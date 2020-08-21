@@ -1,5 +1,7 @@
 {
   "name": "invoices-application",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
