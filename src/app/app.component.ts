@@ -27,6 +27,11 @@ export class AppComponent implements OnInit {
       url: '/settings',
       icon: 'settings'
     },
+    {
+      title: 'Login',
+      url: '/auth/login',
+      icon: 'enter'
+    },
     // {
     //   title: 'Inbox',
     //   url: '/folder/Inbox',
