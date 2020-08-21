@@ -1,12 +1,24 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { Observable } from 'rxjs';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+
+//
+// Firebase
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
+import { AngularFireAuth } from 'angularfire2/auth';
+// import { auth } from 'firebase';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   user$: Observable<User>;
+  user = new BehaviorSubject<User>(null);
   userInformation: User;
 
   constructor(
@@ -41,17 +53,26 @@ export class AuthService {
       phoneNumber: user.phoneNumber,
       refreshToken: user.refreshToken,
     };
-
     this.userInformation = data;
-    debugger;
+    this.user.next(data);
+
+    localStorage.removeItem('userInformation');
+    localStorage.setItem(
+      'userInformation',
+      JSON.stringify(this.userInformation)
+    );
 
     return userRef.set(data, { merge: true });
   }
 
   async logout() {
-    await this._fa.signOut();
+    await this._fa.auth.signOut();
     localStorage.removeItem('userId');
     return this._router.navigate(['/']);
+  }
+
+  getUserStateChange(): Observable<User> {
+    return this.user.asObservable();
   }
 
   getUser() {
@@ -69,19 +90,29 @@ export class AuthService {
     }
   }
 
-  login(email: string, password: string) {
-    this._fa
-      .signInWithEmailAndPassword(email, password)
-      .then((value) => {
-        this.updateUserData(value.user);
-        localStorage.setItem('userId', value.user.uid);
-        if (!value.user.emailVerified) {
-          debugger;
-          this.verifyEmail(value.user.email);
-        }
-      })
-      .catch((err) => {
-        console.log('Something went wrong:', err.message);
-      });
+  login(data: any): Promise<any> {
+    return this._fa.auth.signInWithEmailAndPassword(data.email, data.password);
+  }
+
+  // login(data: any): void {
+  //   this._fa.auth
+  //     .signInWithEmailAndPassword(data.email, data.password)
+  //     .then((value) => {
+  //       this.updateUserData(value.user);
+  //       localStorage.setItem('userId', value.user.uid);
+  //       // if (!value.user.emailVerified) {
+  //       //   debugger;
+  //       //   this.verifyEmail(value.user.email);
+  //       // }
+  //     })
+  //     .catch((err) => {
+  //       console.log('Something went wrong:', err.message);
+  //     });
+  // }
+
+  checkPreAuthorization() {
+    if (localStorage.getItem('userInformation')) {
+      this.updateUserData(JSON.parse(localStorage.getItem('userInformation')));
+    }
   }
 }

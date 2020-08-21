@@ -1,74 +1,57 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AuthService } from './services/auth.service';
+import { User } from './models/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.less']
+  styleUrls: ['app.component.less'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   public selectedIndex = 0;
   public appPages = [
     {
       title: 'Contractors',
       url: '/contractor',
-      icon: 'people'
+      icon: 'people',
     },
     {
       title: 'Invoices',
       url: '/invoice',
-      icon: 'documents'
+      icon: 'documents',
     },
     {
       title: 'Settings',
       url: '/settings',
-      icon: 'settings'
+      icon: 'settings',
     },
+    {
+      title: 'Exit',
+      url: '/auth/login',
+      icon: 'exit',
+    },
+  ];
+  public appNonAuthPages = [
     {
       title: 'Login',
       url: '/auth/login',
-      icon: 'enter'
+      icon: 'enter',
     },
-    // {
-    //   title: 'Inbox',
-    //   url: '/folder/Inbox',
-    //   icon: 'mail'
-    // },
-    // {
-    //   title: 'Outbox',
-    //   url: '/folder/Outbox',
-    //   icon: 'paper-plane'
-    // },
-    // {
-    //   title: 'Favorites',
-    //   url: '/folder/Favorites',
-    //   icon: 'heart'
-    // },
-    // {
-    //   title: 'Archived',
-    //   url: '/folder/Archived',
-    //   icon: 'archive'
-    // },
-    // {
-    //   title: 'Trash',
-    //   url: '/folder/Trash',
-    //   icon: 'trash'
-    // },
-    // {
-    //   title: 'Spam',
-    //   url: '/folder/Spam',
-    //   icon: 'warning'
-    // }
   ];
   public labels = ['Payed', 'Sended'];
+  userInformation: User;
+  userSubscription: Subscription;
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private _auth: AuthService
   ) {
     this.initializeApp();
   }
@@ -77,13 +60,23 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.userSubscription = this._auth
+        .getUserStateChange()
+        .subscribe((data: any) => {
+          if (data) {
+            this.userInformation = data;
+          }
+        });
     });
   }
 
   ngOnInit() {
-    const path = window.location.pathname.split('folder/')[1];
-    if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
-    }
+    this._auth.checkPreAuthorization();
+    this.userInformation = this._auth.getUser();
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 }
