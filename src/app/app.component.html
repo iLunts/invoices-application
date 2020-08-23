@@ -1,10 +1,6 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
-      <h2>
-        User: {{ userData | json }}
-      </h2>
-
       <!-- Auth user -->
       <ion-content *ngIf="userData">
         <ion-list id="inbox-list">
@@ -31,20 +27,26 @@
               ></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle>
             <ion-item
               (click)="logout()"
               routerDirection="root"
               lines="none"
               detail="false"
             >
-              <ion-icon slot="start" name="logout-outline"></ion-icon>
-              <ion-label>Logout</ion-label>
+              <ion-icon
+                slot="start"
+                [ios]="'exit-outline'"
+                [md]="'exit-sharp'"
+              ></ion-icon>
+              <ion-label>Выйти</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
 
         <ion-list id="labels-list">
-          <ion-list-header>Tags</ion-list-header>
+          <ion-list-header>Тэги</ion-list-header>
 
           <ion-item *ngFor="let label of labels" lines="none">
             <ion-icon

@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth.service';
 import { User } from './models/user.model';
-// import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,25 +16,30 @@ export class AppComponent implements OnInit, OnDestroy {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'Contractors',
+      title: 'Контрагенты',
       url: '/contractor',
       icon: 'people',
     },
     {
-      title: 'Invoices',
+      title: 'Счета',
       url: '/invoice',
-      icon: 'documents',
+      icon: 'receipt',
     },
     {
-      title: 'Settings',
+      title: 'Услуги',
+      url: '/service',
+      icon: 'file-tray-stacked',
+    },
+    {
+      title: 'Настройки',
       url: '/settings',
       icon: 'settings',
     },
-    {
-      title: 'Exit',
-      url: '/auth/login',
-      icon: 'exit',
-    },
+    // {
+    //   title: 'Exit',
+    //   url: '/auth/login',
+    //   icon: 'exit',
+    // },
   ];
   public appNonAuthPages = [
     {
@@ -43,9 +48,9 @@ export class AppComponent implements OnInit, OnDestroy {
       icon: 'enter',
     },
   ];
-  public labels = ['Payed', 'Sended'];
+  public labels = ['Оплаченные', 'Отправленные'];
   userData: User;
-  // userSubscription: Subscription;
+  userSubscription: Subscription;
 
   constructor(
     private platform: Platform,
@@ -69,13 +74,16 @@ export class AppComponent implements OnInit, OnDestroy {
       //     }
       //   });
 
-      // this.userSubscription = this._auth
-      //   .getUserStateChange()
-      //   .subscribe((data: any) => {
-      //     if (data) {
-      //       this.userData = data;
-      //     }
-      //   });
+      this.userSubscription = this._auth
+        .getUserStateChange()
+        .subscribe((data: any) => {
+          if (data) {
+            this.userData = data;
+          }
+        });
+
+      // Check user first auth
+      this._auth.CheckUser();
     });
   }
 
@@ -89,6 +97,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.userSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 }

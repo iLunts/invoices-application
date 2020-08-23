@@ -12,6 +12,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  loadingPopover: any;
 
   constructor(
     private _auth: AuthService,
@@ -39,12 +40,11 @@ export class LoginComponent implements OnInit {
     this._auth.SignIn(this.f.email.value, this.f.password.value).then((res) => {
       this._router.navigateByUrl(environment.startPageAfterLogin);
       this._auth.SetUserData(res.user);
-      this._loading.dismiss();
-      if (!res.user.emailVerified) {
-        this._auth.SendVerificationMail().then((res: any) => {
-          // alert('SendVerificationMail: ' + res);
-        });
-      }
+
+      this.loadingPopover.dissmiss();
+      // if (!res.user.emailVerified) {
+      //   this._auth.SendVerificationMail().then((res: any) => {});
+      // }
     });
   }
 
@@ -53,17 +53,17 @@ export class LoginComponent implements OnInit {
   }
 
   async showLoading() {
-    const loading = await this._loading.create({
+    this.loadingPopover = await this._loading.create({
       cssClass: 'popover--loading',
       spinner: null,
       duration: 5000,
-      message: 'Click the backdrop to dismiss early...',
+      message: 'Loading...',
       translucent: true,
       backdropDismiss: true,
     });
-    await loading.present();
+    await this.loadingPopover.present();
 
-    const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed with role:', role);
+    // const { role, data } = await loading.onDidDismiss();
+    // console.log('Loading dismissed with role:', role);
   }
 }

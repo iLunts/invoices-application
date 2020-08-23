@@ -19,7 +19,7 @@ export class AuthService {
   // user = new BehaviorSubject<User>(null);
   // userInformation: User;
   userData: User;
-  userSubject: BehaviorSubject<User>;
+  userSubject = new Subject<User>();
 
   constructor(
     private _fa: AngularFireAuth,
@@ -29,12 +29,13 @@ export class AuthService {
   ) {
     this._fa.authState.subscribe((user) => {
       if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
+        this.SetUserData(user);
+        // this.userData = user;
+        // localStorage.setItem('user', JSON.stringify(this.userData));
+        // JSON.parse(localStorage.getItem('user'));
       } else {
-        localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
+        localStorage.removeItem('user');
+        // JSON.parse(localStorage.getItem('user'));
       }
     });
   }
@@ -73,13 +74,26 @@ export class AuthService {
   // Returns true when user is looged in
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null && user.emailVerified !== false ? true : false;
+    if (user) {
+      this.SetUserData(user);
+    }
+    // return user !== null && user.emailVerified !== false ? true : false;
+    return user !== null ? true : false;
   }
 
   // Returns true when user's email is verified
   get isEmailVerified(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return user.emailVerified !== false ? true : false;
+  }
+
+  CheckUser(): void {
+    if (this.isLoggedIn) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user) {
+        this.SetUserData(user);
+      }
+    }
   }
 
   // Sign in with Gmail
@@ -93,7 +107,7 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this._ngZone.run(() => {
-          this._router.navigate(['dashboard']);
+          this._router.navigate(['invoice']);
         });
         this.SetUserData(result.user);
       })
@@ -102,23 +116,28 @@ export class AuthService {
       });
   }
 
-  // Store user in localStorage
+  // Store user in localStorage and subject
   SetUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this._fs.doc(
-      `users/${user.uid}`
-    );
     const userData: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
+      token: user.idToken,
+      refreshToken: user.refreshToken,
     };
 
-    // this.userSubject.next(userData);
-    return userRef.set(userData, {
-      merge: true,
-    });
+    this.userSubject.next(userData);
+    this.userData = userData;
+    localStorage.setItem('user', JSON.stringify(userData));
+
+    // const userRef: AngularFirestoreDocument<any> = this._fs.doc(
+    //   `users/${this.userData.uid}`
+    // );
+    // userRef.set(userData, {
+    //   merge: true,
+    // }).then();
   }
 
   // Sign-out
@@ -129,7 +148,18 @@ export class AuthService {
     });
   }
 
-  // getUserStateChange(): Observable<User> {
-  //   return this.userSubject.asObservable();
-  // }
+  getUserStateChange(): Observable<User> {
+    return this.userSubject.asObservable();
+  }
+
+  getUserId(): string {
+    if (this.userData) {
+      return this.userData.uid;
+    } else {
+      this.CheckUser();
+      console.log('User after check: ', this.userData.uid);
+
+      return this.userData.uid;
+    }
+  }
 }

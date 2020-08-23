@@ -25,6 +25,11 @@ const routes: Routes = [
       import('./pages/invoice/invoice.module').then((m) => m.InvoiceModule),
   },
   {
+    path: 'service',
+    loadChildren: () =>
+      import('./pages/service/service.module').then((m) => m.ServiceModule),
+  },
+  {
     path: 'settings',
     loadChildren: () =>
       import('./pages/settings/settings.module').then((m) => m.SettingsModule),
