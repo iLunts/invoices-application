@@ -6,5 +6,6 @@ export class User {
   displayName?: string;
   photoURL?: string;
   phoneNumber?: string;
-  refreshToken: string;
+  token?: string;
+  refreshToken?: string;
 }

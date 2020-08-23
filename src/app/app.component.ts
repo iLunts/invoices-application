@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth.service';
 import { User } from './models/user.model';
-import { Subscription } from 'rxjs';
+// import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -44,8 +44,8 @@ export class AppComponent implements OnInit, OnDestroy {
     },
   ];
   public labels = ['Payed', 'Sended'];
-  userInformation: User;
-  userSubscription: Subscription;
+  userData: User;
+  // userSubscription: Subscription;
 
   constructor(
     private platform: Platform,
@@ -61,22 +61,34 @@ export class AppComponent implements OnInit, OnDestroy {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      this.userSubscription = this._auth
-        .getUserStateChange()
-        .subscribe((data: any) => {
-          if (data) {
-            this.userInformation = data;
-          }
-        });
+      // this.userSubscription = this._auth
+      //   .getUserStateChange()
+      //   .subscribe((data: any) => {
+      //     if (data) {
+      //       this.userData = data;
+      //     }
+      //   });
+
+      // this.userSubscription = this._auth
+      //   .getUserStateChange()
+      //   .subscribe((data: any) => {
+      //     if (data) {
+      //       this.userData = data;
+      //     }
+      //   });
     });
   }
 
   ngOnInit() {
-    this._auth.checkPreAuthorization();
-    this.userInformation = this._auth.getUser();
+    // this._auth.checkPreAuthorization();
+    // this.userInformation = this._auth.getUser();
+  }
+
+  logout() {
+    this._auth.SignOut();
   }
 
   ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
+    // this.userSubscription.unsubscribe();
   }
 }
