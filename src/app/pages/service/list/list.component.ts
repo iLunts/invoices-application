@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Service } from 'src/app/models/service.model';
 import { ServicesService } from 'src/app/services/services.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-service-list',
@@ -11,7 +12,7 @@ export class ServiceListComponent implements OnInit {
   serviceList: Service[] = [];
   isLoaded: boolean;
 
-  constructor(private _service: ServicesService) {
+  constructor(private _service: ServicesService, private _router: Router) {
     this.fetch();
   }
 
@@ -32,5 +33,9 @@ export class ServiceListComponent implements OnInit {
     this._service.delete(_id).catch((error) => {
       // this._notifcation.error(error);
     });
+  }
+
+  createNew() {
+    this._router.navigate(['service/create'])
   }
 }
