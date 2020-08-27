@@ -16,9 +16,7 @@
 
   <!-- List -->
   <ion-list class="contractors" *ngIf="isLoaded">
-    <ion-list-header class="contractors__header">
-      Активные
-    </ion-list-header>
+    <ion-list-header class="contractors__header"> Активные </ion-list-header>
 
     <ion-item class="contractors__item" *ngFor="let item of contractorList">
       <div class="contractors__avatar" slot="start">
@@ -45,10 +43,16 @@
         <ion-skeleton-text animated></ion-skeleton-text>
       </ion-avatar>
       <ion-label>
-        <ion-skeleton-text animated style="width: 30%;"></ion-skeleton-text>
-        <ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text>
-        <ion-skeleton-text animated style="width: 90%;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="createNew()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

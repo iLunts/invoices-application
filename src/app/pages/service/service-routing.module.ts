@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ServiceListComponent } from './list/list.component';
 import { ServiceCreateComponent } from './create/create.component';
+import { ServiceGroupCreateComponent } from './group-create/group-create.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'create',
     component: ServiceCreateComponent,
+  },
+  {
+    path: 'group/create',
+    component: ServiceGroupCreateComponent,
   },
 ];
 

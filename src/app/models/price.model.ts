@@ -4,7 +4,7 @@ export class Price {
   currency: number;
 }
 
-export class PriceType {
+export class CurrencyType {
   _id: string;
   code: string;
   currency: number;

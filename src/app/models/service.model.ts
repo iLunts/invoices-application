@@ -14,3 +14,10 @@ export class Service {
   tax: number;
   unit: Unit;
 }
+
+export class ServiceGroup {
+  _id: string;
+  _userId: string;
+  name: string;
+  desc: string;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UnitService } from 'src/app/services/unit.service';
 import { Unit } from 'src/app/models/unit.model';
-import { PriceType } from 'src/app/models/price.model';
+import { CurrencyType } from 'src/app/models/price.model';
 import { PriceService } from 'src/app/services/price.service';
 import {
   FormBuilder,
@@ -10,8 +10,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
-import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
+import { ServicesGroupService } from 'src/app/services/servicesGroup.service';
+import { ServiceGroup } from 'src/app/models/service.model';
 
 @Component({
   selector: 'app-service-create',
@@ -20,7 +22,8 @@ import { Router } from '@angular/router';
 })
 export class ServiceCreateComponent implements OnInit {
   unitList: Unit[] = [];
-  priceList: PriceType[] = [];
+  groupList: ServiceGroup[] = [];
+  currencyList: CurrencyType[] = [];
   form: FormGroup;
   loadingPopover: any;
 
@@ -29,17 +32,18 @@ export class ServiceCreateComponent implements OnInit {
     private _price: PriceService,
     private _fb: FormBuilder,
     private _service: ServicesService,
-    private _loading: LoadingController,
-    private _router: Router
+    private _serviceGroup: ServicesGroupService,
+    private _router: Router,
+    private _notification: NotificationService
   ) {
     this.form = this._fb.group({
-      _groupId: new FormControl(''),
-      desc: new FormControl('', [Validators.required]),
+      desc: new FormControl(''),
       count: new FormControl('', [Validators.required]),
-      groupName: new FormControl('', [Validators.required]),
+      group: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
-      tax: new FormControl('', [Validators.required]),
+      currency: new FormControl('', [Validators.required]),
+      tax: new FormControl(0, [Validators.required]),
       unit: new FormControl('', []),
     });
   }
@@ -50,7 +54,17 @@ export class ServiceCreateComponent implements OnInit {
 
   ngOnInit() {
     this.fetchUnit();
-    this.fetchPrice();
+    this.fetchCurrency();
+    this.fetchServiceGroup();
+  }
+
+  fetchServiceGroup() {
+    this._serviceGroup
+      .getAll()
+      .valueChanges()
+      .subscribe((response: ServiceGroup[]) => {
+        this.groupList = response;
+      });
   }
 
   fetchUnit() {
@@ -59,36 +73,39 @@ export class ServiceCreateComponent implements OnInit {
       .valueChanges()
       .subscribe((response: Unit[]) => {
         this.unitList = response;
+        if (this.unitList) {
+          this.form.controls.unit.setValue(this.unitList[0]);
+        }
       });
   }
 
-  fetchPrice() {
+  fetchCurrency() {
     this._price
       .getAll()
       .valueChanges()
-      .subscribe((response: PriceType[]) => {
-        this.priceList = response;
+      .subscribe((response: CurrencyType[]) => {
+        this.currencyList = response;
+        if (this.currencyList) {
+          this.form.controls.currency.setValue(this.currencyList[0]);
+        }
       });
   }
 
   save() {
-    this.showLoading();
+    this._notification.loading();
     if (this.form.invalid) {
       return;
     }
-    this._service.add(this.form.value).then((response: any) => {
-      this._loading.dismiss();
-      this.form.reset();
-      this._router.navigate(['/service']);
-    });
-  }
-
-  async showLoading() {
-    this.loadingPopover = await this._loading.create({
-      message: 'Ожидайте...',
-      duration: 5000,
-      spinner: 'bubbles',
-    });
-    await this.loadingPopover.present();
+    this._service
+      .add(this.form.value)
+      .then((response: any) => {
+        this._notification.dismissLoading();
+        this.form.reset();
+        this._notification.success();
+        this._router.navigate(['/service']);
+      })
+      .catch((error) => {
+        this._notification.error(error);
+      });
   }
 }

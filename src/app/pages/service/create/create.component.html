@@ -23,7 +23,12 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Группа</ion-label>
-            <ion-input formControlName="groupName"></ion-input>
+            <!-- <ion-input formControlName="groupName"></ion-input> -->
+            <ion-select interface="popover" formControlName="group">
+              <ion-select-option [value]="item" *ngFor="let item of groupList">{{
+                item?.name
+              }}</ion-select-option>
+            </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -53,7 +58,7 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Единицы измерения</ion-label>
-            <ion-select interface="popover" value="brown">
+            <ion-select interface="popover" value="brown" formControlName="unit">
               <ion-select-option [value]="item" *ngFor="let item of unitList">{{
                 item?.fullName
               }}</ion-select-option>
@@ -71,10 +76,10 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Валюта</ion-label>
-            <ion-select interface="popover" value="brown">
+            <ion-select interface="popover" value="brown" formControlName="currency">
               <ion-select-option
                 [value]="item"
-                *ngFor="let item of priceList"
+                *ngFor="let item of currencyList"
                 >{{ item?.shortName }}</ion-select-option
               >
             </ion-select>
@@ -97,7 +102,11 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-button expand="block" type="submit" [disabled]="form.invalid" (click)="save()"
+          <ion-button
+            expand="block"
+            type="submit"
+            [disabled]="form.invalid"
+            (click)="save()"
             >Создать</ion-button
           >
         </ion-col>

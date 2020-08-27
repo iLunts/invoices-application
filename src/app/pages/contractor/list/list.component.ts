@@ -4,6 +4,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { ContractorService } from 'src/app/services/contractor.service';
 import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contractor-list',
@@ -17,7 +18,8 @@ export class ContractorListComponent implements OnInit {
   constructor(
     public _db: AngularFireDatabase,
     private _contractor: ContractorService,
-    private _loading: LoadingController
+    private _loading: LoadingController,
+    private _router: Router,
   ) {}
 
   ngOnInit() {
@@ -41,6 +43,10 @@ export class ContractorListComponent implements OnInit {
         this.contractorList = data;
         this.isLoaded = true;
       });
+  }
+
+  createNew() {
+    this._router.navigate(['contractor/create']);
   }
 
   // deleteContractor(_id: string) {
