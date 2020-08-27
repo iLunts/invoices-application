@@ -17,88 +17,91 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col> ion-col </ion-col>
-      <ion-col> ion-col </ion-col>
-      <ion-col> ion-col </ion-col>
-      <ion-col> ion-col </ion-col>
-    </ion-row>
-  </ion-grid> -->
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Группа</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Название</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Описание</ion-label>
-          <ion-textarea></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Количество</ion-label>
-          <ion-input></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Единицы измерения</ion-label>
-          <ion-select interface="popover" value="brown">
-            <ion-select-option [value]="item" *ngFor="let item of unitList">{{
-              item?.fullName
-            }}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Цена</ion-label>
-          <ion-input type="number"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Валюта</ion-label>
-          <ion-select interface="popover" value="brown">
-            <ion-select-option [value]="item" *ngFor="let item of priceList">{{
-              item?.shortName
-            }}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">НДС %</ion-label>
-          <ion-input type="number" min="0" max="100"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Группа</ion-label>
+            <ion-input formControlName="groupName"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Название</ion-label>
+            <ion-input formControlName="name"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Описание</ion-label>
+            <ion-textarea formControlName="desc"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Количество</ion-label>
+            <ion-input formControlName="count"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Единицы измерения</ion-label>
+            <ion-select interface="popover" value="brown">
+              <ion-select-option [value]="item" *ngFor="let item of unitList">{{
+                item?.fullName
+              }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Цена</ion-label>
+            <ion-input type="number" formControlName="price"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Валюта</ion-label>
+            <ion-select interface="popover" value="brown">
+              <ion-select-option
+                [value]="item"
+                *ngFor="let item of priceList"
+                >{{ item?.shortName }}</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">НДС %</ion-label>
+            <ion-input
+              type="number"
+              min="0"
+              max="100"
+              formControlName="tax"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-button expand="block">Создать</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" type="submit" [disabled]="form.invalid" (click)="save()"
+            >Создать</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

@@ -28,11 +28,12 @@ export class ServicesService {
     return this._fs.collection(this.dbPath, q => q.where('_userId', '==', this._auth.getUserId()).where('name', '>=', name));
   }
 
-  add(service: Service): void {
+  add(service: Service) {
     const pushkey = this._fs.createId();
     service._id = pushkey;
-    this._fs.collection(this.dbPath).doc(pushkey).set({ ...service });
-    this._router.navigate(['/service']);
+    service._userId = this._auth.getUserId();
+    return this._fs.collection(this.dbPath).doc(pushkey).set({ ...service });
+    // this._router.navigate(['/service']);
   }
 
   delete(_id: string): Promise<void> {
