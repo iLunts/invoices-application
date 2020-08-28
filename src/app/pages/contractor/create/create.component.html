@@ -14,6 +14,17 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Поиск по УНП</ion-label>
+          <ion-input [(ngModel)]="unpSearch" (change)="searchByUNP()"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <form [formGroup]="form">
     <ion-grid>
       <ion-row>
