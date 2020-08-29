@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Contractor } from 'src/app/models/contractor.model';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoice-list',
@@ -15,7 +16,8 @@ export class InvoiceListComponent implements OnInit {
 
   constructor(
     public _db: AngularFireDatabase,
-    private _invoice: InvoiceService
+    private _invoice: InvoiceService,
+    private _router: Router,
   ) {}
 
   ngOnInit() {
@@ -45,5 +47,9 @@ export class InvoiceListComponent implements OnInit {
       // this._notification.error('Error delete: ' + error);
       // console.log('Error delete: ', error);
     });
+  }
+
+  createNew() {
+    this._router.navigate(['invoice/create']);
   }
 }

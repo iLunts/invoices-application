@@ -10,6 +10,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { environment } from 'src/environments/environment';
+import { ModalsModule } from '../components/modals/modals.module';
 
 @NgModule({
   declarations: [],
@@ -22,6 +23,7 @@ import { environment } from 'src/environments/environment';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    ModalsModule,
   ],
   exports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { environment } from 'src/environments/environment';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    ModalsModule,
   ],
   entryComponents: [],
 })

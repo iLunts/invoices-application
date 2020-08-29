@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { EgrService } from 'src/app/services/egr.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-contractor-create',
@@ -16,7 +17,10 @@ export class ContractorCreateComponent implements OnInit {
   form: FormGroup;
   unpSearch: string;
 
-  constructor(private _fb: FormBuilder, private _egr: EgrService) {
+  constructor(
+    private _fb: FormBuilder,
+    private _egr: EgrService,
+  ) {
     this.form = this._fb.group({
       name: new FormControl('', [Validators.required]),
     });
@@ -29,7 +33,7 @@ export class ContractorCreateComponent implements OnInit {
   ngOnInit() {}
 
   searchByUNP() {
-    this._egr.getEGRAddressByRegNum(this.unpSearch).then((response: any) => {
+    this._egr.getEGRAddressByRegNum(this.unpSearch).subscribe((response: any) => {
       console.log('EGR: ', response);
     });
   }

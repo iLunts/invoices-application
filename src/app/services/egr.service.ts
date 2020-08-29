@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
+import { Platform } from '@ionic/angular';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +10,11 @@ import { HTTP } from '@ionic-native/http/ngx';
 export class EgrService {
   // baseUrl = 'http://egr.gov.by/egrn/API.jsp';
 
-  constructor(private _http: HttpClient, private _nativeHttp: HTTP) {}
+  constructor(
+    private _http: HttpClient,
+    private _nativeHttp: HTTP,
+    private _platform: Platform
+  ) {}
 
   getCompanyInfo(UNP: string) {
     if (UNP) {
@@ -29,14 +35,17 @@ export class EgrService {
 
   getEGRAddressByRegNum(UNP: string) {
     if (UNP) {
-      return this._nativeHttp.get(
-        `http://egr.gov.by/api/v2/egr/getAddressByRegNum/${UNP}`,
-        {},
-        {}
-      );
-      // return this._http.get(
-      //   `http://egr.gov.by/api/v2/egr/getAddressByRegNum/${UNP}`
-      // );
+      if (this._platform.is('cordova')) {
+        return from(
+          this._nativeHttp.get(
+            `http://egr.gov.by/api/v2/egr/getAddressByRegNum/${UNP}`,
+            {},
+            {}
+          )
+        );
+      } else {
+        return this._http.get(`/apiEGR/v2/egr/getAddressByRegNum/${UNP}`);
+      }
     }
   }
 }

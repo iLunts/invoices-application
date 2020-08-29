@@ -3,5 +3,12 @@
   "integrations": {
     "cordova": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "typescript": true,
+  "proxies": [
+    {
+      "path": "/apiEGR/",
+      "proxyUrl": "http://cors.api.com/api"
+    }
+  ]
 }
