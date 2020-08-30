@@ -11,9 +11,11 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { environment } from 'src/environments/environment';
 import { ModalsModule } from '../components/modals/modals.module';
+import { ContractorItemComponent } from '../components/ui/contractor-item/contractor-item.component';
+import { InvoiceServiceItemComponent } from '../components/ui/invoice-service-item/invoice-service-item.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [ContractorItemComponent, InvoiceServiceItemComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -35,6 +37,8 @@ import { ModalsModule } from '../components/modals/modals.module';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     ModalsModule,
+    ContractorItemComponent,
+    InvoiceServiceItemComponent,
   ],
   entryComponents: [],
 })

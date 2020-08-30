@@ -1,3 +1,5 @@
+import { Service } from './service.model';
+
 export class Invoice {
   _doc: string;
   _userId: string;
@@ -20,4 +22,14 @@ export class Invoice {
 export class Price {
   amount: number;
   currency: number;
+}
+
+export class InvoiceListItem {
+  service: Service;
+  quantity: number;
+
+  constructor(service?: Service, quantity?: number) {
+    this.service = service || null;
+    this.quantity = quantity || 1;
+  }
 }

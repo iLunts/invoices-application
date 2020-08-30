@@ -11,12 +11,16 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { HTTP } from '@ionic-native/http/ngx';
-import { ModalsModule } from './components/modals/modals.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, SharedModule, HttpClientModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    SharedModule,
+    HttpClientModule,
+    AppRoutingModule,
+  ],
   providers: [
     StatusBar,
     SplashScreen,
