@@ -50,10 +50,20 @@
     <ion-row *ngFor="let item of serviceList; let i = index">
       <ion-col>
         <p>{{ serviceList[i] | json }}</p>
-        <ion-button (click)="showServiceModal(i)" expand="block" *ngIf="serviceList[i].service === null">
+        <ion-button
+          (click)="showServiceModal(i)"
+          expand="block"
+          *ngIf="serviceList[i].service === null"
+        >
           Выбрать услугу
         </ion-button>
-        <ion-button (click)="removeService(i)" expand="block" color="danger" fill="outline" *ngIf="serviceList[i].service !== null">
+        <ion-button
+          (click)="removeService(i)"
+          expand="block"
+          color="danger"
+          fill="outline"
+          *ngIf="serviceList[i].service !== null"
+        >
           Удалить услугу
         </ion-button>
         <!-- <app-invoice-service-item></app-invoice-service-item> -->
@@ -64,8 +74,11 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button (click)="addInvoice()" expand="block">
-          Добавить
+        <ion-button
+          (click)="addService()"
+          expand="block"
+        >
+          Добавить услугу
         </ion-button>
       </ion-col>
     </ion-row>

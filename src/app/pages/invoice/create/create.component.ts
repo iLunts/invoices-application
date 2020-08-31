@@ -44,18 +44,25 @@ export class InvoiceCreateComponent implements OnInit {
       console.log(data.data);
       if (data.data.selectedService) {
         this.serviceList[index] = data.data.selectedService;
+      } else {
+        this.serviceList.splice(this.serviceList.length - 1, 1);
       }
     });
 
     return await modal.present();
   }
 
-  addInvoice() {
+  addService() {
     this.serviceList.push(new InvoiceListItem());
+    this.showServiceModal(this.serviceList.length - 1);
   }
 
   removeService(index) {
     this.serviceList.splice(index, 1);
+
+    if (!this.serviceList.length) {
+      this.serviceList.push(new InvoiceListItem());
+    }
   }
 
   save() {
