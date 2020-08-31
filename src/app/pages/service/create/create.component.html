@@ -25,9 +25,11 @@
             <ion-label position="floating">Группа</ion-label>
             <!-- <ion-input formControlName="groupName"></ion-input> -->
             <ion-select interface="popover" formControlName="group">
-              <ion-select-option [value]="item" *ngFor="let item of groupList">{{
-                item?.name
-              }}</ion-select-option>
+              <ion-select-option
+                [value]="item"
+                *ngFor="let item of groupList"
+                >{{ item?.name }}</ion-select-option
+              >
             </ion-select>
           </ion-item>
         </ion-col>
@@ -58,7 +60,11 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Единицы измерения</ion-label>
-            <ion-select interface="popover" value="brown" formControlName="unit">
+            <ion-select
+              interface="popover"
+              value="brown"
+              formControlName="unit"
+            >
               <ion-select-option [value]="item" *ngFor="let item of unitList">{{
                 item?.fullName
               }}</ion-select-option>
@@ -76,7 +82,11 @@
         <ion-col>
           <ion-item>
             <ion-label position="floating">Валюта</ion-label>
-            <ion-select interface="popover" value="brown" formControlName="currency">
+            <ion-select
+              interface="popover"
+              value="brown"
+              formControlName="currency"
+            >
               <ion-select-option
                 [value]="item"
                 *ngFor="let item of currencyList"
@@ -98,19 +108,15 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-button
-            expand="block"
-            type="submit"
-            [disabled]="form.invalid"
-            (click)="save()"
-            >Создать</ion-button
-          >
-        </ion-col>
-      </ion-row>
-    </ion-grid>
   </form>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button expand="block" (click)="save()" [disabled]="form.invalid"
+        >Создать</ion-button
+      >
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

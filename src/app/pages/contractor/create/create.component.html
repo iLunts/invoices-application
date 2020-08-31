@@ -36,19 +36,13 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-button
-            expand="block"
-            type="submit"
-            [disabled]="form.invalid"
-            (click)="save()"
-            >Создать</ion-button
-          >
-        </ion-col>
-      </ion-row>
-    </ion-grid>
   </form>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button expand="block" (click)="save()" [disabled]="form.invalid">Создать</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
