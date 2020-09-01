@@ -10,26 +10,35 @@
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-  <!-- List -->
-  <ion-list class="invoices" *ngIf="serviceList">
-    <ion-item class="invoices__item" *ngFor="let item of serviceList">
-      <div class="invoices__avatar" slot="start">
-        <ion-icon
-          class="invoices__avatar-icon"
-          name="people-outline"
-        ></ion-icon>
-      </div>
-      <ion-label>
-        <h2>{{ item?.name }}</h2>
-        <h3>{{ item?.price }}</h3>
-      </ion-label>
+  <!-- <p>{{ groupServiceList | json }}</p> -->
 
-      <ion-button fill="outline" size="small" (click)="select(item)">
-        <ion-icon
-          slot="icon-only"
-          name="ellipsis-horizontal-outline"
-        ></ion-icon>
-      </ion-button>
-    </ion-item>
-  </ion-list>
+  <!-- List -->
+  <div *ngIf="serviceList">
+    <ion-list class="invoices" *ngFor="let group of groupServiceList">
+      <ion-list-header>
+        {{ group.group }}
+      </ion-list-header>
+
+      <ion-item class="invoices__item" *ngFor="let item of group.data">
+        <div class="invoices__avatar" slot="start">
+          <ion-icon
+            class="invoices__avatar-icon"
+            name="people-outline"
+          ></ion-icon>
+        </div>
+        <ion-label>
+          <h2>{{ item?.name }}</h2>
+          <h3>{{ item?.price }}</h3>
+        </ion-label>
+
+        <ion-button fill="outline" size="small" (click)="select(item)">
+          <ion-icon
+            slot="icon-only"
+            name="ellipsis-horizontal-outline"
+          ></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+
 </ion-content>

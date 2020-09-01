@@ -10,6 +10,7 @@ import { ServicesService } from 'src/app/services/services.service';
 })
 export class ServiceListModalComponent implements OnInit {
   serviceList: Service[] = [];
+  groupServiceList: any[] = [];
   selectedService: Service;
 
   constructor(
@@ -28,8 +29,24 @@ export class ServiceListModalComponent implements OnInit {
       .subscribe((response: Service[]) => {
         if (response) {
           this.serviceList = response;
+          this.groupingList();
         }
       });
+  }
+
+  groupingList() {
+    var groups = this.serviceList.reduce(function (obj, item) {
+      obj[item.groupName] = obj[item.groupName] || [];
+      obj[item.groupName].push(item);
+      return obj;
+    }, {});
+    this.groupServiceList = Object.keys(groups).map(function (key) {
+      return { group: key, data: groups[key] };
+    });
+  }
+
+  getGroupName(name: any, index: number) {
+    return Object.keys(name)[index];
   }
 
   close() {
