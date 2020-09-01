@@ -14,6 +14,29 @@
     </ion-toolbar>
   </ion-header>
 
+  <!-- Status -->
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none" class="field field--select">
+          <ion-label position="floating">Статус счета</ion-label>
+          <ion-select
+            [interfaceOptions]="customStatusActionSheetOptions"
+            interface="action-sheet"
+            placeholder="Выберите статус"
+            (ionChange)="changeStatus($event)"
+          >
+            <ion-select-option
+              [value]="item"
+              *ngFor="let item of invoiceStatusList"
+              >{{ item?.name }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <!-- Contractor -->
   <ion-grid>
     <ion-row>

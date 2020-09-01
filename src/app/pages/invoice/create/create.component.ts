@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ContractorListModalComponent } from 'src/app/components/modals/contractor-list-modal/contractor-list-modal.component';
 import { Contractor } from 'src/app/models/contractor.model';
-import { InvoiceListItem, Invoice } from 'src/app/models/invoice.model';
+import {
+  InvoiceListItem,
+  Invoice,
+  InvoiceStatus,
+} from 'src/app/models/invoice.model';
 import { ServiceListModalComponent } from 'src/app/components/modals/service-list-modal/service-list-modal.component';
 import { Service } from 'src/app/models/service.model';
 import { InvoiceService } from 'src/app/services/invoice.service';
@@ -17,7 +21,14 @@ export class InvoiceCreateComponent implements OnInit {
   invoice: Invoice;
   selectedContractor: Contractor;
   serviceList: InvoiceListItem[] = [new InvoiceListItem()];
+  invoiceStatusList: InvoiceStatus[] = [];
   toastPopover: any;
+
+  customStatusActionSheetOptions: any = {
+    header: 'Статусы',
+    subHeader: 'Выберите статус для этого счета',
+    cssClass: 'select-action-sheet',
+  };
 
   constructor(
     private _modal: ModalController,
@@ -26,9 +37,18 @@ export class InvoiceCreateComponent implements OnInit {
     private _router: Router
   ) {
     this.invoice = new Invoice();
+    this.getStatuses();
   }
 
   ngOnInit() {}
+
+  getStatuses() {
+    this._invoice.getAllStatus().subscribe((response: InvoiceStatus[]) => {
+      if (response) {
+        this.invoiceStatusList = response;
+      }
+    });
+  }
 
   async showServiceModal(index) {
     const modal = await this._modal.create({
@@ -113,6 +133,10 @@ export class InvoiceCreateComponent implements OnInit {
       color: 'success',
     });
     this.toastPopover.present();
+  }
+
+  changeStatus(event) {
+    this.invoice.status = event.detail.value;
   }
 
   save() {

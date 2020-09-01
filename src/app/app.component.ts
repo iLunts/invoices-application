@@ -31,6 +31,11 @@ export class AppComponent implements OnInit, OnDestroy {
       icon: 'file-tray-stacked',
     },
     {
+      title: 'Профиль',
+      url: '/profile',
+      icon: 'business',
+    },
+    {
       title: 'Настройки',
       url: '/settings',
       icon: 'settings',

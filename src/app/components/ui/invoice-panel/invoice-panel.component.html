@@ -1,0 +1,37 @@
+<!-- Empty invoice -->
+<!-- <div
+  class="invoice contractor--select"
+  (click)="showContractorModal()"
+  *ngIf="!selectedContractor"
+>
+  <span class="invoice__avatar">
+    <ion-icon class="invoice__avatar-icon" name="search-outline"></ion-icon>
+  </span>
+  <div class="invoice__body">
+    <h3 class="invoice__select">Выбрать контрагента</h3>
+    <p class="invoice__desc">из список созданных контрагентов</p>
+  </div>
+</div> -->
+
+<!-- Selected invoice -->
+<div class="invoice" *ngIf="selectedInvoice">
+  <div class="invoice__info">
+    <span class="invoice__avatar">
+      <ion-icon class="invoice__avatar-icon" name="receipt-outline"></ion-icon>
+    </span>
+  </div>
+  <div class="invoice__body">
+    <h2 class="invoice__name">
+      № {{ selectedInvoice?.number || 'Б.н.' }} от
+      {{ selectedInvoice?.createDate | date: 'dd MMM yyyy' }}
+    </h2>
+    <p class="invoice__status" [style.color]="selectedInvoice.status.color">
+      {{ selectedInvoice?.status?.name }}
+    </p>
+    <h3 class="invoice__desc">{{ selectedInvoice?.contractor?.VNM }}</h3>
+
+    <p class="invoice__change">
+      <a class="invoice__change-link" (click)="delete()">удалить</a>
+    </p>
+  </div>
+</div>

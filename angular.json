@@ -41,6 +41,9 @@
               },
               {
                 "input": "src/global.less"
+              },
+              {
+                "input": "src/theme/field.less"
               }
             ],
             "scripts": []

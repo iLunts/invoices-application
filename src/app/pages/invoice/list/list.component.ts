@@ -3,6 +3,7 @@ import { Contractor } from 'src/app/models/contractor.model';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-invoice-list',
@@ -18,6 +19,7 @@ export class InvoiceListComponent implements OnInit {
     public _db: AngularFireDatabase,
     private _invoice: InvoiceService,
     private _router: Router,
+    private _notification: NotificationService
   ) {}
 
   ngOnInit() {
@@ -42,10 +44,9 @@ export class InvoiceListComponent implements OnInit {
       });
   }
 
-  delete(_doc: string) {
-    this._invoice.delete(_doc).catch((error) => {
-      // this._notification.error('Error delete: ' + error);
-      // console.log('Error delete: ', error);
+  delete(_id: string) {
+    this._invoice.delete(_id).then((response: any) => {
+      this._notification.success('Счет успешно удален');
     });
   }
 

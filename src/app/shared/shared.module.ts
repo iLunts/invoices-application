@@ -14,9 +14,15 @@ import { ModalsModule } from '../components/modals/modals.module';
 import { ContractorItemComponent } from '../components/ui/contractor-item/contractor-item.component';
 import { InvoiceServiceItemComponent } from '../components/ui/invoice-service-item/invoice-service-item.component';
 import { ContractorPanelComponent } from '../components/ui/contractor-panel/contractor-panel.component';
+import { InvoicePanelComponent } from '../components/ui/invoice-panel/invoice-panel.component';
 
 @NgModule({
-  declarations: [ContractorItemComponent, ContractorPanelComponent, InvoiceServiceItemComponent],
+  declarations: [
+    ContractorItemComponent,
+    ContractorPanelComponent,
+    InvoiceServiceItemComponent,
+    InvoicePanelComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -41,6 +47,7 @@ import { ContractorPanelComponent } from '../components/ui/contractor-panel/cont
     ContractorItemComponent,
     ContractorPanelComponent,
     InvoiceServiceItemComponent,
+    InvoicePanelComponent,
   ],
   entryComponents: [],
 })

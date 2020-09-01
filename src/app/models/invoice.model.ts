@@ -3,11 +3,11 @@ import { Contractor } from './contractor.model';
 import * as moment from 'moment';
 
 export class Invoice {
-  _doc: string;
+  _id: string;
   _userId: string;
   number: string;
-  createDate: Date;
-  expiredDate: Date;
+  createDate: string;
+  expiredDate: string;
 
   // TODO: Need change to model
   billTo: object;
@@ -15,20 +15,30 @@ export class Invoice {
 
   contractor: Contractor;
   services: object;
+  status: InvoiceStatus;
 
   constructor(
     contractor?: Contractor,
     services?: Service,
     number?: string,
-    createDate?: Date,
-    expiredDate?: Date
+    createDate?: string,
+    expiredDate?: string,
+    status?: InvoiceStatus
   ) {
     this.number = number || null;
     this.contractor = contractor || null;
     this.services = services || [];
-    this.createDate = createDate || moment().toDate();
-    this.expiredDate = expiredDate || moment().add(7, 'days').toDate();
+    this.createDate = createDate || moment().toString();
+    this.expiredDate = expiredDate || moment().add(7, 'days').toString();
+    this.status = status || null;
   }
+}
+
+export class InvoiceStatus {
+  _id: string;
+  name: string;
+  color: string;
+  order: number;
 }
 
 export class Price {

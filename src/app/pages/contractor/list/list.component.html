@@ -15,10 +15,22 @@
   </ion-header>
 
   <!-- List -->
-  <ion-list class="contractors" *ngIf="isLoaded">
-    <ion-list-header class="contractors__header"> Активные </ion-list-header>
+  <ion-grid *ngIf="isLoaded">
+    <ion-row>
+      <ion-col size="12" *ngFor="let item of contractorList">
+        <app-contractor-panel
+          [setContractor]="item"
+          [isViewMode]="true"
+        ></app-contractor-panel>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-    <ion-item class="contractors__item" *ngFor="let item of contractorList">
+  <!-- <ion-list class="contractors" *ngIf="isLoaded"> -->
+    <!-- <ion-list-header class="contractors__header"> Активные </ion-list-header> -->
+
+
+    <!-- <ion-item class="contractors__item" *ngFor="let item of contractorList">
       <div class="contractors__avatar" slot="start">
         <ion-icon
           class="contractors__avatar-icon"
@@ -30,8 +42,8 @@
         <h3>УНП: {{ item?.NM }}</h3>
         <p>Дата создания: {{ item?._createdDate }}</p>
       </ion-label>
-    </ion-item>
-  </ion-list>
+    </ion-item> -->
+  <!-- </ion-list> -->
 
   <!-- Skeleton -->
   <ion-list class="contractors" *ngIf="!isLoaded">

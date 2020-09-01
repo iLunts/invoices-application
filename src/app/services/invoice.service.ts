@@ -40,9 +40,14 @@ export class InvoiceService {
   getAllStatus() {
     return this._fs
       .collection(this.dbPathStatuses, (q) =>
-        q.where('_userId', '==', this._auth.getUserId()).orderBy('order')
+        q.orderBy('order')
       )
       .valueChanges();
+    // return this._fs
+    //   .collection(this.dbPathStatuses, (q) =>
+    //     q.where('_userId', '==', this._auth.getUserId()).orderBy('order')
+    //   )
+    //   .valueChanges();
   }
 
   getAllByStatus(statusId: string) {
@@ -57,7 +62,7 @@ export class InvoiceService {
 
   add(invoice: Invoice) {
     const pushkey = this._fs.createId();
-    invoice._doc = pushkey;
+    invoice._id = pushkey;
     invoice._userId = this._auth.getUserId();
     return from(
       this._fs
