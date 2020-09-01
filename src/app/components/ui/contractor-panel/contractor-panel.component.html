@@ -5,10 +5,7 @@
   *ngIf="!selectedContractor"
 >
   <span class="contractor__avatar">
-    <ion-icon
-      class="contractor__avatar-icon"
-      name="search-outline"
-    ></ion-icon>
+    <ion-icon class="contractor__avatar-icon" name="search-outline"></ion-icon>
     <!-- <ion-icon
       class="contractor__avatar-icon"
       name="business-outline"
@@ -29,7 +26,12 @@
     ></ion-icon>
   </span>
   <div class="contractor__body">
-    <h3>Название компании:</h3>
-    <p>ghbvth jhsfgj sdfsdfsdf</p>
+    <h2 class="contractor__name">{{ selectedContractor?.VSN }}</h2>
+    <h3 class="contractor__unp">УНП: {{ selectedContractor?.NM }}</h3>
+    <p class="contractor__desc">Дата создания: {{ selectedContractor?._createdDate }}</p>
+
+    <p class="contractor__change">
+      <a class="contractor__change-link" (click)="showContractorModal()">изменить</a>
+    </p>
   </div>
 </div>

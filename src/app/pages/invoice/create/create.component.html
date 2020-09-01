@@ -18,23 +18,18 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <app-contractor-panel></app-contractor-panel>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <ion-grid *ngIf="selectedContractor">
-    <ion-row>
-      <ion-col>
-        <app-contractor-item
-          [contractor]="selectedContractor"
-        ></app-contractor-item>
+        <app-contractor-panel
+          (contractor)="selectContractor($event)"
+        ></app-contractor-panel>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <ion-grid *ngIf="serviceList">
-    <ion-row class="service-list" *ngFor="let item of serviceList; let i = index">
+    <ion-row
+      class="service-list"
+      *ngFor="let item of serviceList; let i = index"
+    >
       <ion-col size="12">
         <app-invoice-service-item
           [service]="serviceList[i]"
@@ -69,7 +64,9 @@
       <ion-col>
         <div class="total">
           <span class="total__label">Итого:</span>
-          <span class="total__sum">{{ getTotalSum() | number: '0.0-2' }} руб.</span>
+          <span class="total__sum"
+            >{{ getTotalSum() | number: '0.0-2' }} руб.</span
+          >
         </div>
       </ion-col>
     </ion-row>
@@ -79,7 +76,12 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button expand="block" (click)="save()">Создать</ion-button>
+      <ion-button
+        expand="block"
+        (click)="save()"
+        [disabled]="!checkCanCreateInvoice()"
+        >Создать</ion-button
+      >
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

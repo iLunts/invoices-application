@@ -64,7 +64,7 @@ export class InvoiceCreateComponent implements OnInit {
     let total = 0;
     if (this.serviceList && this.serviceList.length) {
       this.serviceList.forEach((element: any) => {
-        if(element.service === null) {
+        if (element.service === null) {
           return;
         } else {
           total += element.count * element.price;
@@ -76,5 +76,35 @@ export class InvoiceCreateComponent implements OnInit {
 
   save() {
     console.log('Save');
+  }
+
+  checkCanCreateInvoice(): boolean {
+    let canCreate = true;
+
+    // Check contractor
+    if (!this.selectedContractor) {
+      canCreate = false;
+    }
+
+    // Check service list
+    // if (!this.serviceList) {
+    //   canCreate = false;
+    // } else {
+    //   this.serviceList.forEach((element) => {
+    //     if (element.service === null) {
+    //       canCreate = false;
+    //     }
+    //   });
+    // }
+
+    return canCreate;
+  }
+
+  selectContractor(contractor: Contractor) {
+    if (contractor) {
+      this.selectedContractor = contractor;
+    } else {
+      this.selectedContractor = null;
+    }
   }
 }
