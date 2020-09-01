@@ -17,32 +17,39 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-item>
+        <ion-item lines="none" class="field">
           <ion-label position="floating">Поиск по УНП</ion-label>
-          <ion-input [(ngModel)]="unpSearch" (change)="searchByUNP()"></ion-input>
+          <ion-input
+            [(ngModel)]="unpSearch"
+            (change)="searchByUNP()"
+          ></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <form [formGroup]="form">
+  <h3>Data: {{ data | json }}</h3>
+
+  <!-- <form [formGroup]="form">
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-item>
+          <ion-item lines="none" class="field">
             <ion-label position="floating">Название</ion-label>
             <ion-input formControlName="name"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>
-  </form>
+  </form> -->
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button expand="block" (click)="save()" [disabled]="form.invalid">Создать</ion-button>
+      <ion-button expand="block" (click)="save()" [disabled]="form.invalid"
+        >Создать</ion-button
+      >
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

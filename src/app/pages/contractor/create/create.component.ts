@@ -16,6 +16,7 @@ import { Platform } from '@ionic/angular';
 export class ContractorCreateComponent implements OnInit {
   form: FormGroup;
   unpSearch: string;
+  data: any;
 
   constructor(private _fb: FormBuilder, private _egr: EgrService) {
     this.form = this._fb.group({
@@ -31,9 +32,10 @@ export class ContractorCreateComponent implements OnInit {
 
   searchByUNP() {
     this._egr
-      .getEGRAddressByRegNum(this.unpSearch)
+      .getCompanyInfo(this.unpSearch)
       .subscribe((response: any) => {
         console.log('EGR: ', response);
+        this.data = response;
       });
   }
 
