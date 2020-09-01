@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Service } from 'src/app/models/service.model';
 
 @Component({
   selector: 'app-invoice-service-item',
@@ -6,9 +7,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./invoice-service-item.component.less'],
 })
 export class InvoiceServiceItemComponent implements OnInit {
+  @Input() service: Service;
+  // @Input() set index(value) {
+  //   if (value !== undefined && value !== null) {
+  //     this.isDelete = true;
+  //     this.indexService = value;
+  //   } else {
+  //     this.isDelete = false;
+  //   }
+  // }
+  @Output() delete = new EventEmitter<Service>();
 
-  constructor() { }
+  isDelete = false;
+  indexService: number;
+
+  constructor() {}
 
   ngOnInit() {}
 
+  upCount() {
+    this.service.count += 1;
+  }
+
+  downCount() {
+    if (this.service.count > 1) {
+      this.service.count -= 1;
+    }
+  }
+
+  remove() {
+    this.delete.emit(this.service);
+  }
 }

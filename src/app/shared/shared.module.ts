@@ -13,9 +13,10 @@ import { environment } from 'src/environments/environment';
 import { ModalsModule } from '../components/modals/modals.module';
 import { ContractorItemComponent } from '../components/ui/contractor-item/contractor-item.component';
 import { InvoiceServiceItemComponent } from '../components/ui/invoice-service-item/invoice-service-item.component';
+import { ContractorPanelComponent } from '../components/ui/contractor-panel/contractor-panel.component';
 
 @NgModule({
-  declarations: [ContractorItemComponent, InvoiceServiceItemComponent],
+  declarations: [ContractorItemComponent, ContractorPanelComponent, InvoiceServiceItemComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -38,6 +39,7 @@ import { InvoiceServiceItemComponent } from '../components/ui/invoice-service-it
     AngularFireAuthModule,
     ModalsModule,
     ContractorItemComponent,
+    ContractorPanelComponent,
     InvoiceServiceItemComponent,
   ],
   entryComponents: [],

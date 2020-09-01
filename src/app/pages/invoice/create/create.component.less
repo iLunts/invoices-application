@@ -1,6 +1,36 @@
 // out: false
 //
-ion-item{
+ion-item {
   --padding-start: none;
   --highlight-height: 0;
+}
+
+// ------------------------------------------------
+// Block '.total'
+// ------------------------------------------------
+.total {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4px;
+  background-color: #fafafa;
+  color: #333;
+  padding: 20px;
+
+  // Element '.total .total__label'
+  & &__label {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    font-weight: 300;
+    color: #999;
+  }
+  
+  // Element '.total .total__sum'
+  & &__sum {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    font-weight: 600;
+    color: #333;
+  }
 }

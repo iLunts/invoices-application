@@ -14,24 +14,11 @@
     </ion-toolbar>
   </ion-header>
 
+  <!-- Contractor -->
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-item>
-          <ion-label position="floating">Поиск по контрагенту</ion-label>
-          <ion-input
-            [(ngModel)]="unpSearch"
-            (click)="showContractorModal()"
-          ></ion-input>
-          <ion-button
-            (click)="showContractorModal()"
-            expand="block"
-            fill="clear"
-            shape="round"
-          >
-            Выбрать
-          </ion-button>
-        </ion-item>
+        <app-contractor-panel></app-contractor-panel>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -48,8 +35,12 @@
 
   <ion-grid *ngIf="serviceList">
     <ion-row *ngFor="let item of serviceList; let i = index">
-      <ion-col>
-        <p>{{ serviceList[i] | json }}</p>
+      <ion-col size="12">
+        <app-invoice-service-item
+          [service]="serviceList[i]"
+          (delete)="removeService($event)"
+        ></app-invoice-service-item>
+
         <ion-button
           (click)="showServiceModal(i)"
           expand="block"
@@ -57,16 +48,18 @@
         >
           Выбрать услугу
         </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
         <ion-button
-          (click)="removeService(i)"
+          (click)="addService()"
           expand="block"
-          color="danger"
-          fill="outline"
-          *ngIf="serviceList[i].service !== null"
+          *ngIf="checkEmptyLastServiceList()"
         >
-          Удалить услугу
+          Добавить услугу
         </ion-button>
-        <!-- <app-invoice-service-item></app-invoice-service-item> -->
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -74,12 +67,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button
-          (click)="addService()"
-          expand="block"
-        >
-          Добавить услугу
-        </ion-button>
+        <div class="total">
+          <span class="total__label">Итого:</span>
+          <span class="total__sum">{{ getTotalSum() | number: '0.0-2' }} руб.</span>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

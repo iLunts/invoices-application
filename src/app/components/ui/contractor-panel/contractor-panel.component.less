@@ -1,0 +1,55 @@
+// out: false
+//
+// -------------------------------------------------------
+// Block '.contractor'
+// -------------------------------------------------------
+.contractor {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-radius: 4px;
+  background-color: #fafafa;
+  color: #333;
+  padding: 20px;
+
+  &&--select {
+    align-items: center;
+
+    .contractor__select {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+      margin: 0;
+    }
+
+    .contractor__desc {
+      font-size: 0.8rem;
+      line-height: 1.2rem;
+      font-weight: 300;
+      margin: 0;
+    }
+  }
+
+  & &__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    background-color: #eee;
+    border-radius: 100px;
+    flex-shrink: 0;
+
+    &-icon {
+      font-size: 1.2rem;
+      color: #999;
+    }
+  }
+
+  & &__body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}

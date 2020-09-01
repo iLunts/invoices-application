@@ -1,2 +1,81 @@
 // out: false
 //
+
+.counter {
+  position: relative;
+
+  & &__body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    height: 45px;
+    margin: 4px 0;
+  }
+
+  & &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: transparent;
+    color: #333;
+    width: 40px;
+    height: 45px;
+    line-height: 38px;
+    outline: none;
+    box-shadow: none;
+    font-size: 1.8rem;
+    font-weight: 200;
+  }
+
+  & &__input {
+    border: none;
+    text-align: center;
+    font-weight: 600;
+    outline: none;
+    box-shadow: none;
+    width: auto !important;
+    min-width: 1px !important;
+  }
+
+  & &__summ {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    color: #999;
+    font-weight: 500;
+    margin: 0;
+
+    &-total {
+      color: #333;
+      font-weight: 600;
+    }
+  }
+}
+
+// ----------------------------------------------------------------
+// Block '.service-item'
+// ----------------------------------------------------------------
+.service-item {
+  position: relative;
+
+  // Element '.service-item .service-item__name'
+  & &__name {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    margin: 0;
+    color: #333;
+    font-weight: 600;
+  }
+
+  // Element '.service-item .service-item__desc'
+  & &__desc {
+    font-size: 0.9rem;
+    line-height: 1.3rem;
+    margin: 0;
+    color: #999;
+    font-weight: 300;
+  }
+}

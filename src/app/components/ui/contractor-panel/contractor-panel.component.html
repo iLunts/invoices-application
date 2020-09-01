@@ -1,0 +1,35 @@
+<!-- Empty contractor -->
+<div
+  class="contractor contractor--select"
+  (click)="showContractorModal()"
+  *ngIf="!selectedContractor"
+>
+  <span class="contractor__avatar">
+    <ion-icon
+      class="contractor__avatar-icon"
+      name="search-outline"
+    ></ion-icon>
+    <!-- <ion-icon
+      class="contractor__avatar-icon"
+      name="business-outline"
+    ></ion-icon> -->
+  </span>
+  <div class="contractor__body">
+    <h3 class="contractor__select">Выбрать контрагента</h3>
+    <p class="contractor__desc">из список созданных контрагентов</p>
+  </div>
+</div>
+
+<!-- Selected contractor -->
+<div class="contractor" *ngIf="selectedContractor">
+  <span class="contractor__avatar">
+    <ion-icon
+      class="contractor__avatar-icon"
+      name="business-outline"
+    ></ion-icon>
+  </span>
+  <div class="contractor__body">
+    <h3>Название компании:</h3>
+    <p>ghbvth jhsfgj sdfsdfsdf</p>
+  </div>
+</div>

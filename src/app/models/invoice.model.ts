@@ -1,4 +1,5 @@
 import { Service } from './service.model';
+import { Contractor } from './contractor.model';
 
 export class Invoice {
   _doc: string;
@@ -11,6 +12,7 @@ export class Invoice {
   billTo: object;
   billFrom: object;
 
+  contractor: Contractor;
   services: object;
 
   constructor(_userId?: string, number?: string) {
