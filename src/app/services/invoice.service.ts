@@ -6,6 +6,7 @@ import {
 import { Invoice } from '../models/invoice.model';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -54,15 +55,17 @@ export class InvoiceService {
       .valueChanges();
   }
 
-  add(invoice: Invoice): void {
+  add(invoice: Invoice) {
     const pushkey = this._fs.createId();
     invoice._doc = pushkey;
     invoice._userId = this._auth.getUserId();
-    this._fs
+    return from(
+      this._fs
       .collection(this.dbPath)
       .doc(pushkey)
-      .set({ ...invoice });
-    this._router.navigate(['/invoice']);
+      .set({ ...invoice })
+    );
+    // this._router.navigate(['/invoice']);
     // this._notification.success('Счет успешно создан');
     // this.invoicesRef.add({ ...invoice});
   }

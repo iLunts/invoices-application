@@ -16,22 +16,16 @@
 
   <!-- List -->
   <ion-list class="services" *ngIf="isLoaded">
-    <!-- <ion-list-header class="services__header">
-      Активные
-    </ion-list-header> -->
-
-    <ion-item class="services__item" *ngFor="let item of listData">
-      <div class="services__avatar" slot="start">
-        <ion-icon
-          class="services__avatar-icon"
-          name="people-outline"
-        ></ion-icon>
-      </div>
-      <ion-label>
-        <h2>{{ item?.billTo.VSN }}</h2>
-        <p>{{ item?.createDate }}</p>
-      </ion-label>
-    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let item of listData">
+          <app-contractor-panel
+            [setContractor]="item?.contractor"
+            [isViewMode]="true"
+          ></app-contractor-panel>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-list>
 
   <!-- Skeleton -->

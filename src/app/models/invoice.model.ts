@@ -1,5 +1,6 @@
 import { Service } from './service.model';
 import { Contractor } from './contractor.model';
+import * as moment from 'moment';
 
 export class Invoice {
   _doc: string;
@@ -15,9 +16,18 @@ export class Invoice {
   contractor: Contractor;
   services: object;
 
-  constructor(_userId?: string, number?: string) {
-    this._userId = _userId;
-    this.number = number;
+  constructor(
+    contractor?: Contractor,
+    services?: Service,
+    number?: string,
+    createDate?: Date,
+    expiredDate?: Date
+  ) {
+    this.number = number || null;
+    this.contractor = contractor || null;
+    this.services = services || [];
+    this.createDate = createDate || moment().toDate();
+    this.expiredDate = expiredDate || moment().add(7, 'days').toDate();
   }
 }
 

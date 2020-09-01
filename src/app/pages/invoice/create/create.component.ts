@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { ContractorListModalComponent } from 'src/app/components/modals/contractor-list-modal/contractor-list-modal.component';
 import { Contractor } from 'src/app/models/contractor.model';
-import { InvoiceListItem } from 'src/app/models/invoice.model';
+import { InvoiceListItem, Invoice } from 'src/app/models/invoice.model';
 import { ServiceListModalComponent } from 'src/app/components/modals/service-list-modal/service-list-modal.component';
 import { Service } from 'src/app/models/service.model';
+import { InvoiceService } from 'src/app/services/invoice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoice-create',
@@ -12,10 +14,19 @@ import { Service } from 'src/app/models/service.model';
   styleUrls: ['./create.component.less'],
 })
 export class InvoiceCreateComponent implements OnInit {
+  invoice: Invoice;
   selectedContractor: Contractor;
   serviceList: InvoiceListItem[] = [new InvoiceListItem()];
+  toastPopover: any;
 
-  constructor(private _modal: ModalController) {}
+  constructor(
+    private _modal: ModalController,
+    private _invoice: InvoiceService,
+    private _toast: ToastController,
+    private _router: Router
+  ) {
+    this.invoice = new Invoice();
+  }
 
   ngOnInit() {}
 
@@ -74,10 +85,6 @@ export class InvoiceCreateComponent implements OnInit {
     return total;
   }
 
-  save() {
-    console.log('Save');
-  }
-
   checkCanCreateInvoice(): boolean {
     let canCreate = true;
 
@@ -86,25 +93,38 @@ export class InvoiceCreateComponent implements OnInit {
       canCreate = false;
     }
 
-    // Check service list
-    // if (!this.serviceList) {
-    //   canCreate = false;
-    // } else {
-    //   this.serviceList.forEach((element) => {
-    //     if (element.service === null) {
-    //       canCreate = false;
-    //     }
-    //   });
-    // }
-
     return canCreate;
   }
 
   selectContractor(contractor: Contractor) {
     if (contractor) {
       this.selectedContractor = contractor;
+      this.invoice.contractor = contractor;
     } else {
       this.selectedContractor = null;
+      this.invoice.contractor = null;
     }
+  }
+
+  async success(message?: string, duration?: number) {
+    this.toastPopover = await this._toast.create({
+      message: message || 'Успешно.',
+      duration: duration || 3000,
+      color: 'success',
+    });
+    this.toastPopover.present();
+  }
+
+  save() {
+    this.invoice.services = this.serviceList;
+
+    if (!this.checkCanCreateInvoice()) {
+      return;
+    }
+    console.log('Save');
+    this._invoice.add(this.invoice).subscribe((response: any) => {
+      this.success('Счет успешно создан');
+      this._router.navigate(['/invoice']);
+    });
   }
 }

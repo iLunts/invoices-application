@@ -30,7 +30,7 @@
     <h3 class="contractor__unp">УНП: {{ selectedContractor?.NM }}</h3>
     <p class="contractor__desc">Дата создания: {{ selectedContractor?._createdDate }}</p>
 
-    <p class="contractor__change">
+    <p class="contractor__change" *ngIf="!isViewMode">
       <a class="contractor__change-link" (click)="showContractorModal()">изменить</a>
     </p>
   </div>
