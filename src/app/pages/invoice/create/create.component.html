@@ -34,7 +34,7 @@
   </ion-grid>
 
   <ion-grid *ngIf="serviceList">
-    <ion-row *ngFor="let item of serviceList; let i = index">
+    <ion-row class="service-list" *ngFor="let item of serviceList; let i = index">
       <ion-col size="12">
         <app-invoice-service-item
           [service]="serviceList[i]"

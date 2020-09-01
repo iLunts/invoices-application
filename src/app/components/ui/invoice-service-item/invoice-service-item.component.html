@@ -25,6 +25,7 @@
               class="counter__btn counter__btn--down"
               type="button"
               (click)="downCount()"
+              [disabled]="service.count <= 1"
             >
               -
             </button>

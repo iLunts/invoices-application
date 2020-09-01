@@ -25,12 +25,21 @@ ion-item {
     font-weight: 300;
     color: #999;
   }
-  
+
   // Element '.total .total__sum'
   & &__sum {
     font-size: 1.4rem;
     line-height: 1.8rem;
     font-weight: 600;
     color: #333;
+  }
+}
+
+// ------------------------------------------------
+// Block '.service-list'
+// ------------------------------------------------
+.service-list {
+  & + & {
+    border-top: 1px solid #eee;
   }
 }
