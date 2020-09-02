@@ -25,7 +25,7 @@ export class InvoiceCreateComponent implements OnInit {
   toastPopover: any;
 
   customStatusActionSheetOptions: any = {
-    header: 'Статусы',
+    // header: 'Статусы',
     subHeader: 'Выберите статус для этого счета',
     cssClass: 'select-action-sheet',
   };
@@ -46,6 +46,7 @@ export class InvoiceCreateComponent implements OnInit {
     this._invoice.getAllStatus().subscribe((response: InvoiceStatus[]) => {
       if (response) {
         this.invoiceStatusList = response;
+        this.invoice.status = this.invoiceStatusList[0];
       }
     });
   }

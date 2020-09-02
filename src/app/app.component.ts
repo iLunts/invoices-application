@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth.service';
 import { User } from './models/user.model';
 import { Subscription } from 'rxjs';
+import { InvoiceService } from './services/invoice.service';
+import { InvoiceStatus } from './models/invoice.model';
 
 @Component({
   selector: 'app-root',
@@ -56,12 +58,14 @@ export class AppComponent implements OnInit, OnDestroy {
   public labels = ['Оплаченные', 'Отправленные'];
   userData: User;
   userSubscription: Subscription;
+  invoiceStatusList: InvoiceStatus[];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _invoce: InvoiceService
   ) {
     this.initializeApp();
   }
@@ -89,12 +93,22 @@ export class AppComponent implements OnInit, OnDestroy {
 
       // Check user first auth
       this._auth.CheckUser();
+
+      this.fetchInvoiceStatuses();
     });
   }
 
   ngOnInit() {
     // this._auth.checkPreAuthorization();
     // this.userInformation = this._auth.getUser();
+  }
+
+  fetchInvoiceStatuses() {
+    this._invoce.getAllStatus().subscribe((response: InvoiceStatus[]) => {
+      if (response) {
+        this.invoiceStatusList = response;
+      }
+    });
   }
 
   logout() {

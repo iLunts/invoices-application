@@ -157,8 +157,6 @@ export class AuthService {
       return this.userData.uid;
     } else {
       this.CheckUser();
-      console.log('User after check: ', this.userData.uid);
-
       return this.userData.uid;
     }
   }

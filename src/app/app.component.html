@@ -45,16 +45,19 @@
           </ion-menu-toggle>
         </ion-list>
 
-        <ion-list id="labels-list">
+        <ion-list
+          id="labels-list"
+          *ngIf="invoiceStatusList && invoiceStatusList.length"
+        >
           <ion-list-header>Тэги</ion-list-header>
 
-          <ion-item *ngFor="let label of labels" lines="none">
+          <ion-item *ngFor="let item of invoiceStatusList" lines="none">
             <ion-icon
               slot="start"
               ios="bookmark-outline"
               md="bookmark-sharp"
             ></ion-icon>
-            <ion-label>{{ label }}</ion-label>
+            <ion-label>{{ item.name }}</ion-label>
           </ion-item>
         </ion-list>
       </ion-content>

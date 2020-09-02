@@ -25,6 +25,7 @@
             interface="action-sheet"
             placeholder="Выберите статус"
             (ionChange)="changeStatus($event)"
+            [(ngModel)]="invoice.status"
           >
             <ion-select-option
               [value]="item"
