@@ -30,28 +30,40 @@ export class EgrService {
     }
   }
 
-  getCompanyInfoByUNP(UNP: string) {
+  getAddressByRegNum(UNP) {
     if (UNP) {
-      // return this._http.get(`https://xn--b1agleslgi.xn--90ais/api/companies/Organization/${UNP}`);
-      return this._http.get(
-        `https://xn--b1agleslgi.xn--90ais/api/companies/Organization/${UNP}`
+      return from(
+        this._httpNative.get(
+          `http://egr.gov.by/api/v2/egr/getJurNamesByRegNum/${UNP}`,
+          {},
+          {}
+        )
       );
     }
   }
 
-  getEGRAddressByRegNum(UNP: string) {
-    if (UNP) {
-      if (this._platform.is('cordova')) {
-        return from(
-          this._httpNative.get(
-            `http://egr.gov.by/api/v2/egr/getAddressByRegNum/${UNP}`,
-            {},
-            {}
-          )
-        );
-      } else {
-        return this._http.get(`/apiEGR/v2/egr/getAddressByRegNum/${UNP}`);
-      }
-    }
-  }
+  // getCompanyInfoByUNP(UNP: string) {
+  //   if (UNP) {
+  //     // return this._http.get(`https://xn--b1agleslgi.xn--90ais/api/companies/Organization/${UNP}`);
+  //     return this._http.get(
+  //       `https://xn--b1agleslgi.xn--90ais/api/companies/Organization/${UNP}`
+  //     );
+  //   }
+  // }
+
+  // getEGRAddressByRegNum(UNP: string) {
+  //   if (UNP) {
+  //     if (this._platform.is('cordova')) {
+  //       return from(
+  //         this._httpNative.get(
+  //           `http://egr.gov.by/api/v2/egr/getAddressByRegNum/${UNP}`,
+  //           {},
+  //           {}
+  //         )
+  //       );
+  //     } else {
+  //       return this._http.get(`/apiEGR/v2/egr/getAddressByRegNum/${UNP}`);
+  //     }
+  //   }
+  // }
 }

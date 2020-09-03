@@ -24,13 +24,16 @@
             [interfaceOptions]="customStatusActionSheetOptions"
             interface="action-sheet"
             placeholder="Выберите статус"
+            cancelText="Отменить"
             (ionChange)="changeStatus($event)"
             [(ngModel)]="invoice.status"
           >
             <ion-select-option
               [value]="item"
               *ngFor="let item of invoiceStatusList"
-              >{{ item?.name }}</ion-select-option
+              >
+              {{ item?.name }}
+              </ion-select-option
             >
           </ion-select>
         </ion-item>
