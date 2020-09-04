@@ -12,7 +12,6 @@ export class BankService {
   constructor(
     private _fs: AngularFirestore,
   ) {
-    // this.banksRef = _fs.collection(this.dbPath, q => q.where('CdControl', '==', null));
     this.banksRef = _fs.collection(this.dbPath);
   }
 

@@ -15,9 +15,11 @@ export class ServicesService {
   dbRef: AngularFirestoreCollection<Service> = null;
 
   constructor(private _fs: AngularFirestore, private _auth: AuthService) {
-    this.servicesRef = _fs.collection(this.dbPath, (q) =>
-      q.where('_userId', '==', this._auth.getUserId())
-    );
+    if (this._auth.isLoggedIn) {
+      this.servicesRef = _fs.collection(this.dbPath, (q) =>
+        q.where('_userId', '==', this._auth.getUserId())
+      );
+    }
   }
 
   getAll(): AngularFirestoreCollection<Service> {

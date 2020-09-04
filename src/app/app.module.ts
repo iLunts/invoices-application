@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { HTTP } from '@ionic-native/http/ngx';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { HTTP } from '@ionic-native/http/ngx';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     HTTP,
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
 })

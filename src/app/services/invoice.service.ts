@@ -21,9 +21,11 @@ export class InvoiceService {
     private _auth: AuthService,
     private _router: Router
   ) {
-    this.invoicesRef = _fs.collection(this.dbPath, (q) =>
-      q.where('_userId', '==', this._auth.getUserId())
-    );
+    if (this._auth.isLoggedIn) {
+      this.invoicesRef = _fs.collection(this.dbPath, (q) =>
+        q.where('_userId', '==', this._auth.getUserId())
+      );
+    }
   }
 
   // getAll(): Observable<Invoice[]> {
@@ -39,15 +41,8 @@ export class InvoiceService {
 
   getAllStatus() {
     return this._fs
-      .collection(this.dbPathStatuses, (q) =>
-        q.orderBy('order')
-      )
+      .collection(this.dbPathStatuses, (q) => q.orderBy('order'))
       .valueChanges();
-    // return this._fs
-    //   .collection(this.dbPathStatuses, (q) =>
-    //     q.where('_userId', '==', this._auth.getUserId()).orderBy('order')
-    //   )
-    //   .valueChanges();
   }
 
   getAllByStatus(statusId: string) {
@@ -66,9 +61,9 @@ export class InvoiceService {
     invoice._userId = this._auth.getUserId();
     return from(
       this._fs
-      .collection(this.dbPath)
-      .doc(pushkey)
-      .set({ ...invoice })
+        .collection(this.dbPath)
+        .doc(pushkey)
+        .set({ ...invoice })
     );
     // this._router.navigate(['/invoice']);
     // this._notification.success('Счет успешно создан');

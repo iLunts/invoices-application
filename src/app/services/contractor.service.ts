@@ -22,9 +22,11 @@ export class ContractorService {
     private _auth: AuthService,
     private _router: Router
   ) {
-    this.customersRef = this._fs.collection(this.dbPath, (q) =>
-      q.where('_userId', '==', this._auth.getUserId())
-    );
+    if (this._auth.isLoggedIn) {
+      this.customersRef = this._fs.collection(this.dbPath, (q) =>
+        q.where('_userId', '==', this._auth.getUserId())
+      );
+    }
   }
 
   getAll(): AngularFirestoreCollection<Contractor> {

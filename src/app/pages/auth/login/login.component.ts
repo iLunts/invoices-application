@@ -38,10 +38,10 @@ export class LoginComponent implements OnInit {
     }
     this.showLoading();
     this._auth.SignIn(this.f.email.value, this.f.password.value).then((res) => {
-      this._router.navigateByUrl(environment.startPageAfterLogin);
       this._auth.SetUserData(res.user);
+      this._router.navigate([environment.startPageAfterLogin]);
+      this.loadingPopover.dismiss();
 
-      this.loadingPopover.dissmiss();
       // if (!res.user.emailVerified) {
       //   this._auth.SendVerificationMail().then((res: any) => {});
       // }

@@ -15,9 +15,6 @@ import { auth } from 'firebase/app';
   providedIn: 'root',
 })
 export class AuthService {
-  // user$: Observable<User>;
-  // user = new BehaviorSubject<User>(null);
-  // userInformation: User;
   userData: User;
   userSubject = new Subject<User>();
 
@@ -30,12 +27,8 @@ export class AuthService {
     this._fa.authState.subscribe((user) => {
       if (user) {
         this.SetUserData(user);
-        // this.userData = user;
-        // localStorage.setItem('user', JSON.stringify(this.userData));
-        // JSON.parse(localStorage.getItem('user'));
       } else {
         localStorage.removeItem('user');
-        // JSON.parse(localStorage.getItem('user'));
       }
     });
   }
@@ -73,7 +66,7 @@ export class AuthService {
 
   // Returns true when user is looged in
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user')) || null;
     if (user) {
       this.SetUserData(user);
     }
@@ -83,16 +76,18 @@ export class AuthService {
 
   // Returns true when user's email is verified
   get isEmailVerified(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user')) || null;
     return user.emailVerified !== false ? true : false;
   }
 
   CheckUser(): void {
     if (this.isLoggedIn) {
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(localStorage.getItem('user')) || null;
       if (user) {
         this.SetUserData(user);
       }
+    } else {
+      this.SignOut();
     }
   }
 
@@ -131,20 +126,13 @@ export class AuthService {
     this.userSubject.next(userData);
     this.userData = userData;
     localStorage.setItem('user', JSON.stringify(userData));
-
-    // const userRef: AngularFirestoreDocument<any> = this._fs.doc(
-    //   `users/${this.userData.uid}`
-    // );
-    // userRef.set(userData, {
-    //   merge: true,
-    // }).then();
   }
 
   // Sign-out
   SignOut() {
     return this._fa.auth.signOut().then(() => {
       localStorage.removeItem('user');
-      this._router.navigate(['login']);
+      this._router.navigate(['/auth/login']);
     });
   }
 
@@ -157,7 +145,11 @@ export class AuthService {
       return this.userData.uid;
     } else {
       this.CheckUser();
-      return this.userData.uid;
+      if (this.userData) {
+        return this.userData.uid;
+      } else {
+        this.SignOut();
+      }
     }
   }
 }

@@ -75,14 +75,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      // this.userSubscription = this._auth
-      //   .getUserStateChange()
-      //   .subscribe((data: any) => {
-      //     if (data) {
-      //       this.userData = data;
-      //     }
-      //   });
-
       this.userSubscription = this._auth
         .getUserStateChange()
         .subscribe((data: any) => {
@@ -94,25 +86,25 @@ export class AppComponent implements OnInit, OnDestroy {
       // Check user first auth
       this._auth.CheckUser();
 
-      this.fetchInvoiceStatuses();
+      // if (this._auth.isLoggedIn) {
+      //   this.fetchInvoiceStatuses();
+      // }
     });
   }
 
-  ngOnInit() {
-    // this._auth.checkPreAuthorization();
-    // this.userInformation = this._auth.getUser();
-  }
+  ngOnInit() {}
 
-  fetchInvoiceStatuses() {
-    this._invoce.getAllStatus().subscribe((response: InvoiceStatus[]) => {
-      if (response) {
-        this.invoiceStatusList = response;
-      }
-    });
-  }
+  // fetchInvoiceStatuses() {
+  //   this._invoce.getAllStatus().subscribe((response: InvoiceStatus[]) => {
+  //     if (response) {
+  //       this.invoiceStatusList = response;
+  //     }
+  //   });
+  // }
 
   logout() {
     this._auth.SignOut();
+    this.userData = null;
   }
 
   ngOnDestroy(): void {
