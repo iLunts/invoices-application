@@ -1,7 +1,7 @@
 {
-  "/api/": {
-    "target": "https://solidexcrm.com",
+  "/api": {
+    "target": "http://egr.gov.by/api/v2/egr/getAddressByRegNum/",
     "secure": false,
-    "changeOrigin": true
+    "pathRewrite": { "^/api": "" }
   }
 }

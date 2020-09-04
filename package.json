@@ -1,5 +1,5 @@
 {
-  "name": "invoices-application",
+  "name": "invoices",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -7,10 +7,14 @@
     "ng": "ng",
     "start": "ng serve",
     "start-proxy": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build",
+    "build": "ng build --prod",
+    "deploy": "ng build --prod && firebase deploy",
+    "deploy-firebase": "ng build --prod && firebase deploy",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "pack": "cross-var octopus-deploy octopack --host http://192.168.2.198/ --apiKey API-H7BUKCKAPTFK0EDSMRDCOVUFU --globs './www/**' --packageName invoices --packageVersion $npm_package_version  --base ./www/ --zip",
+    "oct-d": "npm run build && npm version patch && npm run pack"
   },
   "private": true,
   "dependencies": {

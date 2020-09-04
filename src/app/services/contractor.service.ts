@@ -5,13 +5,15 @@ import {
 } from 'angularfire2/firestore';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
-import { Contractor } from '../models/contractor.model';
+import { Contractor, ContractorInfo } from '../models/contractor.model';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContractorService {
-  private dbPath = '/customers';
+  // private dbPath = '/customers';
+  private dbPath = '/contractors';
   customersRef: AngularFirestoreCollection<Contractor> = null;
   dbRef: AngularFirestoreCollection<Contractor> = null;
 
@@ -29,15 +31,15 @@ export class ContractorService {
     return this.customersRef;
   }
 
-  add(contractor: Contractor): void {
+  add(contractor: Contractor): Observable<any> {
     const pushkey = this._fs.createId();
     contractor._id = pushkey;
-    this._fs
-      .collection(this.dbPath)
-      .doc(pushkey)
-      .set({ ...contractor });
-    this._router.navigate(['/customer']);
-    // this._notification.success('Контрагент успешно создан');
+    return from(
+      this._fs
+        .collection(this.dbPath)
+        .doc(pushkey)
+        .set({ ...contractor })
+    );
   }
 
   delete(_id: string): Promise<void> {
@@ -46,5 +48,24 @@ export class ContractorService {
 
   update(_id: string, value: any): Promise<void> {
     return this.customersRef.doc(_id).update(value);
+  }
+
+  getMappingJurNamesFromEGR(data: any): ContractorInfo {
+    debugger;
+    let info = new ContractorInfo();
+
+    info.fullName = data.vnaim;
+    info.shortName = data.vn;
+    info.name = data.vfn;
+
+    info.fullNameBel = data.vnaimb;
+    info.shortNameBel = data.vnb;
+    info.nameBel = data.vfnb;
+
+    info.registrationDate = data.dcrta;
+
+    debugger;
+
+    return info;
   }
 }

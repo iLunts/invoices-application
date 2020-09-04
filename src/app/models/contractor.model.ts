@@ -1,44 +1,92 @@
 export class Contractor {
   _id: string;
-  fullName: string;
-  shortName: string;
-  name: string;
-  uin: string;
-  isResident: boolean;
-  isLegalPerson: boolean; // Контрагент — организация/ИП
-  countryId: number;
-  // isFavorite: boolean; // Избранный контрагент
-  email: string;
-  phone: string;
-  responsiblePerson: string; // Ответственное лицо
-  address: string;
-  juridicalAddress: string;
+  _createdDate: string;
+
+  info: ContractorInfo;
+  mailingAddress: ContractorAddress;
+  juridicalAddress: ContractorAddress;
 
   constructor(
-    fullName: string,
-    shortName: string,
-    name: string,
-    uin: string,
-    isResident: boolean,
-    isLegalPerson: boolean,
-    countryId: number,
-    email: string,
-    phone: string,
-    responsiblePerson: string,
-    address: string,
-    juridicalAddress: string
+    _id?: string,
+    _createdDate?: string,
+    info?: ContractorInfo,
+    mailingAddress?: ContractorAddress,
+    juridicalAddress?: ContractorAddress
   ) {
-    this.fullName = fullName;
-    this.shortName = shortName;
-    this.name = name;
-    this.uin = uin;
-    this.isResident = isResident;
-    this.isLegalPerson = isLegalPerson;
-    this.countryId = countryId;
-    this.email = email;
-    this.phone = phone;
-    this.responsiblePerson = responsiblePerson;
-    this.address = address;
-    this.juridicalAddress = juridicalAddress;
+    this._id = this._id || null;
+    this._createdDate = this._createdDate || null;
+    this.info = info || new ContractorInfo();
+    this.mailingAddress = mailingAddress || new ContractorAddress();
+    this.juridicalAddress = juridicalAddress || new ContractorAddress();
+  }
+}
+
+export class ContractorAddress {
+  zipCode: string;
+  country: string;
+  countryType: string;
+  city: string;
+  street: string;
+  houseNumber: string;
+  office: string;
+  email: string;
+  phone: string;
+
+  constructor(
+    zipCode?: string,
+    country?: string,
+    countryType?: string,
+    city?: string,
+    street?: string,
+    houseNumber?: string,
+    office?: string,
+    email?: string,
+    phone?: string
+  ) {
+    this.zipCode = zipCode || null;
+    this.country = country || null;
+    this.countryType = countryType || null;
+    this.city = city || null;
+    this.street = street || null;
+    this.houseNumber = houseNumber || null;
+    this.office = office || null;
+    this.email = email || null;
+    this.phone = phone || null;
+  }
+
+  // getAddressFromEGR(data: any) {
+  //   let obj = new ContractorAddress();
+  //   return obj;
+  // }
+}
+
+export class ContractorInfo {
+  fullName?: string;
+  fullNameBel?: string;
+  shortName?: string;
+  shortNameBel?: string;
+  name?: string;
+  nameBel?: string;
+  registrationDate?: string;
+  unp?: string;
+
+  constructor(
+    fullName?: string,
+    fullNameBel?: string,
+    shortName?: string,
+    shortNameBel?: string,
+    name?: string,
+    nameBel?: string,
+    registrationDate?: string,
+    unp?: string
+  ) {
+    this.fullName = fullName || null;
+    this.fullNameBel = fullNameBel || null;
+    this.shortName = shortName || null;
+    this.shortNameBel = shortNameBel || null;
+    this.name = name || null;
+    this.nameBel = nameBel || null;
+    this.registrationDate = registrationDate || null;
+    this.unp = unp || null;
   }
 }

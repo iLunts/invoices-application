@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { EgrService } from 'src/app/services/egr.service';
 import { Platform } from '@ionic/angular';
+import { Contractor } from 'src/app/models/contractor.model';
+import { ContractorService } from 'src/app/services/contractor.service';
 
 @Component({
   selector: 'app-contractor-create',
@@ -17,8 +19,13 @@ export class ContractorCreateComponent implements OnInit {
   form: FormGroup;
   unpSearch: string;
   data: any;
+  contractor: Contractor = new Contractor();
 
-  constructor(private _fb: FormBuilder, private _egr: EgrService) {
+  constructor(
+    private _contractor: ContractorService,
+    private _fb: FormBuilder,
+    private _egr: EgrService
+  ) {
     this.form = this._fb.group({
       name: new FormControl('', [Validators.required]),
     });
@@ -31,15 +38,14 @@ export class ContractorCreateComponent implements OnInit {
   ngOnInit() {}
 
   searchByUNP() {
-    this._egr
-      .getCompanyInfo(this.unpSearch)
-      .subscribe((response: any) => {
-        console.log('EGR: ', response);
-        this.data = response;
-      });
+    // this.data = { ...this._egr.getContractorByUnp(this.unpSearch) };
+    this.contractor = this._egr.getContractorByUnp(this.unpSearch);
   }
 
   save() {
-    console.log('Save');
+    // console.log('Save');
+    this._contractor.add(this.contractor).subscribe((response: any) => {
+      debugger;
+    });
   }
 }

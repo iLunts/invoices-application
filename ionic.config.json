@@ -1,5 +1,5 @@
 {
-  "name": "invoices-application",
+  "name": "invoices",
   "integrations": {
     "cordova": {}
   },

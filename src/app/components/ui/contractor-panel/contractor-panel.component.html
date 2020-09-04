@@ -26,8 +26,8 @@
     ></ion-icon>
   </span>
   <div class="contractor__body">
-    <h2 class="contractor__name">{{ selectedContractor?.VSN }}</h2>
-    <h3 class="contractor__unp">УНП: {{ selectedContractor?.NM }}</h3>
+    <h2 class="contractor__name">{{ selectedContractor?.info?.unp }}</h2>
+    <h3 class="contractor__unp">УНП: {{ selectedContractor?.info?.fullName }}</h3>
     <p class="contractor__desc">Дата создания: {{ selectedContractor?._createdDate }}</p>
 
     <p class="contractor__change" *ngIf="!isViewMode">
