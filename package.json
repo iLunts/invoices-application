@@ -1,8 +1,8 @@
 {
   "name": "invoices",
   "version": "0.0.2",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "SolidEx CRM",
+  "homepage": "https://solidexpert.ltd/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

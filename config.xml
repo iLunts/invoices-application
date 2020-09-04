@@ -2,7 +2,7 @@
 <widget id="by.invoices.application" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Invoices</name>
     <description>Mobile application for personal workflow.</description>
-    <author email="hi@ionicframework.com" href="http://ionicframework.com/">Roman L.</author>
+    <author email="info@solidexpert.ltd" href="http://solidexpert.ltd/">SolidExpert Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
