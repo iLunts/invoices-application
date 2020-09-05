@@ -104,6 +104,8 @@ export class EgrService {
     juridicalAddress.phone = data.vtels;
     juridicalAddress.email = data.vemail;
 
+    debugger;
+
     return juridicalAddress;
   }
 
@@ -119,6 +121,8 @@ export class EgrService {
     info.nameBel = data.vfnb;
 
     info.registrationDate = data.dcrta;
+
+    debugger;
 
     return info;
   }
