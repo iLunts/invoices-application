@@ -54,17 +54,18 @@ export class ContractorService {
 
   getMappingJurNamesFromEGR(data: any): ContractorInfo {
     debugger;
+
     let info = new ContractorInfo();
 
-    info.fullName = data.vnaim;
-    info.shortName = data.vn;
-    info.name = data.vfn;
+    info.fullName = data.vnaim || data[0].vnaim;
+    info.shortName = data.vn || data[0].vn;
+    info.name = data.vfn || data[0].vfn;
 
-    info.fullNameBel = data.vnaimb;
-    info.shortNameBel = data.vnb;
-    info.nameBel = data.vfnb;
+    info.fullNameBel = data.vnaimb || data[0].vnaimb;
+    info.shortNameBel = data.vnb || data[0].vnb;
+    info.nameBel = data.vfnb || data[0].vfnb;
 
-    info.registrationDate = data.dcrta;
+    info.registrationDate = data.dcrta || data[0].dcrta;
 
     debugger;
 
