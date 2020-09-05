@@ -25,25 +25,28 @@ export class EgrService {
 
   getContractorByUnp(UNP: string): Contractor {
     let tempContractor: Contractor = new Contractor();
-    debugger;
 
     this.getJurNames(UNP).subscribe((responseInfo: any) => {
-      if (responseInfo.data) {
+      if (responseInfo) {
         tempContractor.info = this.mappingJurNames(
-          JSON.parse(responseInfo.data)[0]
+          responseInfo
+          // JSON.parse(responseInfo)
         );
 
         this.getAddressByRegNum(UNP).subscribe((responseAddress: any) => {
           if (responseAddress) {
             tempContractor.juridicalAddress = this.mappingJurAddress(
-              JSON.parse(responseAddress.data)[0]
+              responseAddress
             );
+
+            debugger;
+            return tempContractor;
           }
         });
       }
     });
 
-    debugger;
+    // debugger;
     return tempContractor;
   }
 
@@ -52,7 +55,8 @@ export class EgrService {
       if (this._platform.is('cordova')) {
         return from(
           this._httpNative.get(
-            `http://egr.gov.by/api/v2/egr/getJurNamesByRegNum/${UNP}`,
+            `https://invoices.by/api/v2/egr/getJurNamesByRegNum/${UNP}`,
+            // `http://egr.gov.by/api/v2/egr/getJurNamesByRegNum/${UNP}`,
             {},
             {}
           )
@@ -76,7 +80,8 @@ export class EgrService {
     if (this._platform.is('cordova')) {
       return from(
         this._httpNative.get(
-          `http://egr.gov.by/api/v2/egr/getJurNamesByRegNum/${UNP}`,
+          `https://invoices.by/api/v2/egr/getAddressByRegNum/${UNP}`,
+          // `http://egr.gov.by/api/v2/egr/getJurNamesByRegNum/${UNP}`,
           {},
           {}
         )
@@ -84,7 +89,7 @@ export class EgrService {
     } else {
       return from(
         this._http.get(
-          `https://invoices.by/api/v2/egr/getJurNamesByRegNum/${UNP}`
+          `https://invoices.by/api/v2/egr/getAddressByRegNum/${UNP}`
           // `http://egr.gov.by/api/v2/egr/getJurNamesByRegNum/${UNP}`
         )
       );
@@ -94,17 +99,15 @@ export class EgrService {
   private mappingJurAddress(data: any): ContractorAddress {
     let juridicalAddress = new ContractorAddress();
 
-    juridicalAddress.city = data.vnp || data[0].vnp;
-    juridicalAddress.country = data.nsi00201.vnstranp || data[0].nsi00201.vnstranp;
+    juridicalAddress.city = data[0].vnp;
+    juridicalAddress.country = data[0].nsi00201.vnstranp;
     // juridicalAddress.countryType = data.vfn;
-    juridicalAddress.houseNumber = data.vdom || data[0].vdom;
-    juridicalAddress.office = data.vpom || data[0].vpom;
-    juridicalAddress.street = data.vulitsa || data[0].vulitsa;
-    juridicalAddress.zipCode = data.nindex || data[0].nindex;
-    juridicalAddress.phone = data.vtels || data[0].vtels;
-    juridicalAddress.email = data.vemail || data[0].vemail;
-
-    debugger;
+    juridicalAddress.houseNumber = data[0].vdom;
+    juridicalAddress.office = data[0].vpom;
+    juridicalAddress.street = data[0].vulitsa;
+    juridicalAddress.zipCode = data[0].nindex;
+    juridicalAddress.phone = data[0].vtels;
+    juridicalAddress.email = data[0].vemail;
 
     return juridicalAddress;
   }
@@ -112,17 +115,15 @@ export class EgrService {
   private mappingJurNames(data: any): ContractorInfo {
     let info = new ContractorInfo();
 
-    info.fullName = data.vnaim || data[0].vnaim;
-    info.shortName = data.vn || data[0].vn;
-    info.name = data.vfn || data[0].vfn;
+    info.fullName = data[0].vnaim;
+    info.shortName = data[0].vn;
+    info.name = data[0].vfn;
 
-    info.fullNameBel = data.vnaimb || data[0].vnaimb;
-    info.shortNameBel = data.vnb || data[0].vnb;
-    info.nameBel = data.vfnb || data[0].vfnb;
+    info.fullNameBel = data[0].vnaimb;
+    info.shortNameBel = data[0].vnb;
+    info.nameBel = data[0].vfnb;
 
-    info.registrationDate = data.dcrta || data[0].dcrta;
-
-    debugger;
+    info.registrationDate = data[0].dcrta;
 
     return info;
   }
