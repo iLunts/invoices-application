@@ -94,15 +94,15 @@ export class EgrService {
   private mappingJurAddress(data: any): ContractorAddress {
     let juridicalAddress = new ContractorAddress();
 
-    juridicalAddress.city = data.vnp;
-    juridicalAddress.country = data.nsi00201.vnstranp;
+    juridicalAddress.city = data.vnp || data[0].vnp;
+    juridicalAddress.country = data.nsi00201.vnstranp || data[0].nsi00201.vnstranp;
     // juridicalAddress.countryType = data.vfn;
-    juridicalAddress.houseNumber = data.vdom;
-    juridicalAddress.office = data.vpom;
-    juridicalAddress.street = data.vulitsa;
-    juridicalAddress.zipCode = data.nindex;
-    juridicalAddress.phone = data.vtels;
-    juridicalAddress.email = data.vemail;
+    juridicalAddress.houseNumber = data.vdom || data[0].vdom;
+    juridicalAddress.office = data.vpom || data[0].vpom;
+    juridicalAddress.street = data.vulitsa || data[0].vulitsa;
+    juridicalAddress.zipCode = data.nindex || data[0].nindex;
+    juridicalAddress.phone = data.vtels || data[0].vtels;
+    juridicalAddress.email = data.vemail || data[0].vemail;
 
     debugger;
 
@@ -112,15 +112,15 @@ export class EgrService {
   private mappingJurNames(data: any): ContractorInfo {
     let info = new ContractorInfo();
 
-    info.fullName = data.vnaim;
-    info.shortName = data.vn;
-    info.name = data.vfn;
+    info.fullName = data.vnaim || data[0].vnaim;
+    info.shortName = data.vn || data[0].vn;
+    info.name = data.vfn || data[0].vfn;
 
-    info.fullNameBel = data.vnaimb;
-    info.shortNameBel = data.vnb;
-    info.nameBel = data.vfnb;
+    info.fullNameBel = data.vnaimb || data[0].vnaimb;
+    info.shortNameBel = data.vnb || data[0].vnb;
+    info.nameBel = data.vfnb || data[0].vfnb;
 
-    info.registrationDate = data.dcrta;
+    info.registrationDate = data.dcrta || data[0].dcrta;
 
     debugger;
 
