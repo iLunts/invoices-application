@@ -6,10 +6,6 @@
 >
   <span class="contractor__avatar">
     <ion-icon class="contractor__avatar-icon" name="search-outline"></ion-icon>
-    <!-- <ion-icon
-      class="contractor__avatar-icon"
-      name="business-outline"
-    ></ion-icon> -->
   </span>
   <div class="contractor__body">
     <h3 class="contractor__select">Выбрать контрагента</h3>
@@ -26,12 +22,18 @@
     ></ion-icon>
   </span>
   <div class="contractor__body">
-    <h2 class="contractor__name">{{ selectedContractor?.info?.unp }}</h2>
-    <h3 class="contractor__unp">УНП: {{ selectedContractor?.info?.fullName }}</h3>
-    <p class="contractor__desc">Дата создания: {{ selectedContractor?._createdDate }}</p>
+    <h2 class="contractor__name">{{ selectedContractor?.info?.shortName }}</h2>
+    <h3 class="contractor__unp">
+      УНП: {{ selectedContractor?.info?.unp }}
+    </h3>
+    <p class="contractor__date">
+      Дата создания: {{ selectedContractor?._createdDate | date: 'dd MMM yyyy - HH:mm' }}
+    </p>
 
     <p class="contractor__change" *ngIf="!isViewMode">
-      <a class="contractor__change-link" (click)="showContractorModal()">изменить</a>
+      <a class="contractor__change-link" (click)="showContractorModal()"
+        >изменить</a
+      >
     </p>
   </div>
 </div>

@@ -1,6 +1,9 @@
+import * as moment from 'moment';
+
 export class Contractor {
   _id: string;
   _createdDate: string;
+  _userId: string;
 
   info: ContractorInfo;
   mailingAddress: ContractorAddress;
@@ -9,12 +12,14 @@ export class Contractor {
   constructor(
     _id?: string,
     _createdDate?: string,
+    _userId?: string,
     info?: ContractorInfo,
     mailingAddress?: ContractorAddress,
     juridicalAddress?: ContractorAddress
   ) {
     this._id = this._id || null;
-    this._createdDate = this._createdDate || null;
+    this._userId = this._userId || null;
+    this._createdDate = this._createdDate || moment().toString() || null;
     this.info = info || new ContractorInfo();
     this.mailingAddress = mailingAddress || new ContractorAddress();
     this.juridicalAddress = juridicalAddress || new ContractorAddress();
@@ -31,6 +36,7 @@ export class ContractorAddress {
   office: string;
   email: string;
   phone: string;
+  fax: string;
 
   constructor(
     zipCode?: string,
@@ -41,7 +47,8 @@ export class ContractorAddress {
     houseNumber?: string,
     office?: string,
     email?: string,
-    phone?: string
+    phone?: string,
+    fax?: string
   ) {
     this.zipCode = zipCode || null;
     this.country = country || null;
@@ -52,6 +59,7 @@ export class ContractorAddress {
     this.office = office || null;
     this.email = email || null;
     this.phone = phone || null;
+    this.fax = fax || null;
   }
 
   // getAddressFromEGR(data: any) {

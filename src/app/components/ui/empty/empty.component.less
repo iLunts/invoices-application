@@ -1,0 +1,33 @@
+// out: false
+//
+// ------------------------------------------------------------------
+// Block '.empty'
+// ------------------------------------------------------------------
+.empty {
+  position: relative;
+  text-align: center;
+
+  & &__img{
+    display: block;
+    margin: 150px auto 30px;
+    max-width: 60%;
+  }
+
+  & &__title{
+    font-size: 2rem;
+    line-height: 2.6rem;
+    color: #555;
+    margin: 20px 0 20px;
+    font-weight: 300;
+  }
+  
+  & &__text{
+    display: block;
+    max-width: 70%;
+    font-size: 1rem;
+    line-height: 1.6rem;
+    color: #777;
+    margin: 20px auto 20px;
+    font-weight: 300;
+  }
+}

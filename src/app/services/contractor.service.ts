@@ -15,6 +15,7 @@ export class ContractorService {
   // private dbPath = '/customers';
   private dbPath = '/contractors';
   customersRef: AngularFirestoreCollection<Contractor> = null;
+  customersExistRef: AngularFirestoreCollection<Contractor> = null;
   dbRef: AngularFirestoreCollection<Contractor> = null;
 
   constructor(
@@ -33,14 +34,23 @@ export class ContractorService {
     return this.customersRef;
   }
 
-  add(contractor: Contractor): Observable<any> {
+  checkExistContactorByUNP(unp): AngularFirestoreCollection<Contractor> {
+    // this._fs.collection(this.dbPath, (q) =>
+    this.customersExistRef = this._fs.collection(this.dbPath, (q) =>
+      q.where('_userId', '==', this._auth.getUserId()).where('info.unp', '==', unp)
+    );
+    return this.customersExistRef;
+  }
+
+  add(contractor: any): Observable<any> {
     const pushkey = this._fs.createId();
     contractor._id = pushkey;
+    contractor._userId = this._auth.getUserId();
     return from(
       this._fs
         .collection(this.dbPath)
         .doc(pushkey)
-        .set({ ...contractor })
+        .set(JSON.parse(JSON.stringify(contractor)))
     );
   }
 

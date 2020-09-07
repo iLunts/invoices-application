@@ -20,6 +20,7 @@ export class ContractorCreateComponent implements OnInit {
   unpSearch: string;
   data: any;
   contractor: Contractor = new Contractor();
+  isExistContractor: any;
 
   constructor(
     private _contractor: ContractorService,
@@ -38,14 +39,18 @@ export class ContractorCreateComponent implements OnInit {
   ngOnInit() {}
 
   searchByUNP() {
-    // this.data = { ...this._egr.getContractorByUnp(this.unpSearch) };
     this.contractor = this._egr.getContractorByUnp(this.unpSearch);
+    this._contractor.checkExistContactorByUNP(this.unpSearch).valueChanges((response: any) => {
+      debugger;
+      this.isExistContractor = response;
+    });
   }
 
   save() {
-    // console.log('Save');
+    console.log('Contractor: ', this.contractor);
+
     this._contractor.add(this.contractor).subscribe((response: any) => {
-      debugger;
+      // debugger;
     });
   }
 }

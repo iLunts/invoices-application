@@ -28,25 +28,20 @@ export class EgrService {
 
     this.getJurNames(UNP).subscribe((responseInfo: any) => {
       if (responseInfo) {
-        tempContractor.info = this.mappingJurNames(
-          responseInfo
-          // JSON.parse(responseInfo)
-        );
+        tempContractor.info = this.mappingJurNames(responseInfo);
+        tempContractor.info.unp = UNP;
 
         this.getAddressByRegNum(UNP).subscribe((responseAddress: any) => {
           if (responseAddress) {
             tempContractor.juridicalAddress = this.mappingJurAddress(
               responseAddress
             );
-
-            debugger;
             return tempContractor;
           }
         });
       }
     });
 
-    // debugger;
     return tempContractor;
   }
 
@@ -101,13 +96,13 @@ export class EgrService {
 
     juridicalAddress.city = data[0].vnp;
     juridicalAddress.country = data[0].nsi00201.vnstranp;
-    // juridicalAddress.countryType = data.vfn;
     juridicalAddress.houseNumber = data[0].vdom;
     juridicalAddress.office = data[0].vpom;
     juridicalAddress.street = data[0].vulitsa;
     juridicalAddress.zipCode = data[0].nindex;
     juridicalAddress.phone = data[0].vtels;
     juridicalAddress.email = data[0].vemail;
+    juridicalAddress.fax = data[0].vfax;
 
     return juridicalAddress;
   }

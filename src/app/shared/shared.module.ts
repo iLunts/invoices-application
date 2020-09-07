@@ -15,6 +15,7 @@ import { ContractorItemComponent } from '../components/ui/contractor-item/contra
 import { InvoiceServiceItemComponent } from '../components/ui/invoice-service-item/invoice-service-item.component';
 import { ContractorPanelComponent } from '../components/ui/contractor-panel/contractor-panel.component';
 import { InvoicePanelComponent } from '../components/ui/invoice-panel/invoice-panel.component';
+import { EmptyComponent } from '../components/ui/empty/empty.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { InvoicePanelComponent } from '../components/ui/invoice-panel/invoice-pa
     ContractorPanelComponent,
     InvoiceServiceItemComponent,
     InvoicePanelComponent,
+    EmptyComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { InvoicePanelComponent } from '../components/ui/invoice-panel/invoice-pa
     ContractorPanelComponent,
     InvoiceServiceItemComponent,
     InvoicePanelComponent,
+    EmptyComponent,
   ],
   entryComponents: [],
 })

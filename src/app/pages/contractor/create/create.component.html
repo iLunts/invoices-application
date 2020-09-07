@@ -26,9 +26,20 @@
         </ion-item>
       </ion-col>
     </ion-row>
-  </ion-grid>
 
-  <h3>Contractor: {{ contractor | json }}</h3>
+    <ng-container *ngIf="contractor">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <app-contractor-panel
+              [setContractor]="contractor"
+              [isViewMode]="true"
+            ></app-contractor-panel>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-container>
+  </ion-grid>
 
   <!-- <form [formGroup]="form">
     <ion-grid>
@@ -47,9 +58,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button expand="block" (click)="save()"
-        >Создать</ion-button
-      >
+      <ion-button expand="block" (click)="save()">Создать</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
