@@ -10,12 +10,14 @@ import { ContractorListModalComponent } from '../../modals/contractor-list-modal
 })
 export class ContractorPanelComponent implements OnInit {
   @Input() isViewMode = false;
+  @Input() isSelectMode = false;
   @Input() set setContractor(value) {
     if (value) {
       this.selectedContractor = value;
     }
   }
   @Output() contractor = new EventEmitter<Contractor>();
+  @Output() select = new EventEmitter<Contractor>();
   selectedContractor: Contractor;
 
   constructor(private _modal: ModalController) {}
@@ -37,5 +39,9 @@ export class ContractorPanelComponent implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  selectContractor() {
+    this.select.emit(this.selectedContractor);
   }
 }

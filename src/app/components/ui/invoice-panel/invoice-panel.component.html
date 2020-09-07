@@ -28,10 +28,10 @@
     <p class="invoice__status" [style.color]="selectedInvoice.status.color">
       {{ selectedInvoice?.status?.name }}
     </p>
-    <h3 class="invoice__desc">{{ selectedInvoice?.contractor?.VNM }}</h3>
+    <h3 class="invoice__desc">{{ selectedInvoice?.contractor?.info?.shortName }}</h3>
 
     <p class="invoice__change">
-      <a class="invoice__change-link" (click)="delete()">удалить</a>
+      <a class="invoice__change-link invoice__change-link--red" (click)="delete()">удалить</a>
     </p>
   </div>
 </div>

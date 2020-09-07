@@ -10,12 +10,13 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { environment } from 'src/environments/environment';
-import { ModalsModule } from '../components/modals/modals.module';
 import { ContractorItemComponent } from '../components/ui/contractor-item/contractor-item.component';
 import { InvoiceServiceItemComponent } from '../components/ui/invoice-service-item/invoice-service-item.component';
 import { ContractorPanelComponent } from '../components/ui/contractor-panel/contractor-panel.component';
 import { InvoicePanelComponent } from '../components/ui/invoice-panel/invoice-panel.component';
 import { EmptyComponent } from '../components/ui/empty/empty.component';
+import { ContractorListModalComponent } from '../components/modals/contractor-list-modal/contractor-list-modal.component';
+import { ServiceListModalComponent } from '../components/modals/service-list-modal/service-list-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,8 @@ import { EmptyComponent } from '../components/ui/empty/empty.component';
     InvoiceServiceItemComponent,
     InvoicePanelComponent,
     EmptyComponent,
+    ContractorListModalComponent,
+    ServiceListModalComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,6 @@ import { EmptyComponent } from '../components/ui/empty/empty.component';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    ModalsModule,
   ],
   exports: [
     CommonModule,
@@ -45,13 +47,12 @@ import { EmptyComponent } from '../components/ui/empty/empty.component';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    ModalsModule,
     ContractorItemComponent,
     ContractorPanelComponent,
     InvoiceServiceItemComponent,
     InvoicePanelComponent,
     EmptyComponent,
   ],
-  entryComponents: [],
+  entryComponents: [ContractorListModalComponent, ServiceListModalComponent],
 })
 export class SharedModule {}

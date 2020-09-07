@@ -30,9 +30,14 @@
       Дата создания: {{ selectedContractor?._createdDate | date: 'dd MMM yyyy - HH:mm' }}
     </p>
 
-    <p class="contractor__change" *ngIf="!isViewMode">
+    <p class="contractor__change" *ngIf="isViewMode">
       <a class="contractor__change-link" (click)="showContractorModal()"
         >изменить</a
+      >
+    </p>
+    <p class="contractor__change" *ngIf="isSelectMode">
+      <a class="contractor__change-link" (click)="selectContractor()"
+        >выбрать</a
       >
     </p>
   </div>

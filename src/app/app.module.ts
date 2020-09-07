@@ -15,7 +15,6 @@ import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
     BrowserModule,
     SharedModule,
@@ -30,5 +29,6 @@ import { AuthGuard } from './guards/auth.guard';
     AuthGuard,
   ],
   bootstrap: [AppComponent],
+  entryComponents: [],
 })
 export class AppModule {}
