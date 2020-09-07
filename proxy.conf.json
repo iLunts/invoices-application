@@ -1,7 +1,7 @@
 {
-  "/api": {
-    "target": "http://egr.gov.by/api/v2/egr/getAddressByRegNum/",
+  "/api/": {
+    "target": "https://invoices.by",
     "secure": false,
-    "pathRewrite": { "^/api": "" }
+    "changeOrigin": true
   }
 }

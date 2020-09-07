@@ -23,7 +23,7 @@
   <div class="invoice__body">
     <h2 class="invoice__name">
       № {{ selectedInvoice?.number || 'Б.н.' }} от
-      <!-- {{ selectedInvoice?.createDate | date: 'dd MMM yyyy' }} -->
+      {{ selectedInvoice?.createDate | date: 'dd MMM yyyy' }}
     </h2>
     <p class="invoice__status" [style.color]="selectedInvoice.status.color">
       {{ selectedInvoice?.status?.name }}

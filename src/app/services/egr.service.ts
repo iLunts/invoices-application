@@ -64,7 +64,7 @@ export class EgrService {
       } else {
         return from(
           this._http.get(
-            `https://invoices.by/api/v2/egr/getJurNamesByRegNum/${UNP}`
+            `/api/v2/egr/getJurNamesByRegNum/${UNP}`
             // `http://egr.gov.by/api/v2/egr/getJurNamesByRegNum/${UNP}`
           )
         );
@@ -89,7 +89,7 @@ export class EgrService {
     } else {
       return from(
         this._http.get(
-          `https://invoices.by/api/v2/egr/getAddressByRegNum/${UNP}`
+          `/api/v2/egr/getAddressByRegNum/${UNP}`
           // `http://egr.gov.by/api/v2/egr/getJurNamesByRegNum/${UNP}`
         )
       );
