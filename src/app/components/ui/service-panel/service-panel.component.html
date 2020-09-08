@@ -1,0 +1,39 @@
+<!-- Empty service -->
+<!-- <div
+  class="service contractor--select"
+  (click)="showContractorModal()"
+  *ngIf="!selectedService"
+>
+  <span class="service__avatar">
+    <ion-icon class="service__avatar-icon" name="search-outline"></ion-icon>
+  </span>
+  <div class="service__body">
+    <h3 class="service__select">Выбрать контрагента</h3>
+    <p class="service__desc">из список созданных контрагентов</p>
+  </div>
+</div> -->
+
+<!-- Selected service -->
+<div class="service">
+  <span class="service__avatar">
+    <ion-icon
+      class="service__avatar-icon"
+      name="construct-outline"
+    ></ion-icon>
+  </span>
+  <div class="service__body">
+    <h2 class="service__name">{{ selectedService?.name }}</h2>
+    <h3 class="service__unp">
+      Цена: {{ selectedService?.price }} руб.
+    </h3>
+    <p class="service__date">
+      {{ selectedService?.desc }}
+    </p>
+
+    <p class="service__change" *ngIf="isSelectMode">
+      <a class="service__change-link" (click)="selectService()"
+        >выбрать</a
+      >
+    </p>
+  </div>
+</div>

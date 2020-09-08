@@ -10,7 +10,19 @@
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-  <!-- <p>{{ groupServiceList | json }}</p> -->
+  <!-- List -->
+  <!-- <ion-grid *ngIf="contractorList">
+    <ion-row>
+      <ion-col size="12" *ngFor="let item of contractorList">
+        <app-service-panel
+          [setService]="item"
+          [isViewMode]="true"
+          [isSelectMode]="true"
+          (select)="select($event)"
+        ></app-service-panel>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
 
   <!-- List -->
   <div *ngIf="serviceList">
@@ -19,26 +31,19 @@
         {{ group.group }}
       </ion-list-header>
 
-      <ion-item class="invoices__item" *ngFor="let item of group.data">
-        <div class="invoices__avatar" slot="start">
-          <ion-icon
-            class="invoices__avatar-icon"
-            name="people-outline"
-          ></ion-icon>
-        </div>
-        <ion-label>
-          <h2>{{ item?.name }}</h2>
-          <h3>{{ item?.price }}</h3>
-        </ion-label>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" *ngFor="let item of group.data">
+            <app-service-panel
+              [setService]="item"
+              [isViewMode]="true"
+              [isSelectMode]="true"
+              (select)="select($event)"
+            ></app-service-panel>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-        <ion-button fill="outline" size="small" (click)="select(item)">
-          <ion-icon
-            slot="icon-only"
-            name="ellipsis-horizontal-outline"
-          ></ion-icon>
-        </ion-button>
-      </ion-item>
     </ion-list>
   </div>
-
 </ion-content>

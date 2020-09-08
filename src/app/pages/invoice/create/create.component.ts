@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ContractorListModalComponent } from 'src/app/components/modals/contractor-list-modal/contractor-list-modal.component';
 import { Contractor } from 'src/app/models/contractor.model';
@@ -149,7 +149,7 @@ export class InvoiceCreateComponent implements OnInit {
     console.log('Save');
     this._invoice.add(this.invoice).subscribe((response: any) => {
       this.success('Счет успешно создан');
-      this._router.navigate(['/invoice']);
+      this._router.navigate(['/invoice'], { replaceUrl: true });
     });
   }
 }
