@@ -61,7 +61,7 @@
   }
 
   & &__create-date {
-    font-size: .9rem;
+    font-size: 0.9rem;
     line-height: 1.2rem;
     font-weight: 500;
     margin: 0;
@@ -74,19 +74,23 @@
     margin: 0;
   }
 
-  & &__change{
+  & &__change {
     margin: 8px 0 0 0;
     text-align: right;
 
-    &-link{
-      &.invoice__change-link--red{
+    &-link {
+      & + .invoice__change-link {
+        margin-left: 15px;
+      }
+
+      &.invoice__change-link--red {
         color: red;
       }
     }
   }
 
-  & &__status{
-    font-size: .8rem;
+  & &__status {
+    font-size: 0.8rem;
     line-height: 1.2rem;
     font-weight: 500;
     color: #444;

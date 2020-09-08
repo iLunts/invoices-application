@@ -1,18 +1,3 @@
-<!-- Empty invoice -->
-<!-- <div
-  class="invoice contractor--select"
-  (click)="showContractorModal()"
-  *ngIf="!selectedContractor"
->
-  <span class="invoice__avatar">
-    <ion-icon class="invoice__avatar-icon" name="search-outline"></ion-icon>
-  </span>
-  <div class="invoice__body">
-    <h3 class="invoice__select">Выбрать контрагента</h3>
-    <p class="invoice__desc">из список созданных контрагентов</p>
-  </div>
-</div> -->
-
 <!-- Selected invoice -->
 <div class="invoice" *ngIf="selectedInvoice">
   <div class="invoice__info">
@@ -31,7 +16,8 @@
     <h3 class="invoice__desc">{{ selectedInvoice?.contractor?.info?.shortName }}</h3>
 
     <p class="invoice__change">
-      <a class="invoice__change-link invoice__change-link--red" (click)="delete()">удалить</a>
+      <!-- <a class="invoice__change-link invoice__change-link--red" (click)="delete()">удалить</a> -->
+      <a class="invoice__change-link" (click)="showMore()">ещё</a>
     </p>
   </div>
 </div>

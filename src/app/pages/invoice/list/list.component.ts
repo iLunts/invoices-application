@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Contractor } from 'src/app/models/contractor.model';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -11,6 +11,8 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./list.component.less'],
 })
 export class InvoiceListComponent implements OnInit {
+  @ViewChild('htmlData') htmlData: ElementRef;
+
   listData: Contractor[] = [];
   invoiceStatuses: any[] = [];
   isLoaded: boolean;
