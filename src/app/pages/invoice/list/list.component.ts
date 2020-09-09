@@ -53,6 +53,6 @@ export class InvoiceListComponent implements OnInit {
   }
 
   createNew() {
-    this._router.navigate(['invoice/create']);
+    this._router.navigate(['invoice/create'], { replaceUrl: true });
   }
 }

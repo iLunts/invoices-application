@@ -42,7 +42,7 @@ export class ServiceGroupCreateComponent implements OnInit {
         this._notification.dismissLoading();
         this.form.reset();
         this._notification.success();
-        this._router.navigate(['/service']);
+        this._router.navigate(['/service'], { replaceUrl: true });
       })
       .catch((error) => {
         this._notification.error(error);

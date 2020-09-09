@@ -39,7 +39,9 @@ export class LoginComponent implements OnInit {
     this.showLoading();
     this._auth.SignIn(this.f.email.value, this.f.password.value).then((res) => {
       this._auth.SetUserData(res.user);
-      this._router.navigate([environment.startPageAfterLogin]);
+      this._router.navigate([environment.startPageAfterLogin], {
+        replaceUrl: true,
+      });
       this.loadingPopover.dismiss();
 
       // if (!res.user.emailVerified) {

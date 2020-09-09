@@ -42,16 +42,22 @@ export class InvoicePanelComponent implements OnInit {
     const actionSheet = await this._actionSheet.create({
       header: 'Выберите действие',
       buttons: [
+        // {
+        //   text: 'Предпросмотр',
+        //   handler: () => {
+        //     this._invoicePdf.openPDF(this.selectedInvoice);
+        //   },
+        // },
         {
-          text: 'Предпросмотр',
+          text: 'Скачать договор',
           handler: () => {
-            this._invoicePdf.openPDF(this.selectedInvoice);
+            this._invoicePdf.downloadPdf('contract');
           },
         },
         {
-          text: 'Скачать PDF',
+          text: 'Скачать счет',
           handler: () => {
-            this._invoicePdf.downloadPdf(this.selectedInvoice);
+            this._invoicePdf.downloadPdf('invoice');
           },
         },
         {

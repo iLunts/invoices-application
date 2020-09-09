@@ -17,7 +17,7 @@ export class ProfileCreateComponent implements OnInit {
 
   save() {
     this._profile.add(this.profile).subscribe((response: any) => {
-      this._router.navigate(['/profile']);
+      this._router.navigate(['/profile'], { replaceUrl: true });
     });
   }
 }

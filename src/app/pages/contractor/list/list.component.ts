@@ -46,7 +46,7 @@ export class ContractorListComponent implements OnInit {
   }
 
   createNew() {
-    this._router.navigate(['contractor/create']);
+    this._router.navigate(['contractor/create'], { replaceUrl: true });
   }
 
   // deleteContractor(_id: string) {

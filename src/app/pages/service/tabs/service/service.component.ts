@@ -74,6 +74,6 @@ export class ServiceTabServiceComponent implements OnInit {
   }
 
   createNew() {
-    this._router.navigate(['service/create']);
+    this._router.navigate(['service/create'], { replaceUrl: true });
   }
 }

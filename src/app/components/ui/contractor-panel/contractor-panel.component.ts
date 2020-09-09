@@ -11,6 +11,7 @@ import { ContractorListModalComponent } from '../../modals/contractor-list-modal
 export class ContractorPanelComponent implements OnInit {
   @Input() isViewMode = false;
   @Input() isSelectMode = false;
+  @Input() isShowMore = false;
   @Input() set setContractor(value) {
     if (value) {
       this.selectedContractor = value;

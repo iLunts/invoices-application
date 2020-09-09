@@ -26,6 +26,6 @@ export class ProfileListComponent implements OnInit {
   }
 
   createNew() {
-    this._router.navigate(['/profile/create']);
+    this._router.navigate(['/profile/create'], { replaceUrl: true });
   }
 }
