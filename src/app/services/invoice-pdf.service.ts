@@ -5,10 +5,14 @@ import { Injectable } from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import htmlToPdfmake from 'html-to-pdfmake';
 
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { Platform } from '@ionic/angular';
+
+import * as Handlebars from 'handlebars/dist/cjs/handlebars';
+import { CONTRACT_TEMPLATE } from '../templates/contracts/contract';
 
 @Injectable({
   providedIn: 'root',
@@ -63,151 +67,36 @@ export class InvoicePdfService {
   }
 
   createContractPdf() {
+    var template = Handlebars.compile(CONTRACT_TEMPLATE);
+    var context = { title: 'Собаке Качалова' };
+    var html = template(context);
+    var result = htmlToPdfmake(html);
+    debugger;
+
     var docDefinition = {
-      content: [
-        {
-          stack: [
-            { text: 'Договор № б/н', style: 'title' },
-            { text: 'на аренду мини-экскаватора', style: 'subtitle' },
-          ],
-        },
-        {
-          columns: [
-            { text: 'г. Минск', style: 'city' },
-            { text: '«01» июля 2020 г.', style: 'date' },
-          ],
-        },
-        {
-          alignment: 'left',
-          text:
-            'Индивидуальный Предприниматель Лунцевич Владимир Владимирович, именуемый в дальнейшем "Арендодатель", в лице Лунцевича Владимира Владимировича, действующего на основании свидетельства о регистрации индивидуального предпринимателя, с одной стороны и Частное предприятие «Дзержинский Электромонтажстрой», именуемое в дальнейшем "Арендатор", в лице директора Шаронов А. В. действующего на основании Устава, с другой стороны, заключили настоящий Договор о нижеследующем:',
-          style: 'text',
-        },
-        {
-          text: '1. Предмет договора',
-          style: 'group',
-        },
-        {
-          alignment: 'justify',
-          text:
-            '1.1. По настоящему договору Арендодатель за оплату предоставляет Арендатору во временное пользование мини-экскаватор Caterpiller 301.8C и  Volvo EC20B XTV (далее Спецтехника) с экипажем.',
-          style: 'text',
-        },
-        {
-          alignment: 'justify',
-          text:
-            '1.2. Доставка Спецтехники на стройплощадку Арендатора осуществляется силами Арендодателя за счет Арендатора, либо силами Арендатора по договоренности сторон.',
-          style: 'text',
-        },
-        {
-          alignment: 'justify',
-          text:
-            '1.3. Рабочее время Спецтехники измеряется часами и подтверждается составлением сторонами сменного рапорта, который подписывают уполномоченные представители сторон. ',
-          style: 'text',
-        },
-        {
-          text: '2. ОБЯЗАННОСТИ АРЕНДОДАТЕЛЯ',
-          style: 'group',
-        },
-        {
-          alignment: 'justify',
-          text:
-            '2.1. Предоставляет необходимый экипаж (квалифицированного машиниста) для управления сдаваемой в аренду техникой. Машинист является уполномоченным представителем Арендодателя на стройплощадке Арендатора.',
-          style: 'text',
-        },
-        {
-          alignment: 'justify',
-          text:
-            '2.2. Обязуется обеспечивать эксплуатацию техники в соответствии с руководством по эксплуатации Спецтехники, правилами техники безопасности и действующего законодательства Республики Беларусь. Проводит текущее обслуживание Спецтехники и все необходимые регламентные работы (заправка ГСМ, прочие расходные материалы).',
-          style: 'text',
-        },
-        {
-          text: '3. ОБЯЗАННОСТИ АРЕНДАТОРА',
-          style: 'group',
-        },
-        {
-          alignment: 'justify',
-          text:
-            '3.1. Проводит все необходимые согласования на проведение строительных (земляных и прочих) работ. Единолично несет ответственность за сохранность объектов и коммуникаций на стройплощадке.',
-          style: 'text',
-        },
-        {
-          alignment: 'justify',
-          text:
-            '3.2. Назначает со своей стороны уполномоченное лицо, которое дает распоряжения машинисту и заверяет в сменном рапорте часы работы строительной техники.',
-          style: 'text',
-        },
-        {
-          alignment: 'justify',
-          text:
-            '3.3. Несет полную материальную ответственность за сохранность полученной в аренду техники. В случае ее порчи, полностью возмещает ущерб в полном объёме.',
-          style: 'text',
-        },
-        {
-          alignment: 'justify',
-          text:
-            '3.4. Обеспечивает своевременную арендную плату за полученную в аренду Спецтехнику.',
-          style: 'text',
-        },
-        {
-          alignment: 'justify',
-          columns: [
-            {
-              text: 'Реквизиты №1',
-            },
-            {
-              text: 'Реквизиты №2',
-            },
-          ],
-        },
-      ],
+      content: [result],
       styles: {
-        title: {
-          fontSize: 12,
-          bold: true,
-          alignment: 'center',
-          margin: [0, 0, 0, 0],
-        },
-        subtitle: {
+        'html-p': {
           fontSize: 10,
-          bold: true,
-          alignment: 'center',
-          margin: [0, 0, 0, 10],
-        },
-        city: {
-          fontSize: 10,
-          bold: true,
-          alignment: 'left',
-          margin: [0, 0, 0, 10],
-        },
-        date: {
-          fontSize: 10,
-          bold: true,
-          alignment: 'right',
-          margin: [0, 0, 0, 10],
-        },
-        text: {
-          fontSize: 11,
           bold: false,
-          alignment: 'left',
-          margin: [0, 0, 0, 5],
+          margin: [0, 0, 0, 0],
+          alignment: 'justify',
         },
-        group: {
-          fontSize: 14,
-          bold: true,
+        'html-strong': {
+          fontSize: 10,
+          bold: false,
+          margin: [0, 0, 0, 0],
           alignment: 'center',
-          margin: [0, 0, 0, 5],
         },
-        bigger: {
-          fontSize: 15,
-          italics: true,
+        defaultStyle: {
+          fontSize: 12,
+          bold: false,
+          margin: [0, 0, 0, 0]
         },
-      },
-      defaultStyle: {
-        columnGap: 20,
       },
     };
 
+    // this.pdfObj = pdfMake.createPdf({ content: [...result] });
     this.pdfObj = pdfMake.createPdf(docDefinition);
   }
 

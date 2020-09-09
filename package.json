@@ -36,6 +36,8 @@
     "cordova-plugin-advanced-http": "^3.0.1",
     "cordova-plugin-file": "^6.0.2",
     "firebase": "^7.19.0",
+    "handlebars": "^4.7.6",
+    "html-to-pdfmake": "^2.0.10",
     "jspdf": "^2.1.1",
     "moment": "^2.27.0",
     "pdfmake": "^0.1.68",
