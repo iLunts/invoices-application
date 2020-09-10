@@ -6,7 +6,7 @@ import { AccessDeniedComponent } from './pages/access-denied/access-denied.compo
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'invoice',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -15,11 +15,25 @@ const routes: Routes = [
       import('./folder/folder.module').then((m) => m.FolderPageModule),
   },
   {
+    path: 'home',
+    loadChildren: () =>
+      import('./pages/home/home.module').then(
+        (m) => m.HomeModule
+      ),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'contractor',
     loadChildren: () =>
       import('./pages/contractor/contractor.module').then(
         (m) => m.ContractorModule
       ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'contract',
+    loadChildren: () =>
+      import('./pages/contract/contract.module').then((m) => m.ContractModule),
     canActivate: [AuthGuard],
   },
   {

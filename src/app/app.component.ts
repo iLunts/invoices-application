@@ -18,9 +18,19 @@ export class AppComponent implements OnInit, OnDestroy {
   public selectedIndex = 0;
   public appPages = [
     {
+      title: 'Домашняя',
+      url: '/home',
+      icon: 'planet',
+    },
+    {
       title: 'Контрагенты',
       url: '/contractor',
       icon: 'people',
+    },
+    {
+      title: 'Договора',
+      url: '/contract',
+      icon: 'document-text',
     },
     {
       title: 'Счета',

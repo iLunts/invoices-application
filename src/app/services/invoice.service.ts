@@ -6,7 +6,7 @@ import {
 import { Invoice } from '../models/invoice.model';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,7 @@ export class InvoiceService {
   private dbPath = '/invoices';
   private dbPathStatuses = '/invoiceStatuses';
   invoicesRef: AngularFirestoreCollection<Invoice> = null;
+  // invoiceList: Observable<Invoice[]>;
 
   constructor(
     private _fs: AngularFirestore,
@@ -25,13 +26,21 @@ export class InvoiceService {
       this.invoicesRef = _fs.collection(this.dbPath, (q) =>
         q.where('_userId', '==', this._auth.getUserId())
       );
+
+      // this.invoiceList = this.invoicesRef.valueChanges();
     }
   }
 
-  // getAll(): Observable<Invoice[]> {
-  getAll(): AngularFirestoreCollection<Invoice> {
-    return this.invoicesRef;
+  // getList() {
+  //   return this.invoiceList;
+  // };
+
+  getAll(): Observable<Invoice[]> {
+    return this.invoicesRef.valueChanges();
   }
+  // getAll(): AngularFirestoreCollection<Invoice> {
+  //   return this.invoicesRef.valueChanges();
+  // }
 
   get(id: string) {
     return this._fs

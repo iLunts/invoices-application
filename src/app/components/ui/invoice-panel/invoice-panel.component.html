@@ -10,7 +10,7 @@
       № {{ selectedInvoice?.number || 'Б.н.' }} от
       {{ selectedInvoice?.createDate | date: 'dd MMM yyyy' }}
     </h2>
-    <p class="invoice__status" [style.color]="selectedInvoice.status.color">
+    <p class="invoice__status" [style.color]="selectedInvoice?.status?.color">
       {{ selectedInvoice?.status?.name }}
     </p>
     <h3 class="invoice__desc">{{ selectedInvoice?.contractor?.info?.shortName }}</h3>

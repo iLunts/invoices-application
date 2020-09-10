@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  startPageAfterLogin: 'invoice',
+  startPageAfterLogin: 'home',
   firebaseConfig: {
     apiKey: 'AIzaSyAt0A-pNJNvSe9pUWrby_2-SFQCXI7WMsE',
     authDomain: 'invoices-244bd.firebaseapp.com',

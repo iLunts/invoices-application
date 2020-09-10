@@ -4,6 +4,8 @@ import { InvoiceService } from 'src/app/services/invoice.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
+import { Observable } from 'rxjs';
+import { Invoice } from 'src/app/models/invoice.model';
 
 @Component({
   selector: 'app-invoice-list',
@@ -13,8 +15,10 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class InvoiceListComponent implements OnInit {
   @ViewChild('htmlData') htmlData: ElementRef;
 
-  listData: Contractor[] = [];
+  // listData: Contractor[] = [];
+  listData: Observable<Invoice[]>;
   invoiceStatuses: any[] = [];
+  // isLoaded: boolean = true;
   isLoaded: boolean;
 
   constructor(
@@ -39,11 +43,16 @@ export class InvoiceListComponent implements OnInit {
     this.isLoaded = false;
     this._invoice
       .getAll()
-      .valueChanges()
       .subscribe((data: any) => {
         this.listData = data;
         this.isLoaded = true;
       });
+
+    // this.listData = this._invoice.getAll().valueChanges();
+    // this._invoice.getList().subscribe((response: any) => {
+    //   this.listData = response;
+    //   this.isLoaded = true;
+    // });
   }
 
   delete(_id: string) {

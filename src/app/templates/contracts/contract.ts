@@ -1,11 +1,11 @@
 export const CONTRACT_TEMPLATE = `
 <p align="center">
-    <strong>ДОГОВОР № б/н ({{title}})</strong>
+    <strong class="title">ДОГОВОР № б/н ({{title}})</strong>
 </p>
 <p align="center">
-    <strong>на аренду мини-экскаватора</strong>
+    <strong class="subtitle">на аренду мини-экскаватора</strong>
 </p>
-<p style="margin: 0;">
+<p class="date" style="margin: 0;">
     г. Минск «01» июля 2020 г.
 </p>
 <p style="margin: 0;">

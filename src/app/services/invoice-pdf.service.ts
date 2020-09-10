@@ -71,6 +71,7 @@ export class InvoicePdfService {
     var context = { title: 'Собаке Качалова' };
     var html = template(context);
     var result = htmlToPdfmake(html);
+
     debugger;
 
     var docDefinition = {
@@ -91,7 +92,7 @@ export class InvoicePdfService {
         defaultStyle: {
           fontSize: 12,
           bold: false,
-          margin: [0, 0, 0, 0]
+          margin: [0, 0, 0, 0],
         },
       },
     };
