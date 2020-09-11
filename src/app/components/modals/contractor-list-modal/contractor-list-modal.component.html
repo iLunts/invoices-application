@@ -16,7 +16,7 @@
       <ion-col size="12" *ngFor="let item of contractorList">
         <app-contractor-panel
           [setContractor]="item"
-          [isViewMode]="false"
+          [isViewMode]="true"
           [isSelectMode]="true"
           (select)="select($event)"
         ></app-contractor-panel>

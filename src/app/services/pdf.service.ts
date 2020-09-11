@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-// import { Invoice } from '../models/invoice.model';
-// import { jsPDF } from 'jspdf';
 
+// PDF
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -18,9 +17,9 @@ import { CONTRACT_TEMPLATE } from '../templates/contracts/contract';
   providedIn: 'root',
 })
 export class InvoicePdfService {
-  letterObj = {
-    to: 'Contractor-1213123123123',
-    from: 'Contractor-2222222222',
+  templateVariables = {
+    title: 'Contractor-1213123123123',
+    date: 'Contractor-2222222222',
     text: 'Some text.....',
   };
   pdfObj = null;
@@ -68,8 +67,8 @@ export class InvoicePdfService {
 
   createContractPdf() {
     var template = Handlebars.compile(CONTRACT_TEMPLATE);
-    var context = { title: 'Собаке Качалова', date: '01 сентября 2020' };
-    var html = template(context);
+    // var context = { title: 'Собаке Качалова', date: '01 сентября 2020' };
+    var html = template(this.templateVariables);
     var result = htmlToPdfmake(html);
 
     debugger;

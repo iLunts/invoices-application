@@ -1,12 +1,12 @@
 export const CONTRACT_TEMPLATE = `
 <p align="center">
-    <strong class="title">ДОГОВОР № б/н ({{title}})</strong>
+    <strong class="title">ДОГОВОР № б/н</strong>
 </p>
 <p align="center">
     <strong class="subtitle">на аренду мини-экскаватора</strong>
 </p>
 <p class="date" style="margin: 0;">
-    г. Минск «01» июля 2020 г.
+    г. Минск {{date}}
 </p>
 <p style="margin: 0;">
     Индивидуальный Предприниматель Лунцевич Владимир Владимирович, именуемый в
