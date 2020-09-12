@@ -4,6 +4,7 @@ export class Contractor {
   _id: string;
   _createdDate: string;
   _userId: string;
+  // _contractId: string;
 
   info: ContractorInfo;
   mailingAddress: ContractorAddress;
@@ -13,6 +14,7 @@ export class Contractor {
     _id?: string,
     _createdDate?: string,
     _userId?: string,
+    // _contractId?: string,
     info?: ContractorInfo,
     mailingAddress?: ContractorAddress,
     juridicalAddress?: ContractorAddress
@@ -20,6 +22,7 @@ export class Contractor {
     this._id = this._id || null;
     this._userId = this._userId || null;
     this._createdDate = this._createdDate || moment().toString() || null;
+    // this._contractId = this._contractId || null;
     this.info = info || new ContractorInfo();
     this.mailingAddress = mailingAddress || new ContractorAddress();
     this.juridicalAddress = juridicalAddress || new ContractorAddress();

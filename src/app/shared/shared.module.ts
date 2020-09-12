@@ -18,11 +18,13 @@ import { EmptyComponent } from '../components/ui/empty/empty.component';
 import { ContractorListModalComponent } from '../components/modals/contractor-list-modal/contractor-list-modal.component';
 import { ServiceListModalComponent } from '../components/modals/service-list-modal/service-list-modal.component';
 import { ServicePanelComponent } from '../components/ui/service-panel/service-panel.component';
+import { ContractPanelComponent } from '../components/ui/contract-panel/contract-panel.component';
 
 @NgModule({
   declarations: [
     ContractorItemComponent,
     ContractorPanelComponent,
+    ContractPanelComponent,
     InvoiceServiceItemComponent,
     InvoicePanelComponent,
     ServicePanelComponent,
@@ -51,6 +53,7 @@ import { ServicePanelComponent } from '../components/ui/service-panel/service-pa
     AngularFireAuthModule,
     ContractorItemComponent,
     ContractorPanelComponent,
+    ContractPanelComponent,
     InvoiceServiceItemComponent,
     InvoicePanelComponent,
     ServicePanelComponent,

@@ -3,7 +3,8 @@ import { Invoice } from 'src/app/models/invoice.model';
 import * as moment from 'moment';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { ActionSheetController } from '@ionic/angular';
-import { InvoicePdfService } from 'src/app/services/invoice-pdf.service';
+import { TemplatePdfService } from 'src/app/services/template-pdf.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoice-panel',
@@ -21,8 +22,9 @@ export class InvoicePanelComponent implements OnInit {
 
   constructor(
     private _invoice: InvoiceService,
-    private _invoicePdf: InvoicePdfService,
-    private _actionSheet: ActionSheetController
+    private _templatePdf: TemplatePdfService,
+    private _actionSheet: ActionSheetController,
+    private _router: Router
   ) {}
 
   ngOnInit() {}
@@ -41,43 +43,85 @@ export class InvoicePanelComponent implements OnInit {
   async showMore(id) {
     const actionSheet = await this._actionSheet.create({
       header: 'Выберите действие',
-      buttons: [
-        // {
-        //   text: 'Предпросмотр',
-        //   handler: () => {
-        //     this._invoicePdf.openPDF(this.selectedInvoice);
-        //   },
-        // },
-        {
-          text: 'Скачать договор',
-          handler: () => {
-            this._invoicePdf.downloadPdf('contract');
-          },
-        },
-        {
-          text: 'Скачать счет',
-          handler: () => {
-            this._invoicePdf.downloadPdf('invoice');
-          },
-        },
-        {
-          text: 'Удалить',
-          role: 'destructive',
-          handler: () => {
-            this.delete();
-          },
-        },
-        {
-          text: 'Отменить',
-          // icon: 'close',
-          role: 'cancel',
-          handler: () => {
-            // console.log('Cancel clicked');
-          },
-        },
-      ],
+      buttons: this.generateActionButtons(),
+      // [
+
+      // {
+      //   text: 'Предпросмотр',
+      //   handler: () => {
+      //     this._invoicePdf.openPDF(this.selectedInvoice);
+      //   },
+      // },
+      // {
+      //   text: 'Скачать договор',
+      //   handler: () => {
+      //     this._templatePdf.downloadPdf('contract');
+      //   },
+      // },
+      // {
+      //   text: 'Скачать счет',
+      //   handler: () => {
+      //     this._templatePdf.downloadPdf('invoice');
+      //   },
+      // },
+      // {
+      //   text: 'Удалить',
+      //   role: 'destructive',
+      //   handler: () => {
+      //     this.delete();
+      //   },
+      // },
+      // {
+      //   text: 'Отменить',
+      //   role: 'cancel',
+      //   handler: () => {},
+      // },
+      // ],
     });
 
     await actionSheet.present();
+  }
+
+  generateActionButtons() {
+    let buttons: any[] = [
+      {
+        text: 'Удалить',
+        role: 'destructive',
+        handler: () => {
+          this.delete();
+        },
+      },
+      {
+        text: 'Отменить',
+        role: 'cancel',
+        handler: () => {},
+      },
+    ];
+
+    if (this.selectedInvoice.contractId) {
+      buttons.unshift({
+        text: 'Скачать договор PDF',
+        role: 'download',
+        handler: () => {
+          this._templatePdf.downloadPdf('contract');
+        },
+      });
+    } else {
+      buttons.unshift({
+        text: 'Создать договор',
+        role: 'download',
+        handler: () => {
+          this._router.navigate(['/contract/create'], {
+            queryParams: {
+              invoiceId: this.selectedInvoice._id,
+              contractorId: this.selectedInvoice.contractor._id,
+            },
+            replaceUrl: true,
+          });
+        },
+      });
+    }
+
+    return buttons;
   }
 }

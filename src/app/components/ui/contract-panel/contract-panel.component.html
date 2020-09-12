@@ -1,0 +1,23 @@
+<!-- Selected contract -->
+<div class="contract" *ngIf="selectedContract">
+  <div class="contract__info">
+    <span class="contract__avatar">
+      <ion-icon class="contract__avatar-icon" name="document-text-outline"></ion-icon>
+    </span>
+  </div>
+  <div class="contract__body">
+    <!-- <h2 class="contract__name">
+      № {{ selectedContract?.number || 'Б.н.' }} от
+      {{ selectedContract?.createDate | date: 'dd MMM yyyy' }}
+    </h2> -->
+    <p class="contract__status" [style.color]="selectedContract?.status?.color">
+      {{ selectedContract?.status?.name }}
+    </p>
+    <h3 class="contract__desc">{{ selectedContract?.contractor?.info?.shortName }}</h3>
+
+    <p class="contract__change">
+      <!-- <a class="contract__change-link invoice__change-link--red" (click)="delete()">удалить</a> -->
+      <a class="contract__change-link" (click)="showMore()">ещё</a>
+    </p>
+  </div>
+</div>

@@ -54,12 +54,12 @@
     <ion-row>
       <ion-col>
         <app-contractor-panel
+          [setContractor]="contract?.contractor"
           (contractor)="selectContractor($event)"
         ></app-contractor-panel>
       </ion-col>
     </ion-row>
   </ion-grid>
-
 </ion-content>
 
 <ion-footer>

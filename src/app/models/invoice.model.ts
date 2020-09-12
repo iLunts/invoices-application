@@ -8,6 +8,7 @@ export class Invoice {
   number: string;
   createDate: string;
   expiredDate: string;
+  contractId: string;
 
   // TODO: Need change to model
   billTo: object;
@@ -23,7 +24,8 @@ export class Invoice {
     number?: string,
     createDate?: string,
     expiredDate?: string,
-    status?: InvoiceStatus
+    status?: InvoiceStatus,
+    contractId?: string
   ) {
     this.number = number || null;
     this.contractor = contractor || null;
@@ -31,6 +33,7 @@ export class Invoice {
     this.createDate = createDate || moment().toString();
     this.expiredDate = expiredDate || moment().add(7, 'days').toString();
     this.status = status || null;
+    this.contractId = contractId || null;
   }
 }
 

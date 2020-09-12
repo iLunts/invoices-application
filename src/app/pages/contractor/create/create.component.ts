@@ -41,7 +41,6 @@ export class ContractorCreateComponent implements OnInit {
   searchByUNP() {
     this.contractor = this._egr.getContractorByUnp(this.unpSearch);
     this._contractor.checkExistContactorByUNP(this.unpSearch).valueChanges((response: any) => {
-      debugger;
       this.isExistContractor = response;
     });
   }

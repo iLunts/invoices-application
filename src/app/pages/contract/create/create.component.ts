@@ -3,8 +3,9 @@ import { ContractService } from 'src/app/services/contract.service';
 import { ContractStatus, Contract } from 'src/app/models/contract.model';
 import { Contractor } from 'src/app/models/contractor.model';
 import { NotificationService } from 'src/app/services/notification.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CONTRACT_TEMPLATE } from 'src/app/templates/contracts/contract';
+import { ContractorService } from 'src/app/services/contractor.service';
 
 @Component({
   selector: 'app-contract-create',
@@ -16,9 +17,17 @@ export class ContractCreateComponent implements OnInit {
   contract: Contract = new Contract();
   constructor(
     private _contract: ContractService,
+    private _contractor: ContractorService,
     private _notification: NotificationService,
     private _router: Router,
+    private _route: ActivatedRoute
   ) {
+    this._route.queryParams.subscribe((params) => {
+      if (params.contractorId) {
+        this.fetchContractor(params.contractorId);
+      }
+    });
+
     this.getStatuses();
 
     if (!this.contract.date) {
@@ -29,6 +38,15 @@ export class ContractCreateComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  fetchContractor(contractorId: string) {
+    this._contractor
+      .getById(contractorId)
+      .valueChanges()
+      .subscribe((response: any) => {
+        this.selectContractor(response);
+      });
+  }
 
   getStatuses() {
     this._contract.getAllStatus().subscribe((response: ContractStatus[]) => {
@@ -43,7 +61,7 @@ export class ContractCreateComponent implements OnInit {
     if (!contractor) {
       return;
     }
-    this.contract.contractor = contractor;
+    this.contract.contractor = contractor[0];
   }
 
   changeStatus(event) {
@@ -55,7 +73,6 @@ export class ContractCreateComponent implements OnInit {
     //   return;
     // }
     this._contract.add(this.contract).subscribe((response: any) => {
-      debugger;
       this._notification.success('Договор успешно добавлен');
       this._router.navigate(['/contract'], { replaceUrl: true });
     });

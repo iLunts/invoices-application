@@ -17,7 +17,7 @@ import { CONTRACT_TEMPLATE } from '../templates/contracts/contract';
 @Injectable({
   providedIn: 'root',
 })
-export class InvoicePdfService {
+export class TemplatePdfService {
   letterObj = {
     to: 'Contractor-1213123123123',
     from: 'Contractor-2222222222',
