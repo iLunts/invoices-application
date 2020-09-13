@@ -31,14 +31,14 @@ export class TemplatePdfService {
     private _fileOpener: FileOpener
   ) {}
 
-  downloadPdf(type: string) {
+  downloadPdf(type: string, obj?: any) {
     switch (type) {
       case 'invoice': {
-        this.createInvoicePdf();
+        this.createInvoicePdf(obj);
         break;
       }
       case 'contract': {
-        this.createContractPdf();
+        this.createContractPdf(obj);
         break;
       }
     }
@@ -66,13 +66,10 @@ export class TemplatePdfService {
     }
   }
 
-  createContractPdf() {
+  createContractPdf(data?: any) {
     var template = Handlebars.compile(CONTRACT_TEMPLATE);
-    var context = { title: 'Собаке Качалова', date: '01 сентября 2020' };
-    var html = template(context);
+    var html = template(data);
     var result = htmlToPdfmake(html);
-
-    debugger;
 
     var docDefinition = {
       content: [result],
@@ -101,7 +98,7 @@ export class TemplatePdfService {
     this.pdfObj = pdfMake.createPdf(docDefinition);
   }
 
-  createInvoicePdf() {
+  createInvoicePdf(data?: any) {
     var docDefinition = {
       content: [
         'By default paragraphs are stacked one on top of (or actually - below) another. ',

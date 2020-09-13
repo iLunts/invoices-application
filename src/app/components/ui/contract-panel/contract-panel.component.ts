@@ -39,38 +39,9 @@ export class ContractPanelComponent implements OnInit {
   }
 
   async showMore(id) {
-    this.generateActionButtons();
     const actionSheet = await this._actionSheet.create({
       header: 'Выберите действие',
-      buttons: [
-        {
-          text: 'Скачать договор',
-          handler: () => {
-            this._templatePdf.downloadPdf('contract');
-          },
-        },
-        // {
-        //   text: 'Скачать счет',
-        //   handler: () => {
-        //     this._templatePdf.downloadPdf('invoice');
-        //   },
-        // },
-        {
-          text: 'Удалить',
-          role: 'destructive',
-          handler: () => {
-            this.delete();
-          },
-        },
-        {
-          text: 'Отменить',
-          // icon: 'close',
-          role: 'cancel',
-          handler: () => {
-            // console.log('Cancel clicked');
-          },
-        },
-      ],
+      buttons: this.generateActionButtons(),
     });
 
     await actionSheet.present();
@@ -78,6 +49,12 @@ export class ContractPanelComponent implements OnInit {
 
   generateActionButtons() {
     let buttons: any[] = [
+      {
+        text: 'Скачать договор',
+        handler: () => {
+          this._templatePdf.downloadPdf('contract', this.selectedContract);
+        },
+      },
       {
         text: 'Удалить',
         role: 'destructive',
