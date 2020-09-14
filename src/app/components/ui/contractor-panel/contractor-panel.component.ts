@@ -13,6 +13,7 @@ export class ContractorPanelComponent implements OnInit {
   @Input() isViewMode = false;
   @Input() isSelectMode = false;
   @Input() isShowMore = false;
+  @Input() isExist = false;
   @Input() set setContractor(value) {
     if (value && value.info.unp) {
       this.selectedContractor = value;

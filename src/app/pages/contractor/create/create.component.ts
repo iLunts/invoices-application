@@ -47,8 +47,8 @@ export class ContractorCreateComponent implements OnInit {
 
   searchByUNP() {
     this.isLoadingSearchUnp = true;
-    this.contractor = this._egr.getContractorByUnp(this.unpSearch);
-    this.isLoadingSearchUnp = false;
+    // this.contractor = this._egr.getContractorByUnp(this.unpSearch);
+    // this.isLoadingSearchUnp = false;
     // this._contractor
     //   .checkExistContactorByUNP(this.unpSearch)
     //   .valueChanges((response: any) => {
@@ -56,6 +56,24 @@ export class ContractorCreateComponent implements OnInit {
     //     this.isLoadingSearchUnp = false;
     //     debugger;
     //   });
+
+    // this.isExistContractor = this._contractor.checkExistContactorByUNP(
+    //   this.unpSearch
+    // )
+
+    this._contractor
+      .checkExistContactorByUNP(this.unpSearch)
+      .subscribe((response: any) => {
+        if (!response.length) {
+          this.contractor = this._egr.getContractorByUnp(this.unpSearch);
+          this.isExistContractor = false;
+        } else {
+          this.contractor = new Contractor();
+          this.isExistContractor = true;
+        }
+      });
+
+    this.isLoadingSearchUnp = false;
   }
 
   save() {

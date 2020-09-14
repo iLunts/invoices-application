@@ -2,7 +2,7 @@
 <div
   class="contractor contractor--select"
   (click)="showContractorModal()"
-  *ngIf="!selectedContractor"
+  *ngIf="!selectedContractor && !isExist"
 >
   <span class="contractor__avatar">
     <ion-icon class="contractor__avatar-icon" name="search-outline"></ion-icon>
@@ -10,6 +10,20 @@
   <div class="contractor__body">
     <h3 class="contractor__select">Выбрать контрагента</h3>
     <p class="contractor__desc">из список созданных контрагентов</p>
+  </div>
+</div>
+
+<!-- Exist contractor -->
+<div
+  class="contractor contractor--exist"
+  *ngIf="isExist"
+>
+  <span class="contractor__avatar">
+    <ion-icon class="contractor__avatar-icon" name="search-outline"></ion-icon>
+  </span>
+  <div class="contractor__body">
+    <h3 class="contractor__select">Данный контрагент уже существует</h3>
+    <p class="contractor__desc">вы можете выбрать этого контрагента в спике</p>
   </div>
 </div>
 

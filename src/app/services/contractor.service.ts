@@ -36,19 +36,21 @@ export class ContractorService {
 
   getById(id: string): AngularFirestoreCollection<any> {
     const collection = this._fs.collection(this.dbPath, (q) =>
-      q
-        .where('_userId', '==', this._auth.getUserId())
-        .where('_id', '==', id)
+      q.where('_userId', '==', this._auth.getUserId()).where('_id', '==', id)
     );
     return collection;
   }
 
-  checkExistContactorByUNP(unp): AngularFirestoreCollection<Contractor> {
-    // this._fs.collection(this.dbPath, (q) =>
-    this.customersExistRef = this._fs.collection(this.dbPath, (q) =>
-      q.where('_userId', '==', this._auth.getUserId()).where('info.unp', '==', unp)
-    );
-    return this.customersExistRef;
+  checkExistContactorByUNP(unp): Observable<any> {
+    // let isExist = false;
+    return this._fs
+      .collection(this.dbPath, (q) =>
+        q
+          .where('_userId', '==', this._auth.getUserId())
+          .where('info.unp', '==', unp)
+      )
+      .valueChanges();
+    // return isExist;
   }
 
   add(contractor: any): Observable<any> {
