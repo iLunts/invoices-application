@@ -40,6 +40,8 @@
     "html-to-pdfmake": "^2.0.10",
     "jspdf": "^2.1.1",
     "moment": "^2.27.0",
+    "ngx-loader-indicator": "^8.0.0",
+    "ngx-mask": "^10.0.1",
     "pdfmake": "^0.1.68",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

@@ -1,0 +1,39 @@
+<!-- Empty contractor -->
+<div
+  class="bank contractor--select"
+  (click)="showBankModal()"
+  *ngIf="!selectedBank?.CDHeadBank"
+>
+  <span class="bank__avatar">
+    <ion-icon class="bank__avatar-icon" name="cash-outline"></ion-icon>
+  </span>
+  <div class="bank__body">
+    <h3 class="bank__select">Выбрать банк по БИК</h3>
+    <p class="bank__desc">из список существующих банков</p>
+  </div>
+</div>
+
+<!-- Selected contractor -->
+<div class="bank" *ngIf="selectedBank?.CDHeadBank">
+  <!-- <span class="bank__avatar">
+    <ion-icon
+      class="bank__avatar-icon"
+      name="cash-outline"
+    ></ion-icon>
+  </span> -->
+  <div class="bank__body">
+    <h2 class="bank__name">{{ selectedBank?.NmBankShort }}</h2>
+    <h3 class="bank__unp">
+      БИК: {{ selectedBank?.CDHeadBank }}
+    </h3>
+    <p class="bank__date">
+      Дата создания: {{ selectedBank?.DTBegin | date: 'dd MMM yyyy - HH:mm' }}
+    </p>
+
+    <p class="bank__change" *ngIf="isSelectMode">
+      <a class="bank__change-link" (click)="selectBank()"
+        >выбрать</a
+      >
+    </p>
+  </div>
+</div>

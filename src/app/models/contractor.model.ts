@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import { BankAccount } from './bank.model';
 
 export class Contractor {
   _id: string;
@@ -9,6 +10,7 @@ export class Contractor {
   info: ContractorInfo;
   mailingAddress: ContractorAddress;
   juridicalAddress: ContractorAddress;
+  bankAccount: BankAccount;
 
   constructor(
     _id?: string,
@@ -17,7 +19,8 @@ export class Contractor {
     // _contractId?: string,
     info?: ContractorInfo,
     mailingAddress?: ContractorAddress,
-    juridicalAddress?: ContractorAddress
+    juridicalAddress?: ContractorAddress,
+    bankAccount?: BankAccount
   ) {
     this._id = this._id || null;
     this._userId = this._userId || null;
@@ -26,6 +29,7 @@ export class Contractor {
     this.info = info || new ContractorInfo();
     this.mailingAddress = mailingAddress || new ContractorAddress();
     this.juridicalAddress = juridicalAddress || new ContractorAddress();
+    this.bankAccount = bankAccount || new BankAccount();
   }
 }
 
@@ -70,6 +74,19 @@ export class ContractorAddress {
   //   return obj;
   // }
 }
+
+// export class ContractorBankAccount {
+//   swift: string;
+//   bank: BankAccount;
+
+//   constructor(
+//     swift?: string,
+//     bank?: BankAccount,
+//   ) {
+//     this.swift = swift || null;
+//     this.bank = bank || null;
+//   }
+// }
 
 export class ContractorInfo {
   fullName?: string;

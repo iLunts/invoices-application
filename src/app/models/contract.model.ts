@@ -1,6 +1,6 @@
-import * as moment from 'moment';
 import { Contractor } from './contractor.model';
 import { Profile } from './profile.model';
+import * as moment from 'moment';
 
 export class Contract {
   _id: string;

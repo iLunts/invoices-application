@@ -24,7 +24,7 @@ export class InvoiceService {
   ) {
     if (this._auth.isLoggedIn) {
       this.invoicesRef = _fs.collection(this.dbPath, (q) =>
-        q.where('_userId', '==', this._auth.getUserId())
+        q.where('_userId', '==', this._auth.getUserId()).orderBy('_createdDate', 'desc')
       );
 
       // this.invoiceList = this.invoicesRef.valueChanges();
@@ -68,6 +68,7 @@ export class InvoiceService {
     const pushkey = this._fs.createId();
     invoice._id = pushkey;
     invoice._userId = this._auth.getUserId();
+    invoice._createdDate = new Date();
     return from(
       this._fs
         .collection(this.dbPath)

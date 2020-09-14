@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Contractor } from 'src/app/models/contractor.model';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ActionSheetController } from '@ionic/angular';
 import { ContractorListModalComponent } from '../../modals/contractor-list-modal/contractor-list-modal.component';
+import { ContractorService } from 'src/app/services/contractor.service';
 
 @Component({
   selector: 'app-contractor-panel',
@@ -13,7 +14,7 @@ export class ContractorPanelComponent implements OnInit {
   @Input() isSelectMode = false;
   @Input() isShowMore = false;
   @Input() set setContractor(value) {
-    if (value) {
+    if (value && value.info.unp) {
       this.selectedContractor = value;
     }
   }
@@ -21,7 +22,11 @@ export class ContractorPanelComponent implements OnInit {
   @Output() select = new EventEmitter<Contractor>();
   selectedContractor: Contractor;
 
-  constructor(private _modal: ModalController) {}
+  constructor(
+    private _modal: ModalController,
+    private _actionSheet: ActionSheetController,
+    private _contractor: ContractorService,
+  ) {}
 
   ngOnInit() {}
 
@@ -44,5 +49,64 @@ export class ContractorPanelComponent implements OnInit {
 
   selectContractor() {
     this.select.emit(this.selectedContractor);
+  }
+
+  delete() {
+    if (!this.selectedContractor) {
+      return;
+    }
+    this._contractor.delete(this.selectedContractor._id).then();
+  }
+
+  async showMore(id) {
+    const actionSheet = await this._actionSheet.create({
+      header: 'Выберите действие',
+      buttons: this.generateActionButtons(),
+    });
+
+    await actionSheet.present();
+  }
+
+  generateActionButtons() {
+    let buttons: any[] = [
+      {
+        text: 'Удалить',
+        role: 'destructive',
+        handler: () => {
+          this.delete();
+        },
+      },
+      {
+        text: 'Отменить',
+        role: 'cancel',
+        handler: () => {},
+      },
+    ];
+
+    // if (this.selectedContractor.contractId) {
+    //   buttons.unshift({
+    //     text: 'Скачать договор PDF',
+    //     role: 'download',
+    //     handler: () => {
+    //       this._templatePdf.downloadPdf('contract');
+    //     },
+    //   });
+    // } else {
+    //   buttons.unshift({
+    //     text: 'Создать договор',
+    //     role: 'download',
+    //     handler: () => {
+    //       this._router.navigate(['/contract/create'], {
+    //         queryParams: {
+    //           invoiceId: this.selectedInvoice._id,
+    //           contractorId: this.selectedInvoice.contractor._id,
+    //         },
+    //         replaceUrl: true,
+    //       });
+    //     },
+    //   });
+    // }
+
+    return buttons;
   }
 }

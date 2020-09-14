@@ -3,6 +3,9 @@
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="'Назад'" defaultHref="invoice"></ion-back-button>
+    </ion-buttons>
     <ion-title>Новый счет</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -31,10 +34,9 @@
             <ion-select-option
               [value]="item"
               *ngFor="let item of invoiceStatusList"
-              >
-              {{ item?.name }}
-              </ion-select-option
             >
+              {{ item?.name }}
+            </ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>

@@ -1,0 +1,5 @@
+<ion-item lines="none" class="accordion" button (click)="collapse()" detail="false">
+  <ion-label class="accordion__title">{{title || 'Расскрыть'}}</ion-label>
+  <ion-icon class="accordion__icon" slot="end" *ngIf="!isCollapse" name="chevron-down-outline"></ion-icon>
+  <ion-icon class="accordion__icon" slot="end" *ngIf="isCollapse" name="chevron-up-outline"></ion-icon>
+</ion-item>

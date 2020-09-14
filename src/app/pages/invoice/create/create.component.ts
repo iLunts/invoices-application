@@ -11,6 +11,7 @@ import { ServiceListModalComponent } from 'src/app/components/modals/service-lis
 import { Service } from 'src/app/models/service.model';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-invoice-create',
@@ -33,8 +34,8 @@ export class InvoiceCreateComponent implements OnInit {
   constructor(
     private _modal: ModalController,
     private _invoice: InvoiceService,
-    private _toast: ToastController,
-    private _router: Router
+    private _router: Router,
+    private _notification: NotificationService,
   ) {
     this.invoice = new Invoice();
     this.getStatuses();
@@ -127,15 +128,6 @@ export class InvoiceCreateComponent implements OnInit {
     }
   }
 
-  async success(message?: string, duration?: number) {
-    this.toastPopover = await this._toast.create({
-      message: message || 'Успешно.',
-      duration: duration || 3000,
-      color: 'success',
-    });
-    this.toastPopover.present();
-  }
-
   changeStatus(event) {
     this.invoice.status = event.detail.value;
   }
@@ -148,7 +140,7 @@ export class InvoiceCreateComponent implements OnInit {
     }
     console.log('Save');
     this._invoice.add(this.invoice).subscribe((response: any) => {
-      this.success('Счет успешно создан');
+      this._notification.success('Счет успешно создан');
       this._router.navigate(['/invoice'], { replaceUrl: true });
     });
   }

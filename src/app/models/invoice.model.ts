@@ -5,6 +5,7 @@ import * as moment from 'moment';
 export class Invoice {
   _id: string;
   _userId: string;
+  _createdDate: Date;
   number: string;
   createDate: string;
   expiredDate: string;

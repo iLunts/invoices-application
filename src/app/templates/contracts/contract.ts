@@ -231,66 +231,48 @@ export const CONTRACT_TEMPLATE = `
         <tr>
             <td width="50%" valign="top">
                 <p style="margin: 0;">
-                  ИП Лунцевич Владимир Владимирович
+                  {{profile.info.fullName}}
                 </p>
                 <p style="margin: 0;">
-                  УНП: 101378045
+                  УНП: {{profile.info.unp}}
                 </p>
                 <p style="margin: 0;">
-                    ОАО "БПС-Сбербанк"
+                    ОАО "БПС-Сбербанк" !!!!!!!!!!!!
                 </p>
                 <p style="margin: 0;">
-                    Р/с: BY18BPSB30133160360159330000
+                    Р/с: {{profile.bankAccount.swift}}
                 </p>
                 <p style="margin: 0;">
-                    БИК: BPSBBY2X
+                    БИК: {{profile.bankAccount.bic}}
                 </p>
                 <p style="margin: 0;">
-                    Юр. Адрес: 220052, г.Минск ул. Пермская д.26
+                    Юр. Адрес: {{profile.juridicalAddress.zipCode}}, {{profile.juridicalAddress.city}} {{profile.juridicalAddress.street}} д.{{profile.juridicalAddress.houseNumber}} оф.{{profile.juridicalAddress.office}}
                 </p>
                 <p style="margin: 0;">
-                    Тел.: +375-(29)-601-22-11 Владимир
+                    Тел.: {{profile.juridicalAddress.phone}}
                 </p>
             </td>
             <td width="50%" valign="top">
                 <p style="margin: 0;">
-                    <strong>
-                        Частное предприятие «Дзержинский Электромонтажстрой»
-                    </strong>
+                  {{contractor.info.fullName}}
                 </p>
                 <p style="margin: 0;">
-                    Юридический адрес:
+                  УНП: {{contractor.info.unp}}
                 </p>
                 <p style="margin: 0;">
-                    222712, Республика Беларусь, Минская область, Дзержинский
-                    р-н,
+                    {{contractor.bankAccount.bank.NmBankShort}} {{contractor.bankAccount.bank.AdrBank}}
                 </p>
                 <p style="margin: 0;">
-                    г. Дзержинск, ул. Советская, зд. 5.
+                    Р/с: {{contractor.bankAccount.SWIFT}}
                 </p>
                 <p style="margin: 0;">
-                    Почтовый адрес:
+                    БИК: {{contractor.bankAccount.bank.CDHeadBank}}
                 </p>
                 <p style="margin: 0;">
-                    220090, г. Минск, ул. Олешева, д. 1, пом. 316, оф. 306.
+                    Юр. Адрес: {{contractor.juridicalAddress.zipCode}}, {{contractor.juridicalAddress.city}} {{contractor.juridicalAddress.street}} д.{{contractor.juridicalAddress.houseNumber}} оф.{{contractor.juridicalAddress.office}}
                 </p>
                 <p style="margin: 0;">
-                    Тел./факс: 8-017-255-71-19
-                </p>
-                <p style="margin: 0;">
-                    e-mail: info@dzems.by
-                </p>
-                <p style="margin: 0;">
-                    Р/с BY19 ALFA 3012 2090 4500 1027 0000
-                </p>
-                <p style="margin: 0;">
-                    в ЗАО «Альфа-Банк» ALFABY2Х
-                </p>
-                <p style="margin: 0;">
-                    УНП 691610662
-                </p>
-                <p style="margin: 0;">
-                    ОКПО 304246906000
+                    Тел.: {{contractor.juridicalAddress.phone}}
                 </p>
             </td>
         </tr>
@@ -301,7 +283,7 @@ export const CONTRACT_TEMPLATE = `
     <strong></strong>
 </p>
 <p style="margin: 0;">
-________________________ Лунцевич В.В. ____________________    <a name="OLE_LINK2"></a><a name="OLE_LINK1">Н.С. Гапанович</a>
+________________________ Лунцевич В.В. ____________________  Н.С. Гапанович
 </p>
 <p style="margin: 0;">
     Б.П М.П.

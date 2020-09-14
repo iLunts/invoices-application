@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
 import { Platform } from '@ionic/angular';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import {
   Contractor,
   ContractorInfo,

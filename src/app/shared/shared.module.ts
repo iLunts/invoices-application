@@ -19,6 +19,27 @@ import { ContractorListModalComponent } from '../components/modals/contractor-li
 import { ServiceListModalComponent } from '../components/modals/service-list-modal/service-list-modal.component';
 import { ServicePanelComponent } from '../components/ui/service-panel/service-panel.component';
 import { ContractPanelComponent } from '../components/ui/contract-panel/contract-panel.component';
+import { AccordionLineComponent } from '../components/ui/accordion-line/accordion-line.component';
+import { BankPanelComponent } from '../components/ui/bank-panel/bank-panel.component';
+import { BankListModalComponent } from '../components/modals/bank-list-modal/bank-list-modal.component';
+
+import { NgxLoaderIndicatorModule } from 'ngx-loader-indicator';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
+let loaderOptions = {
+  img: '/assets/svg/pack/loader.svg',
+  loaderStyles: {
+    background: 'rgba(255, 255, 255, 0.8)',
+  },
+  imgStyles: {
+    width: '30px',
+    // background: 'yellow',
+  },
+  rotate: {
+    duration: 5000,
+    // direction: 'reverse'
+  },
+};
 
 @NgModule({
   declarations: [
@@ -31,6 +52,9 @@ import { ContractPanelComponent } from '../components/ui/contract-panel/contract
     EmptyComponent,
     ContractorListModalComponent,
     ServiceListModalComponent,
+    BankListModalComponent,
+    AccordionLineComponent,
+    BankPanelComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +65,8 @@ import { ContractPanelComponent } from '../components/ui/contract-panel/contract
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    NgxLoaderIndicatorModule.forRoot(loaderOptions),
+    NgxMaskModule.forRoot(),
   ],
   exports: [
     CommonModule,
@@ -58,7 +84,15 @@ import { ContractPanelComponent } from '../components/ui/contract-panel/contract
     InvoicePanelComponent,
     ServicePanelComponent,
     EmptyComponent,
+    AccordionLineComponent,
+    BankPanelComponent,
+    NgxLoaderIndicatorModule,
+    NgxMaskModule,
   ],
-  entryComponents: [ContractorListModalComponent, ServiceListModalComponent],
+  entryComponents: [
+    ContractorListModalComponent,
+    ServiceListModalComponent,
+    BankListModalComponent,
+  ],
 })
 export class SharedModule {}

@@ -44,39 +44,6 @@ export class InvoicePanelComponent implements OnInit {
     const actionSheet = await this._actionSheet.create({
       header: 'Выберите действие',
       buttons: this.generateActionButtons(),
-      // [
-
-      // {
-      //   text: 'Предпросмотр',
-      //   handler: () => {
-      //     this._invoicePdf.openPDF(this.selectedInvoice);
-      //   },
-      // },
-      // {
-      //   text: 'Скачать договор',
-      //   handler: () => {
-      //     this._templatePdf.downloadPdf('contract');
-      //   },
-      // },
-      // {
-      //   text: 'Скачать счет',
-      //   handler: () => {
-      //     this._templatePdf.downloadPdf('invoice');
-      //   },
-      // },
-      // {
-      //   text: 'Удалить',
-      //   role: 'destructive',
-      //   handler: () => {
-      //     this.delete();
-      //   },
-      // },
-      // {
-      //   text: 'Отменить',
-      //   role: 'cancel',
-      //   handler: () => {},
-      // },
-      // ],
     });
 
     await actionSheet.present();
