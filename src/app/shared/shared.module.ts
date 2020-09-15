@@ -25,6 +25,7 @@ import { BankListModalComponent } from '../components/modals/bank-list-modal/ban
 
 import { NgxLoaderIndicatorModule } from 'ngx-loader-indicator';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { OverlayComponent } from '../components/ui/overlay/overlay.component';
 
 let loaderOptions = {
   img: '/assets/svg/pack/loader.svg',
@@ -55,6 +56,7 @@ let loaderOptions = {
     BankListModalComponent,
     AccordionLineComponent,
     BankPanelComponent,
+    OverlayComponent,
   ],
   imports: [
     CommonModule,
@@ -93,6 +95,7 @@ let loaderOptions = {
     ContractorListModalComponent,
     ServiceListModalComponent,
     BankListModalComponent,
+    OverlayComponent,
   ],
 })
 export class SharedModule {}

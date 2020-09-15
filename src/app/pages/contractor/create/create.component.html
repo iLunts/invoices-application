@@ -34,7 +34,9 @@
       </ion-col>
     </ion-row>
 
-    <ng-container *ngIf="(contractor && contractor.info.unp) || isExistContractor">
+    <ng-container
+      *ngIf="(contractor && contractor.info.unp) || isExistContractor"
+    >
       <ion-grid>
         <ion-row>
           <ion-col size="12" class="ion-no-padding">
@@ -73,18 +75,18 @@
     </ion-row>
   </ion-grid>
 
-  <!-- Bank account -->
-  <!-- <app-accordion-line
-    title="Банковская информация"
+  <!-- Post address -->
+  <app-accordion-line
+    title="Почтовый адрес"
     (change)="collapse($event)"
-  ></app-accordion-line> -->
+  ></app-accordion-line>
 
-  <!-- <ion-grid *ngIf="isCollapse">
+  <ion-grid *ngIf="isCollapse">
     <ion-row>
       <ion-col size="12"> </ion-col>
       <ion-col size="12">SWIFT</ion-col>
     </ion-row>
-  </ion-grid> -->
+  </ion-grid>
 </ion-content>
 
 <ion-footer>
