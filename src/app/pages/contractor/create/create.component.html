@@ -34,8 +34,7 @@
       </ion-col>
     </ion-row>
 
-    <!-- TODO: check if UNP changed -->
-    <ng-container *ngIf="contractor && (contractor.info.unp || isExistContractor)">
+    <ng-container *ngIf="(contractor && contractor.info.unp) || isExistContractor">
       <ion-grid>
         <ion-row>
           <ion-col size="12" class="ion-no-padding">

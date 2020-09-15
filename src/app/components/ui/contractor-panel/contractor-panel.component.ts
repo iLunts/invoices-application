@@ -17,6 +17,8 @@ export class ContractorPanelComponent implements OnInit {
   @Input() set setContractor(value) {
     if (value && value.info.unp) {
       this.selectedContractor = value;
+    } else {
+      this.selectedContractor = null;
     }
   }
   @Output() contractor = new EventEmitter<Contractor>();
@@ -26,7 +28,7 @@ export class ContractorPanelComponent implements OnInit {
   constructor(
     private _modal: ModalController,
     private _actionSheet: ActionSheetController,
-    private _contractor: ContractorService,
+    private _contractor: ContractorService
   ) {}
 
   ngOnInit() {}
