@@ -1,0 +1,10 @@
+<ion-item lines="none" class="field">
+  <ion-label position="floating">{{ label }}</ion-label>
+  <ion-input
+    (ionChange)="onInputChange($event)"
+    [ngModel]="value"
+    [disabled]="disabled"
+    [readonly]="readonly"
+  ></ion-input>
+  <input type="text" [(ngModel)]="value" (keydown)="onKeydown($event)">
+</ion-item>

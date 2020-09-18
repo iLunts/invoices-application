@@ -26,6 +26,8 @@ import { BankListModalComponent } from '../components/modals/bank-list-modal/ban
 import { NgxLoaderIndicatorModule } from 'ngx-loader-indicator';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { OverlayComponent } from '../components/ui/overlay/overlay.component';
+import { FieldComponent } from '../components/ui/fields/field/field.component';
+import { FieldSwiftComponent } from '../components/ui/fields/field-swift/field-swift.component';
 
 let loaderOptions = {
   img: '/assets/svg/pack/loader.svg',
@@ -57,6 +59,8 @@ let loaderOptions = {
     AccordionLineComponent,
     BankPanelComponent,
     OverlayComponent,
+    FieldComponent,
+    FieldSwiftComponent,
   ],
   imports: [
     CommonModule,
@@ -79,6 +83,8 @@ let loaderOptions = {
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    FieldComponent,
+    FieldSwiftComponent,
     ContractorItemComponent,
     ContractorPanelComponent,
     ContractPanelComponent,
