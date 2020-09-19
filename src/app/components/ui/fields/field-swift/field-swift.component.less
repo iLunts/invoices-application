@@ -16,11 +16,25 @@ input {
   outline: none;
   box-shadow: none;
   border: none;
-  
+
   &:hover,
   &:focus {
     outline: none;
     box-shadow: none;
     border: none;
   }
+}
+
+::-webkit-input-placeholder {
+  /* Edge */
+  color: #e0e0e0;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #e0e0e0;
+}
+
+::placeholder {
+  color: #e0e0e0;
 }

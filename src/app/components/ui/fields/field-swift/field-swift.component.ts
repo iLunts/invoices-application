@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -14,6 +14,10 @@ import { AbstractControl, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class FieldSwiftComponent implements OnInit {
+  @ViewChild('swiftInput', { static: false }) swiftInput: {
+    setFocus: () => void;
+  };
+
   @Input() label: string;
   @Input() placeholder: string;
   @Input() control: AbstractControl;
@@ -193,5 +197,9 @@ export class FieldSwiftComponent implements OnInit {
       const temp = this.value.substr(0, this.value.length - 1);
       this.updateValue(temp);
     }
+  }
+
+  setFocusOnInput() {
+    this.swiftInput.setFocus();
   }
 }

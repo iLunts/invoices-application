@@ -1,10 +1,12 @@
 <ion-item lines="none" class="field">
   <ion-label position="floating">{{ label }}</ion-label>
   <ion-input
+    #swiftInput
     (ionChange)="onInputChange($event)"
     [ngModel]="value"
     [disabled]="disabled"
     [readonly]="readonly"
+    placeholder="BY01 ABCD 3012 0000 0000 0000 0000"
   ></ion-input>
-  <input type="text" [(ngModel)]="value" (keydown)="onKeydown($event)">
+  <input type="text" [(ngModel)]="value" (keydown)="onKeydown($event)" (focus)="setFocusOnInput()" placeholder="BY01 ABCD 3012 0000 0000 0000 0000">
 </ion-item>
