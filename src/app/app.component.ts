@@ -28,16 +28,6 @@ export class AppComponent implements OnInit, OnDestroy {
       icon: 'people',
     },
     {
-      title: 'Договора',
-      url: '/contract',
-      icon: 'document-text',
-    },
-    {
-      title: 'Счета',
-      url: '/invoice',
-      icon: 'receipt',
-    },
-    {
       title: 'Услуги',
       url: '/service',
       icon: 'file-tray-stacked',
@@ -47,16 +37,18 @@ export class AppComponent implements OnInit, OnDestroy {
       url: '/profile',
       icon: 'business',
     },
+  ];
+  public docsPages = [
     {
-      title: 'Настройки',
-      url: '/settings',
-      icon: 'settings',
+      title: 'Договора',
+      url: '/contract',
+      icon: 'document-text',
     },
-    // {
-    //   title: 'Exit',
-    //   url: '/auth/login',
-    //   icon: 'exit',
-    // },
+    {
+      title: 'Счета',
+      url: '/invoice',
+      icon: 'receipt',
+    },
   ];
   public appNonAuthPages = [
     {
@@ -95,10 +87,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
       // Check user first auth
       this._auth.CheckUser();
-
-      // if (this._auth.isLoggedIn) {
-      //   this.fetchInvoiceStatuses();
-      // }
     });
   }
 

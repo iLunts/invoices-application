@@ -8,24 +8,59 @@
             userData?.displayName
           }}</ion-list-header>
           <ion-note *ngIf="userData?.email">{{ userData?.email }}</ion-note>
+
+          <ion-list-header>
+            <ion-label>Страницы</ion-label>
+          </ion-list-header>
           <ion-menu-toggle
             auto-hide="false"
             *ngFor="let p of appPages; let i = index"
           >
             <ion-item
-              (click)="selectedIndex = i"
               routerDirection="root"
               [routerLink]="[p.url]"
               lines="none"
               detail="false"
-              [class.selected]="selectedIndex == i"
+            >
+              <ion-icon slot="start" [ios]="p.icon + '-outline'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-list-header>
+            <ion-label>Документы</ion-label>
+          </ion-list-header>
+          <ion-menu-toggle
+            auto-hide="false"
+            *ngFor="let p of docsPages; let i = index"
+          >
+            <ion-item
+              routerDirection="root"
+              [routerLink]="[p.url]"
+              lines="none"
+              detail="false"
+            >
+              <ion-icon slot="start" [ios]="p.icon + '-outline'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-list-header>
+            <ion-label>Системные</ion-label>
+          </ion-list-header>
+          <ion-menu-toggle>
+            <ion-item
+              routerDirection="root"
+              [routerLink]="['/settings']"
+              routerDirection="root"
+              lines="none"
+              detail="false"
             >
               <ion-icon
                 slot="start"
-                [ios]="p.icon + '-outline'"
-                [md]="p.icon + '-outline'"
+                [name]="'settings-outline'"
               ></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+              <ion-label>Настройки</ion-label>
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle>
@@ -44,22 +79,6 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
-
-        <!-- <ion-list
-          id="labels-list"
-          *ngIf="invoiceStatusList && invoiceStatusList.length"
-        >
-          <ion-list-header>Тэги</ion-list-header>
-
-          <ion-item *ngFor="let item of invoiceStatusList" lines="none">
-            <ion-icon
-              slot="start"
-              ios="bookmark-outline"
-              md="bookmark-outline"
-            ></ion-icon>
-            <ion-label>{{ item.name }}</ion-label>
-          </ion-item>
-        </ion-list> -->
       </ion-content>
 
       <!-- Not auth -->

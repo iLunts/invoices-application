@@ -14,16 +14,26 @@
     </ion-toolbar>
   </ion-header>
 
+  <div class="profile">
+    <img class="profile__avatar" src="/assets/svg/illustrations/profile.svg" alt="">
+    <p class="profile__name">
+      {{ profileList?.info?.shortName }}
+    </p>
+    <p class="profile__unp">
+      {{ profileList?.info?.unp }}
+    </p>
+  </div>
+
   <!-- List -->
-  <ion-list class="profile">
+  <!-- <ion-list class="profile">
     <ion-grid>
       <ion-row>
         <ion-col class="profile-panel">
-          123
+          {{ profileList | json }}
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-list>
+  </ion-list> -->
 
   <!-- Skeleton -->
   <!-- <ion-list class="services" *ngIf="!isLoaded">

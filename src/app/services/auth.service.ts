@@ -10,6 +10,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestoreDocument } from 'angularfire2/firestore';
 import { auth } from 'firebase/app';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class AuthService {
     private _fa: AngularFireAuth,
     private _fs: AngularFirestore,
     private _router: Router,
-    public _ngZone: NgZone
+    public _ngZone: NgZone,
   ) {
     this._fa.authState.subscribe((user) => {
       if (user) {

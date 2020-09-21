@@ -40,7 +40,7 @@ export class ProfileService {
       this._fs
         .collection(this.dbPath)
         .doc(pushkey)
-        .set({ ...profile })
+        .set(JSON.parse(JSON.stringify(profile)))
     );
   }
 

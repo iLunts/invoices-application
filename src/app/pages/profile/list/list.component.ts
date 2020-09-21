@@ -20,7 +20,7 @@ export class ProfileListComponent implements OnInit {
   fetch() {
     this._profile.getAll().valueChanges().subscribe((response: any) => {
       if (response) {
-        this.profileList = response;
+        this.profileList = response[0];
       }
     });
   }

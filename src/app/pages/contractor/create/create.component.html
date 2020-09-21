@@ -51,13 +51,13 @@
     </ng-container>
   </ion-grid>
 
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row>
       <ion-col>
         <app-field-swift label="SWIFT"></app-field-swift>  
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
   <ion-grid *ngIf="contractor.info.unp">
     <ion-row>
@@ -67,19 +67,12 @@
           (bank)="selectBank($event)"
         ></app-bank-panel>
       </ion-col>
-      
-      <ion-col *ngIf="contractor?.bankAccount">
-        <ion-item lines="none" class="field">
-          <ion-label position="floating">Расчётный счёт (SWIFT)</ion-label>
-          <ion-input [(ngModel)]="contractor.bankAccount.SWIFT"></ion-input>
-          <!-- <ion-input value="{{ contractor.bankAccount.SWIFT | mask: '0000 0000 0000 0000' }}"></ion-input> -->
-        </ion-item>
 
-        <!-- <input
+      <ion-col *ngIf="contractor?.bankAccount">
+        <app-field-swift
           [(ngModel)]="contractor.bankAccount.SWIFT"
-          type="text"
-          mask="0000 0000 0000 0000"
-        /> -->
+          label="Расчётный счёт (SWIFT)"
+        ></app-field-swift>
       </ion-col>
     </ion-row>
   </ion-grid>

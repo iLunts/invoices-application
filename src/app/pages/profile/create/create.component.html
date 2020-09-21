@@ -4,10 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="start">
-      <ion-back-button
-        [text]="'Назад'"
-        defaultHref="profile"
-      ></ion-back-button>
+      <ion-back-button [text]="'Назад'" defaultHref="profile"></ion-back-button>
     </ion-buttons>
     <ion-title>Новый профиль</ion-title>
   </ion-toolbar>
@@ -34,9 +31,7 @@
       </ion-col>
     </ion-row>
 
-    <ng-container
-      *ngIf="profile && profile.info.unp"
-    >
+    <ng-container *ngIf="profile && profile.info.unp">
       <ion-grid>
         <ion-row>
           <ion-col size="12" class="ion-no-padding">
@@ -58,18 +53,11 @@
           (bank)="selectBank($event)"
         ></app-bank-panel>
       </ion-col>
-      <ion-col *ngIf="profile?.bankAccount">
-        <ion-item lines="none" class="field">
-          <ion-label position="floating">Расчетный счет (SWIFT)</ion-label>
-          <ion-input [(ngModel)]="profile.bankAccount.SWIFT"></ion-input>
-          <!-- <ion-input value="{{ profile.bankAccount.SWIFT | mask: '0000 0000 0000 0000' }}"></ion-input> -->
-        </ion-item>
-
-        <!-- <input
+      <ion-col *ngIf="profile?.bankAccount?.bank">
+        <app-field-swift
           [(ngModel)]="profile.bankAccount.SWIFT"
-          type="text"
-          mask="0000 0000 0000 0000"
-        /> -->
+          label="Расчётный счёт (SWIFT)"
+        ></app-field-swift>
       </ion-col>
     </ion-row>
   </ion-grid>
