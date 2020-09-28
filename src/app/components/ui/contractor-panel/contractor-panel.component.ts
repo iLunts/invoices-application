@@ -3,6 +3,7 @@ import { Contractor } from 'src/app/models/contractor.model';
 import { ModalController, ActionSheetController } from '@ionic/angular';
 import { ContractorListModalComponent } from '../../modals/contractor-list-modal/contractor-list-modal.component';
 import { ContractorService } from 'src/app/services/contractor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contractor-panel',
@@ -28,7 +29,8 @@ export class ContractorPanelComponent implements OnInit {
   constructor(
     private _modal: ModalController,
     private _actionSheet: ActionSheetController,
-    private _contractor: ContractorService
+    private _contractor: ContractorService,
+    private _router: Router
   ) {}
 
   ngOnInit() {}
@@ -72,6 +74,26 @@ export class ContractorPanelComponent implements OnInit {
 
   generateActionButtons() {
     let buttons: any[] = [
+      {
+        text: 'Информация',
+        handler: () => {
+          this._router.navigate(['/contractor', this.selectedContractor._id], {
+            replaceUrl: true,
+          });
+        },
+      },
+      {
+        text: 'Документы',
+        handler: () => {
+          this._contractor.setContractor(this.selectedContractor);
+          this._router.navigate(
+            ['/contractor', this.selectedContractor._id, 'documents'],
+            {
+              replaceUrl: true,
+            }
+          );
+        },
+      },
       {
         text: 'Удалить',
         role: 'destructive',

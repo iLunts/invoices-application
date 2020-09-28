@@ -7,6 +7,7 @@ import { Invoice } from '../models/invoice.model';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { from, Observable } from 'rxjs';
+import { ContractorService } from './contractor.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,32 +16,26 @@ export class InvoiceService {
   private dbPath = '/invoices';
   private dbPathStatuses = '/invoiceStatuses';
   invoicesRef: AngularFirestoreCollection<Invoice> = null;
+  invoicesForContractorsRef: AngularFirestoreCollection<Invoice> = null;
   // invoiceList: Observable<Invoice[]>;
 
   constructor(
     private _fs: AngularFirestore,
     private _auth: AuthService,
-    private _router: Router
+    private _contractor: ContractorService
   ) {
     if (this._auth.isLoggedIn) {
       this.invoicesRef = _fs.collection(this.dbPath, (q) =>
-        q.where('_userId', '==', this._auth.getUserId()).orderBy('_createdDate', 'desc')
+        q
+          .where('_userId', '==', this._auth.getUserId())
+          .orderBy('_createdDate', 'desc')
       );
-
-      // this.invoiceList = this.invoicesRef.valueChanges();
     }
   }
 
-  // getList() {
-  //   return this.invoiceList;
-  // };
-
-  getAll(): Observable<Invoice[]> {
+  getAll(): Observable<any[]> {
     return this.invoicesRef.valueChanges();
   }
-  // getAll(): AngularFirestoreCollection<Invoice> {
-  //   return this.invoicesRef.valueChanges();
-  // }
 
   get(id: string) {
     return this._fs
@@ -62,6 +57,20 @@ export class InvoiceService {
           .where('_id', '==', statusId)
       )
       .valueChanges();
+  }
+
+  getAllByContractor(): Observable<any[]> {
+    this.invoicesForContractorsRef = this._fs.collection(this.dbPath, (q) =>
+      q
+        .where('_userId', '==', this._auth.getUserId())
+        .where(
+          'contractor.info.unp',
+          '==',
+          this._contractor.getContractor().info.unp
+        )
+        .orderBy('_createdDate', 'desc')
+    );
+    return this.invoicesForContractorsRef.valueChanges();
   }
 
   add(invoice: Invoice) {

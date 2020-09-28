@@ -22,7 +22,7 @@ export class ContractPanelComponent implements OnInit {
   constructor(
     private _contract: ContractService,
     private _actionSheet: ActionSheetController,
-    private _templatePdf: TemplatePdfService
+    private _templatePdf: TemplatePdfService,
   ) {}
 
   ngOnInit() {}

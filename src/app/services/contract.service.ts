@@ -6,6 +6,7 @@ import {
 import { AuthService } from './auth.service';
 import { Contractor } from '../models/contractor.model';
 import { Observable, from } from 'rxjs';
+import { ContractorService } from './contractor.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,13 @@ export class ContractService {
   private dbPath = '/contracts';
   private dbPathStatuses = '/contractStatuses';
   contractsRef: AngularFirestoreCollection<Contractor> = null;
+  contractsForContractorsRef: AngularFirestoreCollection<Contractor> = null;
 
-  constructor(private _fs: AngularFirestore, private _auth: AuthService) {
+  constructor(
+    private _fs: AngularFirestore,
+    private _auth: AuthService,
+    private _contractor: ContractorService
+  ) {
     if (this._auth.isLoggedIn) {
       this.contractsRef = this._fs.collection(this.dbPath, (q) =>
         q.where('_userId', '==', this._auth.getUserId())
@@ -31,6 +37,20 @@ export class ContractService {
     return this._fs
       .collection(this.dbPathStatuses, (q) => q.orderBy('order'))
       .valueChanges();
+  }
+
+  getAllByContractor(): Observable<any[]> {
+    this.contractsForContractorsRef = this._fs.collection(this.dbPath, (q) =>
+      q
+        .where('_userId', '==', this._auth.getUserId())
+        .where(
+          'contractor.info.unp',
+          '==',
+          this._contractor.getContractor().info.unp
+        )
+        .orderBy('_createdDate', 'desc')
+    );
+    return this.contractsForContractorsRef.valueChanges();
   }
 
   add(contract: any): Observable<any> {

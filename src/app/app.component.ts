@@ -6,7 +6,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './services/auth.service';
 import { User } from './models/user.model';
 import { Subscription } from 'rxjs';
-import { InvoiceService } from './services/invoice.service';
 import { InvoiceStatus } from './models/invoice.model';
 
 @Component({
@@ -67,7 +66,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private _auth: AuthService,
-    private _invoce: InvoiceService
   ) {
     this.initializeApp();
   }

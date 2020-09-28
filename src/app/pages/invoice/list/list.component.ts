@@ -43,8 +43,8 @@ export class InvoiceListComponent implements OnInit {
     this.isLoaded = false;
     this._invoice
       .getAll()
-      .subscribe((data: any) => {
-        this.listData = data;
+      .subscribe((response: any) => {
+        this.listData = response;
         this.isLoaded = true;
       });
 

@@ -18,6 +18,8 @@ export class ContractorService {
   customersExistRef: AngularFirestoreCollection<Contractor> = null;
   dbRef: AngularFirestoreCollection<Contractor> = null;
 
+  selectedContractor: Contractor;
+
   constructor(
     private _fs: AngularFirestore,
     private _auth: AuthService,
@@ -71,6 +73,14 @@ export class ContractorService {
 
   update(_id: string, value: any): Promise<void> {
     return this.customersRef.doc(_id).update(value);
+  }
+
+  setContractor(contractor: Contractor): void {
+    this.selectedContractor = contractor;
+  }
+
+  getContractor(): Contractor {
+    return this.selectedContractor;
   }
 
   // getMappingJurNamesFromEGR(data: any): ContractorInfo {

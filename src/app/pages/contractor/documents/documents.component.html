@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [text]="'Назад'"
+        defaultHref="contractor"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ selectedContractor.info.shortName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{
+        selectedContractor.info.shortName
+      }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Tabs -->
+  <ion-segment value="invoice" (ionChange)="segmentChanged($event)" scrollable>
+    <ion-segment-button value="invoice">
+      <ion-label>Счета</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="contract">
+      <ion-label>Договора</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Invoice list -->
+  <ion-list class="services" *ngIf="activeTab === 'invoice'">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" *ngFor="let item of invoiceList">
+          <app-invoice-panel [invoice]="item"></app-invoice-panel>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+
+  <!-- Contract List -->
+  <ion-list class="services" *ngIf="activeTab === 'contract'">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" *ngFor="let item of contractList">
+          <app-contract-panel [invoice]="item"></app-contract-panel>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+</ion-content>
