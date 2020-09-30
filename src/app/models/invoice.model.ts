@@ -5,6 +5,7 @@ import * as moment from 'moment';
 export class Invoice {
   _id: string;
   _userId: string;
+  _contractId: string;
   _createdDate: Date;
   number: string;
   createDate: string;
@@ -20,6 +21,10 @@ export class Invoice {
   status: InvoiceStatus;
 
   constructor(
+    _id?: string,
+    _userId?: string,
+    _contractId?: string,
+    _createdDate?: Date,
     contractor?: Contractor,
     services?: Service,
     number?: string,
@@ -28,6 +33,10 @@ export class Invoice {
     status?: InvoiceStatus,
     contractId?: string
   ) {
+    this._id = _id || null;
+    this._userId = _userId || null;
+    this._contractId = _contractId || null;
+    this._createdDate = _createdDate || new Date();
     this.number = number || null;
     this.contractor = contractor || null;
     this.services = services || [];

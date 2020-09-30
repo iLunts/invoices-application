@@ -65,7 +65,7 @@ export class InvoicePanelComponent implements OnInit {
       },
     ];
 
-    if (this.selectedInvoice.contractId) {
+    if (this.selectedInvoice._contractId) {
       buttons.unshift({
         text: 'Скачать договор PDF',
         role: 'download',

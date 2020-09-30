@@ -6,6 +6,7 @@ export class Contract {
   _id: string;
   _createdDate: string;
   _userId: string;
+  _invoiceId: string;
 
   template: string;
   contractor: Contractor;
@@ -17,14 +18,16 @@ export class Contract {
     _id?: string,
     _createdDate?: string,
     _userId?: string,
+    _invoiceId?: string,
     template?: string,
     contractor?: Contractor,
     profile?: Profile,
     status?: ContractStatus,
-    date?: string,
+    date?: string
   ) {
     this._id = this._id || null;
     this._userId = this._userId || null;
+    this._invoiceId = this._invoiceId || null;
     this._createdDate = this._createdDate || moment().toString() || null;
     this.template = template || null;
     this.contractor = contractor || null;

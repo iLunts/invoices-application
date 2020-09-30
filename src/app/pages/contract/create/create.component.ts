@@ -6,6 +6,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CONTRACT_TEMPLATE } from 'src/app/templates/contracts/contract';
 import { ContractorService } from 'src/app/services/contractor.service';
+import { InvoiceService } from 'src/app/services/invoice.service';
 
 @Component({
   selector: 'app-contract-create',
@@ -18,6 +19,7 @@ export class ContractCreateComponent implements OnInit {
   constructor(
     private _contract: ContractService,
     private _contractor: ContractorService,
+    private _invoice: InvoiceService,
     private _notification: NotificationService,
     private _router: Router,
     private _route: ActivatedRoute
@@ -25,6 +27,9 @@ export class ContractCreateComponent implements OnInit {
     this._route.queryParams.subscribe((params) => {
       if (params.contractorId) {
         this.fetchContractor(params.contractorId);
+      }
+      if (params.invoiceId) {
+        this.contract._invoiceId = params.invoiceId;
       }
     });
 
@@ -72,9 +77,16 @@ export class ContractCreateComponent implements OnInit {
     // if (!this.checkCanCreateInvoice()) {
     //   return;
     // }
+    // if(this.contract._invoiceId){
+
+    // }
     this._contract.add(this.contract).subscribe((response: any) => {
-      this._notification.success('Договор успешно добавлен');
-      this._router.navigate(['/contract'], { replaceUrl: true });
+      this._invoice
+        .update(this.contract._invoiceId, { _contractId: this.contract._id })
+        .then((resp: any) => {
+          this._notification.success('Договор успешно добавлен');
+          this._router.navigate(['/contract'], { replaceUrl: true });
+        });
     });
   }
 }

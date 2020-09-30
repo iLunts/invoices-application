@@ -4,6 +4,7 @@ import { Contract } from 'src/app/models/contract.model';
 import { ContractService } from 'src/app/services/contract.service';
 import { ActionSheetController } from '@ionic/angular';
 import { TemplatePdfService } from 'src/app/services/template-pdf.service';
+import { InvoiceService } from 'src/app/services/invoice.service';
 
 @Component({
   selector: 'app-contract-panel',
@@ -21,8 +22,9 @@ export class ContractPanelComponent implements OnInit {
 
   constructor(
     private _contract: ContractService,
+    private _invoice: InvoiceService,
     private _actionSheet: ActionSheetController,
-    private _templatePdf: TemplatePdfService,
+    private _templatePdf: TemplatePdfService
   ) {}
 
   ngOnInit() {}
@@ -35,7 +37,14 @@ export class ContractPanelComponent implements OnInit {
     if (!this.selectedContract) {
       return;
     }
-    this._contract.delete(this.selectedContract._id).then();
+    this._contract.delete(this.selectedContract._id).then((response: any) => {
+      // Checking if contract have invoiceId and remove if it have
+      if (this.selectedContract._invoiceId) {
+        this._invoice.update(this.selectedContract._invoiceId, {
+          _contractId: null,
+        });
+      }
+    });
   }
 
   async showMore(id) {
