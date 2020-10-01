@@ -52,6 +52,13 @@ export class InvoicePanelComponent implements OnInit {
   generateActionButtons() {
     let buttons: any[] = [
       {
+        text: 'Скачать cчет',
+        role: 'download',
+        handler: () => {
+          this._templatePdf.downloadPdf('invoice', this.selectedInvoice);
+        },
+      },
+      {
         text: 'Удалить',
         role: 'destructive',
         handler: () => {
@@ -67,7 +74,7 @@ export class InvoicePanelComponent implements OnInit {
 
     if (this.selectedInvoice._contractId) {
       buttons.unshift({
-        text: 'Скачать договор PDF',
+        text: 'Скачать договор',
         role: 'download',
         handler: () => {
           this._templatePdf.downloadPdf('contract');
