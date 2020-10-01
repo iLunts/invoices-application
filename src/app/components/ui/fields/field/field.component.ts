@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-field',
@@ -6,9 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./field.component.less'],
 })
 export class FieldComponent implements OnInit {
+  @Input() label: any;
+  @Input() value: any;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
-
 }

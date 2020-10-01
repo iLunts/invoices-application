@@ -7,9 +7,9 @@ import { ServiceListModalComponent } from './service-list-modal/service-list-mod
 
 @NgModule({
   declarations: [
-    ContractorListModalComponent,
-    InvoiceListModalComponent,
-    ServiceListModalComponent,
+    // ContractorListModalComponent,
+    // InvoiceListModalComponent,
+    // ServiceListModalComponent,
   ],
   imports: [CommonModule, IonicModule],
 })

@@ -16,6 +16,12 @@ import { InvoiceService } from 'src/app/services/invoice.service';
 export class ContractCreateComponent implements OnInit {
   contractStatusList: ContractStatus[];
   contract: Contract = new Contract();
+  customStatusActionSheetOptions: any = {
+    // header: 'Статусы',
+    subHeader: 'Выберите статус для этого договора',
+    cssClass: 'select-action-sheet',
+  };
+
   constructor(
     private _contract: ContractService,
     private _contractor: ContractorService,

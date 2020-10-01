@@ -47,7 +47,7 @@ export class ContractPanelComponent implements OnInit {
     });
   }
 
-  async showMore(id) {
+  async showMore() {
     const actionSheet = await this._actionSheet.create({
       header: 'Выберите действие',
       buttons: this.generateActionButtons(),

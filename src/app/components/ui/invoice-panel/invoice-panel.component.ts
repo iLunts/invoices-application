@@ -40,7 +40,7 @@ export class InvoicePanelComponent implements OnInit {
     this._invoice.delete(this.selectedInvoice._id).then();
   }
 
-  async showMore(id) {
+  async showMore() {
     const actionSheet = await this._actionSheet.create({
       header: 'Выберите действие',
       buttons: this.generateActionButtons(),

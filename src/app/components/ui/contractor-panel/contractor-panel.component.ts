@@ -63,7 +63,7 @@ export class ContractorPanelComponent implements OnInit {
     this._contractor.delete(this.selectedContractor._id).then();
   }
 
-  async showMore(id) {
+  async showMore() {
     const actionSheet = await this._actionSheet.create({
       header: 'Выберите действие',
       buttons: this.generateActionButtons(),

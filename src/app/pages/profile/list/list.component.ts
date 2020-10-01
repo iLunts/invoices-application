@@ -9,7 +9,7 @@ import { Profile } from 'src/app/models/profile.model';
   styleUrls: ['./list.component.less'],
 })
 export class ProfileListComponent implements OnInit {
-  profileList: Profile[] = [];
+  profileList: Profile;
 
   constructor(private _router: Router, private _profile: ProfileService) {
     this.fetch();

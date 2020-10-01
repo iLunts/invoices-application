@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Contractor } from 'src/app/models/contractor.model';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
@@ -16,7 +15,8 @@ export class InvoiceListComponent implements OnInit {
   @ViewChild('htmlData') htmlData: ElementRef;
 
   // listData: Contractor[] = [];
-  listData: Observable<Invoice[]>;
+  // listData: Observable<Invoice[]>;
+  listData: Invoice[] = [];
   invoiceStatuses: any[] = [];
   // isLoaded: boolean = true;
   isLoaded: boolean;
@@ -41,18 +41,10 @@ export class InvoiceListComponent implements OnInit {
 
   fetch() {
     this.isLoaded = false;
-    this._invoice
-      .getAll()
-      .subscribe((response: any) => {
-        this.listData = response;
-        this.isLoaded = true;
-      });
-
-    // this.listData = this._invoice.getAll().valueChanges();
-    // this._invoice.getList().subscribe((response: any) => {
-    //   this.listData = response;
-    //   this.isLoaded = true;
-    // });
+    this._invoice.getAll().subscribe((response: any) => {
+      this.listData = response;
+      this.isLoaded = true;
+    });
   }
 
   delete(_id: string) {
