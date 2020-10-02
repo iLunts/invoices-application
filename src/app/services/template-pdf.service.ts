@@ -17,8 +17,10 @@ import {
   INVOICE_TEMPLATE_FOOTER,
   INVOICE_TEMPLATE_HEADER,
   INVOICE_TEMPLATE_LOGO,
+  INVOICE_TEMPLATE_TABLE,
 } from '../templates/contracts/invoice';
 import * as moment from 'moment';
+import { reduce } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -73,8 +75,18 @@ export class TemplatePdfService {
   }
 
   createContractPdf(data?: any) {
+    // Default styles obj
+    var defaultStyle: {
+      fontSize: 12;
+      bold: false;
+      margin: [0, 0, 0, 0];
+    };
+
     var template = Handlebars.compile(CONTRACT_TEMPLATE);
-    var html = template(data);
+    var html = template(data, {
+      tableAutoSize: true,
+      defaultStyle: defaultStyle,
+    });
     var result = htmlToPdfmake(html);
 
     var docDefinition = {
@@ -92,11 +104,6 @@ export class TemplatePdfService {
           margin: [0, 0, 0, 0],
           alignment: 'center',
         },
-        defaultStyle: {
-          fontSize: 12,
-          bold: false,
-          margin: [0, 0, 0, 0],
-        },
       },
     };
 
@@ -105,7 +112,6 @@ export class TemplatePdfService {
   }
 
   createInvoicePdf(data?: any) {
-
     // Date format
     Handlebars.registerHelper('formatDate', function (datetime, format) {
       if (moment) {
@@ -119,18 +125,52 @@ export class TemplatePdfService {
 
     // Invoice number
     Handlebars.registerHelper('invoiceNumber', function (number) {
-      if(number) {
+      if (number) {
         return number;
       } else {
         return 'б.н.';
       }
     });
 
+    // Get summa
+    Handlebars.registerHelper('getSumma', function (count, price) {
+      if (!count || !price) {
+        return 'NaN';
+      } else {
+        return count * price;
+      }
+    });
+
+    // Get index
+    Handlebars.registerHelper('getIndex', function (index) {
+      if (index == null || index == undefined) {
+        return '0';
+      } else {
+        return index + 1;
+      }
+    });
+
+    // Default styles obj
+    var defaultStyle: {
+      fontSize: 12;
+      bold: false;
+      margin: [0, 0, 0, 0];
+    };
+
     var template = Handlebars.compile(
-      INVOICE_TEMPLATE_LOGO + INVOICE_TEMPLATE_HEADER + INVOICE_TEMPLATE_FOOTER
+      INVOICE_TEMPLATE_LOGO +
+        INVOICE_TEMPLATE_HEADER +
+        INVOICE_TEMPLATE_TABLE +
+        INVOICE_TEMPLATE_FOOTER
     );
-    var html = template(data);
-    var result = htmlToPdfmake(html, { tableAutoSize: true });
+    var html = template({
+      invoice: data,
+      profile: { test: 'ООО ТЕСТОВАЯ КОМПАНИЯ' },
+    });
+    var result = htmlToPdfmake(html, {
+      tableAutoSize: true,
+      defaultStyle: defaultStyle,
+    });
 
     var docDefinition = {
       content: [result],
@@ -143,17 +183,27 @@ export class TemplatePdfService {
         },
         'html-strong': {
           fontSize: 10,
-          bold: false,
+          bold: true,
           margin: [0, 0, 0, 0],
           alignment: 'center',
         },
-        defaultStyle: {
-          fontSize: 12,
-          bold: false,
+        'html-th': {
+          fontSize: 10,
+          bold: true,
           margin: [0, 0, 0, 0],
+          alignment: 'center',
+        },
+        'cell--bold': {
+          fontSize: 12,
+          bold: true,
+          margin: [0, 0, 0, 0],
+          alignment: 'center',
         },
       },
     };
+
+    docDefinition;
+    debugger;
 
     // this.pdfObj = pdfMake.createPdf({ content: [...result] });
     this.pdfObj = pdfMake.createPdf(docDefinition);

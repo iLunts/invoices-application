@@ -15,6 +15,7 @@ export class ProfileService {
   private dbPath = '/profiles';
   profileRef: AngularFirestoreCollection<Profile> = null;
   dbRef: AngularFirestoreCollection<Profile> = null;
+  // selectedProfile: any;
 
   constructor(
     private _fs: AngularFirestore,
