@@ -140,7 +140,7 @@ export const INVOICE_TEMPLATE_TABLE = `
           <th style="border: none; padding: 5px 15px; margin: 4px 10px; border-bottom: 1px solid #F5F6FA;">Кол-во</th>
           <th style="border: none; padding: 5px 15px; margin: 4px 10px; border-bottom: 1px solid #F5F6FA;">Цена</th>
           <th style="border: none; padding: 5px 15px; margin: 4px 10px; border-bottom: 1px solid #F5F6FA;">НДС</th>
-          <th style="border: none; padding: 5px 15px; margin: 4px 10px; border-bottom: 1px solid #F5F6FA;">Сумма</th>
+          <th style="border: none; padding: 5px 15px; margin: 4px 10px; border-bottom: 1px solid #F5F6FA; width: 20%;">Сумма</th>
         </tr>
       </thead>
       <tbody>
@@ -152,12 +152,28 @@ export const INVOICE_TEMPLATE_TABLE = `
           <td class="cell--bold" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; border-bottom: 1px solid #F5F6FA; line-height: 1.9px;"><strong>{{this.count}}</strong></td>
           <td class="cell--bold" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; border-bottom: 1px solid #F5F6FA; line-height: 1.9px;">{{this.price}}</td>
           <td class="cell--bold" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; border-bottom: 1px solid #F5F6FA; line-height: 1.9px;">{{this.tax}}</td>
-          <td class="cell--bold" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; border-bottom: 1px solid #F5F6FA; line-height: 1.9px;">{{getSumma this.this.count this.this.price}}</td>
+          <td class="cell--bold" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; border-bottom: 1px solid #F5F6FA; line-height: 1.9px; width: 20%;">{{getSum this.this.count this.this.price}}</td>
         </tr>
         {{/each}}
+        <tr>
+          <td colspan="6" class="invoice-cell-footer-label" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.9px;">Итого:</td>
+          <td class="invoice-cell-footer-summa" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.9px;">1 400 руб.</td>
+        </tr>
+        <tr>
+          <td colspan="6" class="invoice-cell-footer-label" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.9px;">Всего с НДС:</td>
+          <td class="invoice-cell-footer-summa" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.9px;">Без НДС</td>
+        </tr>
+        <tr>
+          <td colspan="6" class="invoice-cell-footer-label" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.9px;">Всего к оплате с НДС:</td>
+          <td class="invoice-cell-footer-summa" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.9px;">1 400 руб.</td>
+        </tr>
       </tbody>
     </table>
   </body>
 </html>
 `;
-export const INVOICE_TEMPLATE_FOOTER = `<h1>FOOTER</h1>`;
+export const INVOICE_TEMPLATE_NOTE = `
+<p class="invoice-note">Всего наименований 2(два), на сумму ({{getTotalSum}}) рублей
+00 коп.</p>
+`;
+export const INVOICE_TEMPLATE_SIGN = `<p class="invoice-sign">ООО "Название компании" _____________________________ (подпись)</p>`;
