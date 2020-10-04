@@ -19,6 +19,7 @@ export class SignaturePadComponent implements OnInit, AfterViewInit {
   signaturePad: any;
   canvasWidth: number;
   canvasHeight: number;
+  signatureBase64: string;
 
   constructor(
     private elementRef: ElementRef,
@@ -53,6 +54,7 @@ export class SignaturePadComponent implements OnInit, AfterViewInit {
 
   save(): void {
     const img = this.signaturePad.toDataURL();
+    this.signatureBase64 = img;
     // this.base64ToGallery.base64ToGallery(img).then(
     //   (res) => console.log('Saved image to gallery ', res),
     //   (err) => console.log('Error saving image to gallery ', err)
