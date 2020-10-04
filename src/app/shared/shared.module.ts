@@ -28,6 +28,9 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { OverlayComponent } from '../components/ui/overlay/overlay.component';
 import { FieldComponent } from '../components/ui/fields/field/field.component';
 import { FieldSwiftComponent } from '../components/ui/fields/field-swift/field-swift.component';
+import { SignaturePadComponent } from '../components/ui/signature-pad/signature-pad.component';
+import { SignaturePanelComponent } from '../components/ui/signature-panel/signature-panel.component';
+// import { AngularSignaturePadModule } from 'angular-signature-pad/angular-signature-pad';
 
 let loaderOptions = {
   img: '/assets/svg/pack/loader.svg',
@@ -52,6 +55,8 @@ let loaderOptions = {
     InvoiceServiceItemComponent,
     InvoicePanelComponent,
     ServicePanelComponent,
+    SignaturePadComponent,
+    SignaturePanelComponent,
     EmptyComponent,
     ContractorListModalComponent,
     ServiceListModalComponent,
@@ -73,6 +78,7 @@ let loaderOptions = {
     AngularFireAuthModule,
     NgxLoaderIndicatorModule.forRoot(loaderOptions),
     NgxMaskModule.forRoot(),
+    // AngularSignaturePadModule.forRoot(),
   ],
   exports: [
     CommonModule,
@@ -91,6 +97,7 @@ let loaderOptions = {
     InvoiceServiceItemComponent,
     InvoicePanelComponent,
     ServicePanelComponent,
+    SignaturePanelComponent,
     EmptyComponent,
     AccordionLineComponent,
     BankPanelComponent,
@@ -102,6 +109,7 @@ let loaderOptions = {
     ServiceListModalComponent,
     BankListModalComponent,
     OverlayComponent,
+    SignaturePadComponent,
   ],
 })
 export class SharedModule {}

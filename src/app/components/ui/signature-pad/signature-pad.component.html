@@ -1,0 +1,36 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Подпись</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Закрыть</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <button class="btn" type="button" (click)="clear()">
+          <ion-icon class="btn__icon" name="cash-outline"></ion-icon>
+        </button>
+        <button class="btn" type="button" (click)="undo()">
+          <ion-icon class="btn__icon" name="cash-outline"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <canvas
+          class="signature-pad-canvas"
+          #canvas
+          width="300"
+          height="500"
+          style="touch-action: none"
+        ></canvas>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

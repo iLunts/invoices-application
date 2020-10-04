@@ -1,4 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  HostListener,
+  AfterViewInit,
+} from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ContractorListModalComponent } from 'src/app/components/modals/contractor-list-modal/contractor-list-modal.component';
 import { Contractor } from 'src/app/models/contractor.model';
@@ -12,6 +20,7 @@ import { Service } from 'src/app/models/service.model';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
+import SignaturePad from 'signature_pad';
 
 @Component({
   selector: 'app-invoice-create',
@@ -35,8 +44,12 @@ export class InvoiceCreateComponent implements OnInit {
     private _modal: ModalController,
     private _invoice: InvoiceService,
     private _router: Router,
-    private _notification: NotificationService,
+    private _notification: NotificationService
   ) {
+    // this.signaturePad = new SignaturePad(
+    //   this.signaturePadElement.nativeElement
+    // );
+
     this.invoice = new Invoice();
     this.getStatuses();
   }
