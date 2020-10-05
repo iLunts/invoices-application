@@ -157,4 +157,8 @@ export class InvoiceCreateComponent implements OnInit {
       this._router.navigate(['/invoice'], { replaceUrl: true });
     });
   }
+
+  addSignature(event) {
+    this.invoice.signature.sign = event;
+  }
 }

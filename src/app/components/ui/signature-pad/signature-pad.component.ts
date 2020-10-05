@@ -2,8 +2,10 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   HostListener,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { ModalController } from '@ionic/angular';
@@ -16,6 +18,7 @@ import SignaturePad from 'signature_pad';
 })
 export class SignaturePadComponent implements OnInit, AfterViewInit {
   @ViewChild('canvas', { static: true }) signaturePadElement;
+  @Output() result = new EventEmitter<string>();
   signaturePad: any;
   canvasWidth: number;
   canvasHeight: number;
@@ -37,8 +40,14 @@ export class SignaturePadComponent implements OnInit, AfterViewInit {
 
   init() {
     const canvas: any = this.elementRef.nativeElement.querySelector('canvas');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight - 300;
+    if (window.innerWidth < window.innerHeight) {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerWidth;
+    } else {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight - 140;
+    }
+    // canvas.height = window.innerHeight - 300;
     if (this.signaturePad) {
       this.signaturePad.clear(); // Clear the pad on init
     }
@@ -53,12 +62,19 @@ export class SignaturePadComponent implements OnInit, AfterViewInit {
   }
 
   save(): void {
-    const img = this.signaturePad.toDataURL();
-    this.signatureBase64 = img;
-    // this.base64ToGallery.base64ToGallery(img).then(
-    //   (res) => console.log('Saved image to gallery ', res),
-    //   (err) => console.log('Error saving image to gallery ', err)
-    // );
+    if (!this.signaturePad.isEmpty()) {
+      const img = this.signaturePad.toDataURL();
+      // const img = this.signaturePad.toDataURL('image/svg+xml');
+      this.signatureBase64 = img;
+      this.result.emit(img);
+      this.dismissModal();
+      // this.base64ToGallery.base64ToGallery(img).then(
+      //   (res) => console.log('Saved image to gallery ', res),
+      //   (err) => console.log('Error saving image to gallery ', err)
+      // );
+    } else {
+      console.log('Signature is empty!');
+    }
   }
 
   isCanvasBlank(): boolean {
@@ -80,7 +96,14 @@ export class SignaturePadComponent implements OnInit, AfterViewInit {
   }
 
   dismissModal() {
-    this._modal.dismiss().then(() => {
-    });
+    this._modal.dismiss({ signature: this.signatureBase64 });
+  }
+
+  checkSign() {
+    if (this.signaturePad) {
+      return this.signaturePad.isEmpty();
+    } else {
+      return false;
+    }
   }
 }

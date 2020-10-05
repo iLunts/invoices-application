@@ -19,6 +19,7 @@ export class Invoice {
   contractor: Contractor;
   services: object;
   status: InvoiceStatus;
+  signature: Signature;
 
   constructor(
     _id?: string,
@@ -31,7 +32,8 @@ export class Invoice {
     createDate?: string,
     expiredDate?: string,
     status?: InvoiceStatus,
-    contractId?: string
+    contractId?: string,
+    signature?: Signature
   ) {
     this._id = _id || null;
     this._userId = _userId || null;
@@ -44,6 +46,7 @@ export class Invoice {
     this.expiredDate = expiredDate || moment().add(7, 'days').toString();
     this.status = status || null;
     this.contractId = contractId || null;
+    this.signature = signature || new Signature();
   }
 }
 
@@ -66,5 +69,24 @@ export class InvoiceListItem {
   constructor(service?: Service, quantity?: number) {
     this.service = service || null;
     this.quantity = quantity || 1;
+  }
+}
+
+export class Signature {
+  sign: string;
+  firstName: string;
+  lastName: string;
+  initials: string;
+
+  constructor(
+    sign?: string,
+    firstName?: string,
+    lastName?: string,
+    initials?: string
+  ) {
+    this.sign = sign || null;
+    this.firstName = firstName || null;
+    this.lastName = lastName || null;
+    this.initials = initials || null;
   }
 }

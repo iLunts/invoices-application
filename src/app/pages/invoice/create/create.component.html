@@ -91,7 +91,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <app-signature-panel></app-signature-panel>
+        <app-signature-panel (result)="addSignature($event)"></app-signature-panel>
       </ion-col>
     </ion-row>
   </ion-grid>

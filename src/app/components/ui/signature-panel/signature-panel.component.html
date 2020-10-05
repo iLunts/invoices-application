@@ -1,9 +1,17 @@
-<div class="signature" (click)="open()">
+<div class="signature" (click)="open()" *ngIf="!signaturePad">
   <span class="signature__avatar">
     <ion-icon class="signature__avatar-icon" name="pulse-outline"></ion-icon>
   </span>
   <div class="signature__body">
     <h3 class="signature__select">Оставить подпись</h3>
     <p class="signature__desc">выбрать из списка или создать новую</p>
+  </div>
+</div>
+
+<div class="signature" (click)="edit()" *ngIf="signaturePad">
+  <ion-img class="signature__sign-img" [src]="signaturePad"></ion-img>
+  <div class="signature__body">
+    <h3 class="signature__select">Изменить подпись</h3>
+    <p class="signature__desc">сделано новую подпись или изменить предыдущую</p>
   </div>
 </div>

@@ -176,4 +176,5 @@ export const INVOICE_TEMPLATE_NOTE = `
 <p class="invoice-note">Всего наименований 2(два), на сумму ({{getTotalSum}}) рублей
 00 коп.</p>
 `;
-export const INVOICE_TEMPLATE_SIGN = `<p class="invoice-sign">ООО "Название компании" _____________________________ (подпись)</p>`;
+export const INVOICE_TEMPLATE_SIGN = `<p class="invoice-sign">ООО "Название компании" 
+<img src="{{invoice.signature.sign}}" style="width: 160px;"/> (подпись)</p>`;

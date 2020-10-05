@@ -34,7 +34,10 @@
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-button (click)="save(i)" expand="block">
+        <ion-button 
+          (click)="save(i)" 
+          expand="block"
+          [disabled]="checkSign()">
           Сохранить подпись
         </ion-button>
       </ion-col>

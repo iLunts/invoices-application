@@ -82,11 +82,9 @@ export class InvoiceService {
       this._fs
         .collection(this.dbPath)
         .doc(pushkey)
-        .set({ ...invoice })
+        .set(JSON.parse(JSON.stringify(invoice)))
+      // .set({ ...invoice })
     );
-    // this._router.navigate(['/invoice']);
-    // this._notification.success('Счет успешно создан');
-    // this.invoicesRef.add({ ...invoice});
   }
 
   delete(_id: string): Promise<void> {
