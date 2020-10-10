@@ -33,6 +33,16 @@ export class InvoiceCreateComponent implements OnInit {
   serviceList: InvoiceListItem[] = [new InvoiceListItem()];
   invoiceStatusList: InvoiceStatus[] = [];
   toastPopover: any;
+  invoiceTypeList: any[] = [
+    {
+      name: 'Счет',
+      value: 'invoice',
+    },
+    {
+      name: 'Счет-протокол',
+      value: 'invoice-protocol',
+    },
+  ];
 
   customStatusActionSheetOptions: any = {
     // header: 'Статусы',
@@ -143,6 +153,10 @@ export class InvoiceCreateComponent implements OnInit {
 
   changeStatus(event) {
     this.invoice.status = event.detail.value;
+  }
+
+  changeType(event) {
+    this.invoice.type = event.detail.value;
   }
 
   save() {

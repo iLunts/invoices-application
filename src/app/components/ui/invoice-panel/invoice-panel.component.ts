@@ -43,6 +43,7 @@ export class InvoicePanelComponent implements OnInit {
   async showMore() {
     const actionSheet = await this._actionSheet.create({
       header: 'Выберите действие',
+      cssClass: 'invoice-action-sheet',
       buttons: this.generateActionButtons(),
     });
 
@@ -72,6 +73,32 @@ export class InvoicePanelComponent implements OnInit {
       },
     ];
 
+    // Acts
+    if (this.selectedInvoice._actId) {
+      buttons.unshift({
+        text: 'Скачать акт',
+        role: 'download',
+        handler: () => {
+          this._templatePdf.downloadPdf('act');
+        },
+      });
+    } else {
+      buttons.unshift({
+        text: 'Создать акт',
+        role: 'download',
+        handler: () => {
+          this._router.navigate(['/act/create'], {
+            queryParams: {
+              invoiceId: this.selectedInvoice._id,
+              contractorId: this.selectedInvoice.contractor._id,
+            },
+            replaceUrl: true,
+          });
+        },
+      });
+    }
+
+    // Contracts
     if (this.selectedInvoice._contractId) {
       buttons.unshift({
         text: 'Скачать договор',
@@ -95,7 +122,6 @@ export class InvoicePanelComponent implements OnInit {
         },
       });
     }
-
     return buttons;
   }
 }

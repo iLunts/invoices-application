@@ -39,6 +39,7 @@ export class ServiceTabServiceComponent implements OnInit {
   async showMore(id) {
     const actionSheet = await this._actionSheet.create({
       header: 'Выберите действие',
+      cssClass: 'invoice-action-sheet',
       buttons: [
         {
           text: 'Удалить',

@@ -43,6 +43,9 @@
                 "input": "src/global.less"
               },
               {
+                "input": "src/theme/actionSheet.less"
+              },
+              {
                 "input": "src/theme/field.less"
               }
             ],

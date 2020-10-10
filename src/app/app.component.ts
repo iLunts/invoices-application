@@ -39,19 +39,24 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
   public docsPages = [
     {
+      title: 'Счета',
+      url: '/invoice',
+      icon: 'receipt',
+    },
+    {
       title: 'Договора',
       url: '/contract',
       icon: 'document-text',
     },
     {
-      title: 'Счета',
-      url: '/invoice',
-      icon: 'receipt',
+      title: 'Акты',
+      url: '/act',
+      icon: 'document-text',
     },
   ];
   public appNonAuthPages = [
     {
-      title: 'Login',
+      title: 'Войти',
       url: '/auth/login',
       icon: 'enter',
     },
@@ -65,7 +70,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private _auth: AuthService,
+    private _auth: AuthService
   ) {
     this.initializeApp();
   }

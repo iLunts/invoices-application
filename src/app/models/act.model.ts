@@ -2,61 +2,68 @@ import { Service } from './service.model';
 import { Contractor } from './contractor.model';
 import * as moment from 'moment';
 
-export class Invoice {
+export class Act {
   _id: string;
   _userId: string;
   _contractId: string;
-  _actId: string;
   _createdDate: Date;
+  _invoiceId: string;
   number: string;
   createDate: string;
   expiredDate: string;
   contractId: string;
 
-  // TODO: Need change to model
-  billTo: object;
-  billFrom: object;
-
   contractor: Contractor;
-  services: object;
-  status: InvoiceStatus;
-  type: string;
+  companyProfile: Contractor;
+
+  orderList: OrderList[];
+  status: ActStatus;
   signature: Signature;
 
   constructor(
     _id?: string,
     _userId?: string,
     _contractId?: string,
-    _actId?: string,
+    _invoiceId?: string,
     _createdDate?: Date,
     contractor?: Contractor,
-    services?: Service,
+    orderList?: OrderList[],
     number?: string,
     createDate?: string,
     expiredDate?: string,
-    status?: InvoiceStatus,
-    type?: string,
+    status?: ActStatus,
     contractId?: string,
     signature?: Signature
   ) {
     this._id = _id || null;
     this._userId = _userId || null;
     this._contractId = _contractId || null;
-    this._actId = _contractId || null;
+    this._invoiceId = _invoiceId || null;
     this._createdDate = _createdDate || new Date();
     this.number = number || null;
     this.contractor = contractor || null;
-    this.services = services || [];
+    this.orderList = orderList || [];
     this.createDate = createDate || moment().toString();
     this.expiredDate = expiredDate || moment().add(7, 'days').toString();
     this.status = status || null;
-    this.type = type || null;
     this.contractId = contractId || null;
     this.signature = signature || new Signature();
   }
 }
 
-export class InvoiceStatus {
+export class OrderList {
+  date: Date;
+  service: Service;
+  order: number;
+
+  constructor(date?: Date, service?: Service, order?: number) {
+    this.date = date || new Date();
+    this.service = service || null;
+    this.order = order || null;
+  }
+}
+
+export class ActStatus {
   _id: string;
   name: string;
   color: string;
@@ -68,7 +75,7 @@ export class Price {
   currency: number;
 }
 
-export class InvoiceListItem {
+export class ActListItem {
   service: Service;
   quantity: number;
 

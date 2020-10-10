@@ -50,6 +50,7 @@ export class ContractPanelComponent implements OnInit {
   async showMore() {
     const actionSheet = await this._actionSheet.create({
       header: 'Выберите действие',
+      cssClass: 'invoice-action-sheet',
       buttons: this.generateActionButtons(),
     });
 

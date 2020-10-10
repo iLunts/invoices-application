@@ -24,9 +24,8 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-item>
+          <ion-item class="field" lines="none">
             <ion-label position="floating">Группа</ion-label>
-            <!-- <ion-input formControlName="groupName"></ion-input> -->
             <ion-select interface="popover" formControlName="group">
               <ion-select-option
                 [value]="item"
@@ -39,7 +38,7 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-item>
+          <ion-item class="field" lines="none">
             <ion-label position="floating">Название</ion-label>
             <ion-input formControlName="name"></ion-input>
           </ion-item>
@@ -47,7 +46,7 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-item>
+          <ion-item class="field" lines="none">
             <ion-label position="floating">Описание</ion-label>
             <ion-textarea formControlName="desc"></ion-textarea>
           </ion-item>
@@ -55,14 +54,14 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-item>
+          <ion-item class="field" lines="none">
             <ion-label position="floating">Количество</ion-label>
             <ion-input formControlName="count"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item>
-            <ion-label position="floating">Единицы измерения</ion-label>
+          <ion-item class="field" lines="none">
+            <ion-label position="stacked">Единицы измерения</ion-label>
             <ion-select
               interface="popover"
               value="brown"
@@ -77,14 +76,14 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-item>
+          <ion-item class="field" lines="none">
             <ion-label position="floating">Цена</ion-label>
             <ion-input type="number" formControlName="price"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item>
-            <ion-label position="floating">Валюта</ion-label>
+          <ion-item class="field" lines="none">
+            <ion-label position="stacked">Валюта</ion-label>
             <ion-select
               interface="popover"
               value="brown"
@@ -99,7 +98,7 @@
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item>
+          <ion-item class="field" lines="none">
             <ion-label position="floating">НДС %</ion-label>
             <ion-input
               type="number"

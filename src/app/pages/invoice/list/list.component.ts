@@ -12,7 +12,7 @@ import { Invoice } from 'src/app/models/invoice.model';
   styleUrls: ['./list.component.less'],
 })
 export class InvoiceListComponent implements OnInit {
-  @ViewChild('htmlData') htmlData: ElementRef;
+  // @ViewChild('htmlData') htmlData: ElementRef;
 
   // listData: Contractor[] = [];
   // listData: Observable<Invoice[]>;

@@ -8,24 +8,25 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { from, Observable } from 'rxjs';
 import { ContractorService } from './contractor.service';
+import { Act } from '../models/act.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class InvoiceService {
-  private dbPath = '/invoices';
-  private dbPathStatuses = '/invoiceStatuses';
-  invoicesRef: AngularFirestoreCollection<Invoice> = null;
-  invoicesForContractorsRef: AngularFirestoreCollection<Invoice> = null;
+export class ActService {
+  private dbPath = '/acts';
+  private dbPathStatuses = '/actStatuses';
+  actsRef: AngularFirestoreCollection<Act> = null;
+  actsForContractorsRef: AngularFirestoreCollection<Act> = null;
   // invoiceList: Observable<Invoice[]>;
 
   constructor(
     private _fs: AngularFirestore,
     private _auth: AuthService,
-    private _contractor: ContractorService
+    // private _contractor: ContractorService
   ) {
     if (this._auth.isLoggedIn) {
-      this.invoicesRef = _fs.collection(this.dbPath, (q) =>
+      this.actsRef = _fs.collection(this.dbPath, (q) =>
         q
           .where('_userId', '==', this._auth.getUserId())
           .orderBy('_createdDate', 'desc')
@@ -34,14 +35,7 @@ export class InvoiceService {
   }
 
   getAll(): Observable<any[]> {
-    return this.invoicesRef.valueChanges();
-  }
-
-  getById(id: string): AngularFirestoreCollection<any> {
-    const collection = this._fs.collection(this.dbPath, (q) =>
-      q.where('_userId', '==', this._auth.getUserId()).where('_id', '==', id)
-    );
-    return collection;
+    return this.actsRef.valueChanges();
   }
 
   get(id: string) {
@@ -66,38 +60,39 @@ export class InvoiceService {
       .valueChanges();
   }
 
-  getAllByContractor(): Observable<any[]> {
-    this.invoicesForContractorsRef = this._fs.collection(this.dbPath, (q) =>
-      q
-        .where('_userId', '==', this._auth.getUserId())
-        .where(
-          'contractor.info.unp',
-          '==',
-          this._contractor.getContractor().info.unp
-        )
-        .orderBy('_createdDate', 'desc')
-    );
-    return this.invoicesForContractorsRef.valueChanges();
-  }
+  // getAllByContractor(): Observable<any[]> {
+  //   this.actsForContractorsRef = this._fs.collection(this.dbPath, (q) =>
+  //     q
+  //       .where('_userId', '==', this._auth.getUserId())
+  //       .where(
+  //         'contractor.info.unp',
+  //         '==',
+  //         this._contractor.getContractor().info.unp
+  //       )
+  //       .orderBy('_createdDate', 'desc')
+  //   );
+  //   return this.actsForContractorsRef.valueChanges();
+  // }
 
-  add(invoice: Invoice) {
+  add(act: Act) {
     const pushkey = this._fs.createId();
-    invoice._id = pushkey;
-    invoice._userId = this._auth.getUserId();
-    invoice._createdDate = new Date();
+    act._id = pushkey;
+    act._userId = this._auth.getUserId();
+    act._createdDate = new Date();
     return from(
       this._fs
         .collection(this.dbPath)
         .doc(pushkey)
-        .set(JSON.parse(JSON.stringify(invoice)))
+        .set(JSON.parse(JSON.stringify(act)))
+      // .set({ ...invoice })
     );
   }
 
   delete(_id: string): Promise<void> {
-    return this.invoicesRef.doc(_id).delete();
+    return this.actsRef.doc(_id).delete();
   }
 
   update(_id: string, value: any): Promise<void> {
-    return this.invoicesRef.doc(_id).update(value);
+    return this.actsRef.doc(_id).update(value);
   }
 }

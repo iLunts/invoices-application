@@ -32,6 +32,8 @@ body,
 :root {
   font-size: 16px;
   font-family: 'Kumbh Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: #3b4144;
 }
 
 * {
@@ -47,4 +49,48 @@ ion-button {
   margin-left: 0;
   margin-right: 0;
   min-height: 44px;
+
+  &.button-small{
+    min-height: 26px;
+  }
 }
+
+//
+// ion header
+//
+ion-header {
+  ion-title {
+    color: #3b4144;
+  }
+}
+
+//
+// ion list
+//
+ion-list {
+  ion-list-header {
+    ion-label {
+      color: #3b4144;
+    }
+  }
+}
+
+//
+// ion list
+//
+ion-menu-button {
+  color: #5c6871;
+}
+
+ion-back-button {
+  color: #5c6871;
+}
+
+//
+// .action-sheet
+//
+// .action-sheet-button {
+//   &.sc-ion-action-sheet-ios {
+//     color: #5c6871;
+//   }
+// }

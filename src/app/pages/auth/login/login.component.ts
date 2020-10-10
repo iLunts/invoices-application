@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
       cssClass: 'popover--loading',
       spinner: null,
       duration: 5000,
-      message: 'Loading...',
+      message: 'Загрузка...',
       translucent: true,
       backdropDismiss: true,
     });
