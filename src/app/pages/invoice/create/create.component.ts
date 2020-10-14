@@ -61,6 +61,7 @@ export class InvoiceCreateComponent implements OnInit {
     // );
 
     this.invoice = new Invoice();
+    this.invoice.type = this.invoiceTypeList[0];
     this.getStatuses();
   }
 

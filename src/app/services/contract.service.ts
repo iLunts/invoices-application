@@ -16,6 +16,7 @@ export class ContractService {
   private dbPathStatuses = '/contractStatuses';
   contractsRef: AngularFirestoreCollection<Contractor> = null;
   contractsForContractorsRef: AngularFirestoreCollection<Contractor> = null;
+  contractsForContractorIdRef: AngularFirestoreCollection<Contractor> = null;
 
   constructor(
     private _fs: AngularFirestore,
@@ -51,6 +52,20 @@ export class ContractService {
         .orderBy('_createdDate', 'desc')
     );
     return this.contractsForContractorsRef.valueChanges();
+  }
+
+  getAllByContractorId(contractorId: string): Observable<any[]> {
+    this.contractsForContractorIdRef = this._fs.collection(this.dbPath, (q) =>
+      q
+        .where('_userId', '==', this._auth.getUserId())
+        .where(
+          'contractor._id',
+          '==',
+          contractorId
+        )
+        .orderBy('_createdDate', 'desc')
+    );
+    return this.contractsForContractorIdRef.valueChanges();
   }
 
   add(contract: any): Observable<any> {

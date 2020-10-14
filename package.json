@@ -5,7 +5,7 @@
   "homepage": "https://solidexpert.ltd/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json --open",
+    "start": "ng serve --proxy-config proxy.conf.json --port 5500 --open",
     "build": "ng build --prod",
     "deploy": "ng build --prod && firebase deploy",
     "deploy-firebase": "ng build --prod && firebase deploy",

@@ -19,6 +19,7 @@ export class Act {
   orderList: OrderList[];
   status: ActStatus;
   signature: Signature;
+  total: TotalSum;
 
   constructor(
     _id?: string,
@@ -33,7 +34,8 @@ export class Act {
     expiredDate?: string,
     status?: ActStatus,
     contractId?: string,
-    signature?: Signature
+    signature?: Signature,
+    total?: TotalSum
   ) {
     this._id = _id || null;
     this._userId = _userId || null;
@@ -48,6 +50,7 @@ export class Act {
     this.status = status || null;
     this.contractId = contractId || null;
     this.signature = signature || new Signature();
+    this.total = total || new TotalSum();
   }
 }
 
@@ -73,6 +76,11 @@ export class ActStatus {
 export class Price {
   amount: number;
   currency: number;
+
+  constructor(amount?: number, currency?: number) {
+    this.amount = amount || 0;
+    this.currency = amount || 913;
+  }
 }
 
 export class ActListItem {
@@ -82,6 +90,16 @@ export class ActListItem {
   constructor(service?: Service, quantity?: number) {
     this.service = service || null;
     this.quantity = quantity || 1;
+  }
+}
+
+export class TotalSum {
+  totalSum: Price;
+  taxSum: Price;
+
+  constructor(totalSum?: Price, taxSum?: Price) {
+    this.totalSum = totalSum || new Price();
+    this.taxSum = taxSum || new Price();
   }
 }
 

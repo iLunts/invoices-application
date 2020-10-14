@@ -16,6 +16,8 @@ import { ContractorService } from 'src/app/services/contractor.service';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import * as _ from 'lodash';
+import { ContractService } from 'src/app/services/contract.service';
+import { Contract } from 'src/app/models/contract.model';
 
 @Component({
   selector: 'app-acts-create',
@@ -35,6 +37,7 @@ export class ActsCreateComponent implements OnInit {
     cssClass: 'select-action-sheet',
   };
   invoice: Invoice = new Invoice();
+  contractList: Contract[];
 
   constructor(
     private _modal: ModalController,
@@ -43,11 +46,13 @@ export class ActsCreateComponent implements OnInit {
     private _notification: NotificationService,
     private _act: ActService,
     private _contractor: ContractorService,
-    private _invoice: InvoiceService
+    private _invoice: InvoiceService,
+    private _contract: ContractService
   ) {
     this._route.queryParams.subscribe((params) => {
       if (params.contractorId) {
         this.fetchContractor(params.contractorId);
+        this.fetchContract(params.contractorId);
       }
       if (params.invoiceId) {
         this.fetchInvoice(params.invoiceId);
@@ -87,6 +92,20 @@ export class ActsCreateComponent implements OnInit {
       });
   }
 
+  fetchContract(contractorId: string) {
+    this._contract
+      .getAllByContractorId(contractorId)
+      .subscribe((response: Contract[]) => {
+        if (response && response.length) {
+          this.contractList = response;
+
+          if (this.contractList && this.contractList.length > 0) {
+            this.act._contractId = this.contractList[0]._id;
+          }
+        }
+      });
+  }
+
   getStatuses() {
     this._act.getAllStatus().subscribe((response: ActStatus[]) => {
       if (response) {
@@ -102,6 +121,7 @@ export class ActsCreateComponent implements OnInit {
     });
 
     this.groupOrderListByDate();
+    this.calculateTotalSum();
   }
 
   async showServiceModal(index) {
@@ -190,6 +210,7 @@ export class ActsCreateComponent implements OnInit {
     if (!this.checkCanCreateInvoice()) {
       return;
     }
+    this.calculateTotalSum();
     console.log('Save');
     this._act.add(this.act).subscribe((response: any) => {
       this._notification.success('Акт успешно создан');
@@ -204,17 +225,23 @@ export class ActsCreateComponent implements OnInit {
   groupOrderListByDate() {
     let arr: any[] = [];
     let obj: any = _.groupBy(this.act.orderList, 'date');
-    var result = Object.keys(obj).map(
-      (key) => {
-        arr.push({
-          groupName: key,
-          groupList: obj[key],
-        });
-        // debugger;
-      }
-    );
+    Object.keys(obj).map((key) => {
+      arr.push({
+        groupName: key,
+        groupList: obj[key],
+      });
+    });
 
     return arr;
-    // return _.groupBy(this.act.orderList, 'date');
+  }
+
+  calculateTotalSum(): void {
+    this.act.total.totalSum.amount = 0;
+    this.act.orderList.forEach((element) => {
+      if (element) {
+        this.act.total.totalSum.amount +=
+          element.service.count * element.service.price;
+      }
+    });
   }
 }

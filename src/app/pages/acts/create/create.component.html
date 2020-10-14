@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="act" [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Новый акт</ion-title>
@@ -45,17 +45,14 @@
           <ion-label position="fixed">Договор</ion-label>
           <ion-select
             [interfaceOptions]="customStatusActionSheetOptions"
-            interface="action-sheet"
+            interface="alert"
             placeholder="Выберите договор"
             cancelText="Отменить"
             (ionChange)="changeContract($event)"
             [(ngModel)]="act._contractId"
           >
-            <ion-select-option
-              [value]="item"
-              *ngFor="let item of actStatusList"
-            >
-              {{ item?.name }}
+            <ion-select-option [value]="item" *ngFor="let item of contractList">
+              {{ item?.date }}
             </ion-select-option>
           </ion-select>
         </ion-item>
@@ -75,20 +72,6 @@
     </ion-row>
   </ion-grid>
 
-  <!-- <ion-grid fixed>
-    <ion-row>
-      <ion-col size="12">
-        <h2 *ngFor="let group of groupOrderListByDate()">
-          {{ group.groupName | json }}
-
-          <p *ngFor="let item of group.groupList">
-            {{ item | json }}
-          </p>
-        </h2>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
-
   <ion-grid *ngIf="act && act.orderList">
     <ion-row
       class="service-list"
@@ -96,14 +79,23 @@
     >
       <!-- Group Name -->
       <ion-col size="12">
-        <h2>{{group.groupName | date: 'dd MMM yyyy'}}</h2>
+        <div class="act-date">
+          <h2 class="act-date__title">{{ group.groupName | date: 'dd MMM yyyy' }}</h2>
+          <div class="act-date__actions">
+            <button>Clone</button>
+            <button>Add new</button>
+          </div>
+        </div>
       </ion-col>
 
       <!-- Group List -->
-      <ion-col size="12" *ngFor="let item of group.groupList">
+      <!-- <ion-col size="12" *ngFor="let item of group.groupList"> -->
+      <ion-col size="12" *ngFor="let item of act.orderList">
         <app-invoice-service-item
+          *ngIf="item.date == group.groupName"
           [service]="item.service"
           (delete)="removeService($event)"
+          (update)="calculateTotalSum()"
         ></app-invoice-service-item>
 
         <!-- <ion-button
@@ -188,9 +180,9 @@
       <ion-col>
         <div class="total">
           <span class="total__label">Итого:</span>
-          <!-- <span class="total__sum"
-            >{{ getTotalSum() | number: '0.0-2' }} руб.</span
-          > -->
+          <span class="total__sum"
+            >{{ act.total?.totalSum?.amount | number: '0.0-2' }} руб.</span
+          >
         </div>
       </ion-col>
     </ion-row>

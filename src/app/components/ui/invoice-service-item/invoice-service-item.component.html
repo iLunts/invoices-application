@@ -1,66 +1,54 @@
-<!-- <ion-item>
-  <ion-label position="floating">Название</ion-label>
-  <ion-input
-    [(ngModel)]="unpSearch"
-  ></ion-input>
-</ion-item> -->
-
-<div *ngIf="service._id">
-
-  <ion-grid class="service-item">
-    <ion-row>
-      <ion-col>
-        <p class="service-item__name">{{service.name}}</p>
-        <p class="service-item__desc">{{service.desc}}</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <ion-grid>
-    <ion-row>
-      <ion-col size="8">
-        <div class="counter">
-          <div class="counter__body">
-            <button
-              class="counter__btn counter__btn--down"
-              type="button"
-              (click)="downCount()"
-              [disabled]="service.count <= 1"
-            >
-              -
-            </button>
-            <input
-              class="counter__input"
-              type="text"
-              value="{{ service.count }} {{ service.unit.shortName }}"
-              readonly
-            />
-            <button
-              class="counter__btn counter__btn--up"
-              type="button"
-              (click)="upCount()"
-            >
-              +
-            </button>
-          </div>
-          <p class="counter__summ">
-            Сумма: 
-            {{ service.price | number: '0.0-2' }} руб *
-            {{ service.count }} =
-            <span class="counter__summ-total">{{ service.count * service.price | number: '0.0-2' }} руб.</span>
-          </p>
+<ion-grid class="service-item" *ngIf="service._id">
+  <ion-row>
+    <ion-col size="12">
+      <p class="service-item__name">{{ service.name }}</p>
+      <p class="service-item__desc">{{ service.desc }}</p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="8">
+      <div class="counter">
+        <div class="counter__body">
+          <button
+            class="counter__btn counter__btn--down"
+            type="button"
+            (click)="downCount()"
+            [disabled]="service.count <= 1"
+          >
+            -
+          </button>
+          <input
+            class="counter__input"
+            type="text"
+            value="{{ service.count }} {{ service.unit.shortName }}"
+            readonly
+          />
+          <button
+            class="counter__btn counter__btn--up"
+            type="button"
+            (click)="upCount()"
+          >
+            +
+          </button>
         </div>
-      </ion-col>
-      <ion-col size="4">
-        <ion-button
-          (click)="remove()"
-          expand="block"
-          color="danger"
-          fill="outline"
-        >
-          Удалить
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</div>
+        <p class="counter__summ">
+          Сумма:
+          {{ service.price | number: '0.0-2' }} руб * {{ service.count }} =
+          <span class="counter__summ-total"
+            >{{ service.count * service.price | number: '0.0-2' }} руб.</span
+          >
+        </p>
+      </div>
+    </ion-col>
+    <ion-col size="4">
+      <ion-button
+        (click)="remove()"
+        expand="block"
+        color="danger"
+        fill="outline"
+      >
+        Удалить
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

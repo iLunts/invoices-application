@@ -17,6 +17,7 @@ export class InvoiceServiceItemComponent implements OnInit {
   //   }
   // }
   @Output() delete = new EventEmitter<Service>();
+  @Output() update = new EventEmitter<Service>();
 
   isDelete = false;
   indexService: number;
@@ -27,15 +28,21 @@ export class InvoiceServiceItemComponent implements OnInit {
 
   upCount() {
     this.service.count += 1;
+    this.doEmit();
   }
 
   downCount() {
     if (this.service.count > 1) {
       this.service.count -= 1;
+      this.doEmit();
     }
   }
 
   remove() {
     this.delete.emit(this.service);
+  }
+
+  doEmit(): void {
+    this.update.emit(this.service);
   }
 }
