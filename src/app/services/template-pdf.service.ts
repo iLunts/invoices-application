@@ -48,7 +48,15 @@ export class TemplatePdfService {
         this.createInvoicePdf(obj);
         break;
       }
+      case 'invoice-protocol': {
+        this.createInvoicePdf(obj);
+        break;
+      }
       case 'contract': {
+        this.createContractPdf(obj);
+        break;
+      }
+      case 'act': {
         this.createContractPdf(obj);
         break;
       }

@@ -18,6 +18,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 import * as _ from 'lodash';
 import { ContractService } from 'src/app/services/contract.service';
 import { Contract } from 'src/app/models/contract.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-acts-create',
@@ -38,6 +39,7 @@ export class ActsCreateComponent implements OnInit {
   };
   invoice: Invoice = new Invoice();
   contractList: Contract[];
+  orderListByDateList: any[] = [];
 
   constructor(
     private _modal: ModalController,
@@ -222,26 +224,66 @@ export class ActsCreateComponent implements OnInit {
     this.act.signature.sign = event;
   }
 
-  groupOrderListByDate() {
-    let arr: any[] = [];
+  groupOrderListByDate(): any[] {
+    // let arr: any[] = [];
+    this.orderListByDateList = [];
     let obj: any = _.groupBy(this.act.orderList, 'date');
     Object.keys(obj).map((key) => {
-      arr.push({
+      this.orderListByDateList.push({
         groupName: key,
         groupList: obj[key],
       });
     });
 
-    return arr;
+    return this.orderListByDateList;
   }
 
   calculateTotalSum(): void {
+    // this.act.total.totalSum.amount = 0;
+    // this.act.orderList.forEach((element) => {
+    //   if (element) {
+    //     this.act.total.totalSum.amount +=
+    //       element.service.count * element.service.price;
+    //   }
+    // });
+
     this.act.total.totalSum.amount = 0;
-    this.act.orderList.forEach((element) => {
-      if (element) {
-        this.act.total.totalSum.amount +=
-          element.service.count * element.service.price;
-      }
+    this.orderListByDateList.forEach((element, index) => {
+      element.groupList.forEach((el) => {
+        this.act.total.totalSum.amount += el.service.count * el.service.price;
+      });
     });
+  }
+
+  cloneDay(date: string) {
+    const dateNext = moment(date).add(1, 'day').toDate();
+    const index = this.orderListByDateList
+      .map((e) => e.groupName)
+      .indexOf(date);
+    if (index !== -1) {
+      let tempGroupList: OrderList[] = JSON.parse(
+        JSON.stringify(this.orderListByDateList[index].groupList)
+      );
+      tempGroupList.forEach((element) => {
+        element.date = dateNext;
+      });
+
+      this.orderListByDateList.splice(index + 1, 0, {
+        groupName: dateNext.toString(),
+        groupList: tempGroupList,
+      });
+    }
+    this.calculateTotalSum();
+  }
+
+  removeDay(date: string) {
+    const dateNext = moment(date).add(1, 'day').toDate();
+    const index = this.orderListByDateList
+      .map((e) => e.groupName)
+      .indexOf(date);
+    if (index !== -1) {
+      this.orderListByDateList.splice(index, 1);
+    }
+    this.calculateTotalSum();
   }
 }

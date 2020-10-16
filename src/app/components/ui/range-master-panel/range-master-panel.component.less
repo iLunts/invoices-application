@@ -1,0 +1,28 @@
+// out: false
+//
+.rm-panel {
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+
+  & &__body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    transform: translateY(-50%);
+  }
+}
+
+ion-item {
+  --padding-start: 0;
+  --padding-end: 0;
+}

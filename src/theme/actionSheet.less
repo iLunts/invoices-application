@@ -16,3 +16,64 @@ ion-action-sheet {
     }
   }
 }
+
+//
+// ion action sheet
+//
+.action-sheet-group {
+  &.sc-ion-action-sheet-md {
+    &:first-child {
+      border-radius: 15px 15px 0 0;
+    }
+  }
+}
+
+.action-sheet-button-inner.sc-ion-action-sheet-md {
+  justify-content: center;
+}
+
+.action-sheet-title.sc-ion-action-sheet-md {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  text-align: center;
+  color: #bfbfbf;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 0;
+    height: 1px;
+    background: #eee;
+  }
+}
+
+//
+//
+//
+.md {
+  ion-action-sheet {
+    &.invoice-action-sheet {
+      .action-sheet-download {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+
+      .action-sheet-destructive {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #f44336;
+      }
+    }
+
+    .action-sheet-button {
+      &.sc-ion-action-sheet-md {
+        font-weight: 600;
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<div class="act" *ngIf="selectedAct">
+  <div class="act__info">
+    <span class="act__avatar">
+      <ion-icon class="act__avatar-icon" name="receipt-outline"></ion-icon>
+    </span>
+  </div>
+  <div class="act__body">
+    <h2 class="act__name">
+      № {{ selectedAct?.number || 'Б.н.' }} от
+      {{ selectedAct?.createDate | date: 'dd MMM yyyy' }}
+    </h2>
+    <p class="act__status" [style.color]="selectedAct?.status?.color">
+      {{ selectedAct?.status?.name }}
+    </p>
+    <h3 class="act__desc">{{ selectedAct?.contractor?.info?.shortName }}</h3>
+
+    <p class="act__change">
+      <!-- <a class="act__change-link invoice__change-link--red" (click)="delete()">удалить</a> -->
+      <ion-button class="act__change-link" color="light" size="small" (click)="showMore()">ещё ...</ion-button>
+    </p>
+  </div>
+</div>

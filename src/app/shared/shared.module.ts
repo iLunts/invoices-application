@@ -30,6 +30,8 @@ import { FieldComponent } from '../components/ui/fields/field/field.component';
 import { FieldSwiftComponent } from '../components/ui/fields/field-swift/field-swift.component';
 import { SignaturePadComponent } from '../components/ui/signature-pad/signature-pad.component';
 import { SignaturePanelComponent } from '../components/ui/signature-panel/signature-panel.component';
+import { ActPanelComponent } from '../components/ui/act-panel/act-panel.component';
+import { RangeMasterPanelComponent } from '../components/ui/range-master-panel/range-master-panel.component';
 // import { AngularSignaturePadModule } from 'angular-signature-pad/angular-signature-pad';
 
 let loaderOptions = {
@@ -54,6 +56,7 @@ let loaderOptions = {
     ContractPanelComponent,
     InvoiceServiceItemComponent,
     InvoicePanelComponent,
+    ActPanelComponent,
     ServicePanelComponent,
     SignaturePadComponent,
     SignaturePanelComponent,
@@ -66,6 +69,7 @@ let loaderOptions = {
     OverlayComponent,
     FieldComponent,
     FieldSwiftComponent,
+    RangeMasterPanelComponent,
   ],
   imports: [
     CommonModule,
@@ -91,11 +95,13 @@ let loaderOptions = {
     AngularFireAuthModule,
     FieldComponent,
     FieldSwiftComponent,
+    RangeMasterPanelComponent,
     ContractorItemComponent,
     ContractorPanelComponent,
     ContractPanelComponent,
     InvoiceServiceItemComponent,
     InvoicePanelComponent,
+    ActPanelComponent,
     ServicePanelComponent,
     SignaturePanelComponent,
     EmptyComponent,

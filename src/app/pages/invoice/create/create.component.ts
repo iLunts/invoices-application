@@ -176,4 +176,14 @@ export class InvoiceCreateComponent implements OnInit {
   addSignature(event) {
     this.invoice.signature.sign = event;
   }
+
+  calculateTotalSum(): void {
+    this.invoice.total.totalSum.amount = 0;
+    this.serviceList.forEach((element) => {
+      if (element) {
+        this.invoice.total.totalSum.amount +=
+          element.service.count * element.service.price;
+      }
+    });
+  }
 }

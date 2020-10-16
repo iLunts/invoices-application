@@ -13,6 +13,7 @@ export class Service {
   // price: Price;
   tax: number;
   unit: Unit;
+  isFreePrice: boolean;
 }
 
 export class ServiceGroup {

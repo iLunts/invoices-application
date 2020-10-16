@@ -22,6 +22,7 @@ export class Invoice {
   status: InvoiceStatus;
   type: string;
   signature: Signature;
+  total: TotalSum;
 
   constructor(
     _id?: string,
@@ -37,7 +38,8 @@ export class Invoice {
     status?: InvoiceStatus,
     type?: string,
     contractId?: string,
-    signature?: Signature
+    signature?: Signature,
+    total?: TotalSum
   ) {
     this._id = _id || null;
     this._userId = _userId || null;
@@ -53,6 +55,7 @@ export class Invoice {
     this.type = type || null;
     this.contractId = contractId || null;
     this.signature = signature || new Signature();
+    this.total = total || new TotalSum();
   }
 }
 
@@ -66,6 +69,23 @@ export class InvoiceStatus {
 export class Price {
   amount: number;
   currency: number;
+  code: string;
+
+  constructor(amount?: number, currency?: number, code?: string) {
+    this.amount = amount || 0;
+    this.currency = amount || 913;
+    this.code = code || 'BYN';
+  }
+}
+
+export class TotalSum {
+  totalSum: Price;
+  taxSum: Price;
+
+  constructor(totalSum?: Price, taxSum?: Price) {
+    this.totalSum = totalSum || new Price();
+    this.taxSum = taxSum || new Price();
+  }
 }
 
 export class InvoiceListItem {

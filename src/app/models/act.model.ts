@@ -76,10 +76,12 @@ export class ActStatus {
 export class Price {
   amount: number;
   currency: number;
+  code: string;
 
-  constructor(amount?: number, currency?: number) {
+  constructor(amount?: number, currency?: number, code?: string) {
     this.amount = amount || 0;
     this.currency = amount || 913;
+    this.code = code || 'BYN';
   }
 }
 

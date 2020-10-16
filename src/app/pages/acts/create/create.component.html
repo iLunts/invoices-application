@@ -75,22 +75,42 @@
   <ion-grid *ngIf="act && act.orderList">
     <ion-row
       class="service-list"
-      *ngFor="let group of groupOrderListByDate(); let i = index"
+      *ngFor="let group of orderListByDateList; let i = index"
     >
       <!-- Group Name -->
       <ion-col size="12">
         <div class="act-date">
-          <h2 class="act-date__title">{{ group.groupName | date: 'dd MMM yyyy' }}</h2>
+          <h2 class="act-date__title">
+            {{ group.groupName | date: 'dd MMM yyyy' }}
+          </h2>
           <div class="act-date__actions">
-            <button>Clone</button>
-            <button>Add new</button>
+            <button class="btn act-date__actions-btn" (click)="removeDay(group.groupName)">
+              <ion-icon
+                class="act-date__actions-btn-icon"
+                slot="end"
+                name="trash-outline"
+              ></ion-icon>
+            </button>
+            <button class="btn act-date__actions-btn" (click)="cloneDay(group.groupName)">
+              <ion-icon
+                class="act-date__actions-btn-icon"
+                slot="end"
+                name="copy-outline"
+              ></ion-icon>
+            </button>
+            <button class="btn act-date__actions-btn" (click)="addNewDay()">
+              <ion-icon
+                class="act-date__actions-btn-icon"
+                slot="end"
+                name="add-outline"
+              ></ion-icon>
+            </button>
           </div>
         </div>
       </ion-col>
 
       <!-- Group List -->
-      <!-- <ion-col size="12" *ngFor="let item of group.groupList"> -->
-      <ion-col size="12" *ngFor="let item of act.orderList">
+      <ion-col size="12" *ngFor="let item of group.groupList">
         <app-invoice-service-item
           *ngIf="item.date == group.groupName"
           [service]="item.service"
@@ -174,30 +194,24 @@
       </ion-col>
     </ion-row>
   </ion-grid> -->
-
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <div class="total">
-          <span class="total__label">Итого:</span>
-          <span class="total__sum"
-            >{{ act.total?.totalSum?.amount | number: '0.0-2' }} руб.</span
-          >
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-buttons slot="end">
+    <div class="total">
+      <div class="total__content">
+        <span class="total__label">Итого:</span>
+        <span class="total__sum">
+          {{ act.total?.totalSum?.amount | number: '0.0-2' }} руб.
+        </span>
+      </div>
       <ion-button
+        class="total__btn"
         expand="block"
         (click)="save()"
         [disabled]="!checkCanCreateInvoice()"
         >Создать</ion-button
       >
-    </ion-buttons>
+    </div>
   </ion-toolbar>
 </ion-footer>

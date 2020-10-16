@@ -5,6 +5,10 @@ ion-item {
   --highlight-height: 0;
 }
 
+ion-content {
+  --padding-top: 20px;
+}
+
 // ------------------------------------------------
 // Block '.total'
 // ------------------------------------------------
@@ -14,28 +18,32 @@ ion-item {
   align-items: center;
   justify-content: space-between;
   border-radius: 4px;
-  // background-color: #fafafa;
-  // color: #333;
   background-color: #00ad64;
   color: #fff;
-  padding: 20px;
+  padding: 2px 8px 2px 15px;
 
   // Element '.total .total__label'
   & &__label {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.5rem;
     font-weight: 400;
-    // color: #999;
     color: fade(#fff, 80%);
+    margin-right: 6px;
   }
 
   // Element '.total .total__sum'
   & &__sum {
-    font-size: 1.4rem;
-    line-height: 1.8rem;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
     font-weight: 600;
-    // color: #333;
     color: #fff;
+  }
+
+  & &__btn {
+    // margin: 0;
+    --background: #077143;
+    font-weight: 600;
+    min-height: 40px;
   }
 }
 
@@ -69,6 +77,21 @@ ion-item {
   }
 
   & &__actions {
+    &-btn {
+      display: inline-flex;
+      width: 30px;
+      height: 30px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      columns: #999;
+      outline: none;
+      box-shadow: none;
+
+      & + .act-date__actions-btn {
+        margin-left: 10px;
+      }
+    }
   }
 }
 
@@ -88,5 +111,15 @@ ion-item {
   ion-icon {
     display: inline-flex;
     align-items: center;
+  }
+}
+
+// --------------------------------------------------
+// block: 'ion-footer'
+// --------------------------------------------------
+ion-footer {
+  ion-toolbar {
+    --border-width: 0;
+    padding: 0 10px 10px 10px;
   }
 }
