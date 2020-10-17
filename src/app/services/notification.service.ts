@@ -13,20 +13,22 @@ export class NotificationService {
     private _toast: ToastController
   ) {}
 
-  async success(message?: string, duration?: number) {
+  async success(message?: string, pos?: any, duration?: number) {
     this.toastPopover = await this._toast.create({
       message: message || 'Успешно.',
       duration: duration || 3000,
       color: 'success',
+      position: pos || 'bottom',
     });
     this.toastPopover.present();
   }
 
-  async error(message?: string, duration?: number) {
+  async error(message?: string, pos?: any, duration?: number) {
     this.toastPopover = await this._toast.create({
       message: message || 'Ошибка.',
       duration: duration || 3000,
       color: 'danger',
+      position: pos || 'bottom',
     });
     this.toastPopover.present();
   }

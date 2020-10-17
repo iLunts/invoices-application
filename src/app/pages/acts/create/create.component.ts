@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
 import { ServiceListModalComponent } from 'src/app/components/modals/service-list-modal/service-list-modal.component';
@@ -26,6 +26,8 @@ import * as moment from 'moment';
   styleUrls: ['./create.component.less'],
 })
 export class ActsCreateComponent implements OnInit {
+  @ViewChild('content') private content: any;
+
   act: Act = new Act();
   selectedContractor: Contractor;
   serviceList: InvoiceListItem[] = [new InvoiceListItem()];
@@ -150,16 +152,13 @@ export class ActsCreateComponent implements OnInit {
   }
 
   removeService(service: Service) {
+    // TODO: Need change remove obj from array
     const index = this.serviceList.findIndex(
       (element: any) => element._id === service._id
     );
 
     if (index !== -1) {
       this.serviceList.splice(index, 1);
-    }
-
-    if (!this.serviceList.length) {
-      this.serviceList.push(new InvoiceListItem());
     }
   }
 
@@ -207,16 +206,25 @@ export class ActsCreateComponent implements OnInit {
   }
 
   save() {
-    // this.act.services = this.serviceList;
-
     if (!this.checkCanCreateInvoice()) {
       return;
     }
+    this.revertOrders();
     this.calculateTotalSum();
     console.log('Save');
     this._act.add(this.act).subscribe((response: any) => {
       this._notification.success('Акт успешно создан');
       this._router.navigate(['/act'], { replaceUrl: true });
+    });
+  }
+
+  revertOrders() {
+    this.removeEmptyOrders();
+    this.act.orderList = [];
+    this.orderListByDateList.forEach((element) => {
+      element.groupList.forEach((el) => {
+        this.act.orderList.push(el);
+      });
     });
   }
 
@@ -255,6 +263,14 @@ export class ActsCreateComponent implements OnInit {
     });
   }
 
+  removeEmptyOrders(): void {
+    this.orderListByDateList.forEach((element, index) => {
+      if (!element.groupList || element.groupList.length === 0) {
+        this.orderListByDateList.splice(index, 1);
+      }
+    });
+  }
+
   cloneDay(date: string) {
     const dateNext = moment(date).add(1, 'day').toDate();
     const index = this.orderListByDateList
@@ -274,6 +290,11 @@ export class ActsCreateComponent implements OnInit {
       });
     }
     this.calculateTotalSum();
+
+    // Scroll to bottom after render DOM
+    setTimeout(() => {
+      this.content.scrollToBottom(300);
+    }, 200);
   }
 
   removeDay(date: string) {
@@ -285,5 +306,20 @@ export class ActsCreateComponent implements OnInit {
       this.orderListByDateList.splice(index, 1);
     }
     this.calculateTotalSum();
+  }
+
+  addDay(date: string) {
+    const dateNext = moment(date).add(1, 'day').toDate();
+
+    const index = this.orderListByDateList
+      .map((e) => e.groupName)
+      .indexOf(date);
+
+    if (index !== -1) {
+      this.orderListByDateList.splice(index + 1, 0, {
+        groupName: dateNext.toString(),
+        groupList: [],
+      });
+    }
   }
 }

@@ -6,7 +6,7 @@
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col size="8">
+    <ion-col size="10">
       <div class="counter">
         <div class="counter__body">
           <button
@@ -51,14 +51,15 @@
         <ion-icon name="barcode-outline"></ion-icon>
       </ion-button>
     </ion-col> -->
-    <ion-col size="4">
+    <ion-col size="2">
       <ion-button
         (click)="remove()"
         expand="block"
         color="danger"
         fill="outline"
       >
-        Удалить
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        <!-- Удалить -->
       </ion-button>
     </ion-col>
   </ion-row>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,6 +24,8 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    // { provide: LOCALE_ID, useValue: 'ru' },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'RUB' },
     HTTP,
     AuthGuard,
     File,

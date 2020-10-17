@@ -11,13 +11,26 @@
       {{ selectedInvoice?.createDate | date: 'dd MMM yyyy' }}
     </h2>
     <p class="invoice__status" [style.color]="selectedInvoice?.status?.color">
-      {{ selectedInvoice?.status?.name }}
+      <span>{{ selectedInvoice?.status?.name }}</span>
+      <span class="invoice__sum">
+        на сумму:
+        <b>{{ selectedInvoice?.total?.totalSum.amount | number: '0.0-2' }}</b>
+        руб.
+      </span>
     </p>
-    <h3 class="invoice__desc">{{ selectedInvoice?.contractor?.info?.shortName }}</h3>
+    <h3 class="invoice__desc">
+      {{ selectedInvoice?.contractor?.info?.shortName }}
+    </h3>
 
     <p class="invoice__change">
       <!-- <a class="invoice__change-link invoice__change-link--red" (click)="delete()">удалить</a> -->
-      <ion-button class="invoice__change-link" color="light" size="small" (click)="showMore()">ещё ...</ion-button>
+      <ion-button
+        class="invoice__change-link"
+        color="light"
+        size="small"
+        (click)="showMore()"
+        >ещё ...</ion-button
+      >
     </p>
   </div>
 </div>

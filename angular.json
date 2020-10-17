@@ -47,6 +47,9 @@
               },
               {
                 "input": "src/theme/field.less"
+              },
+              {
+                "input": "src/theme/total.less"
               }
             ],
             "scripts": []

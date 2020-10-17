@@ -30,7 +30,7 @@ import SignaturePad from 'signature_pad';
 export class InvoiceCreateComponent implements OnInit {
   invoice: Invoice;
   selectedContractor: Contractor;
-  serviceList: InvoiceListItem[] = [new InvoiceListItem()];
+  serviceList: Service[] = [new Service()];
   invoiceStatusList: InvoiceStatus[] = [];
   toastPopover: any;
   invoiceTypeList: any[] = [
@@ -83,52 +83,32 @@ export class InvoiceCreateComponent implements OnInit {
     });
 
     modal.onDidDismiss().then((data) => {
-      console.log(data.data);
       if (data.data.selectedService) {
-        this.serviceList[index] = data.data.selectedService;
+        this.invoice.services.push(data.data.selectedService);
       } else {
-        this.serviceList.splice(this.serviceList.length - 1, 1);
+        this.serviceList.splice(this.invoice.services.length - 1, 1);
       }
+      this.calculateTotalSum();
     });
 
     return await modal.present();
   }
 
   addService() {
-    this.serviceList.push(new InvoiceListItem());
+    // this.invoice.services.push(new Service());
     this.showServiceModal(this.serviceList.length - 1);
   }
 
   removeService(service: Service) {
-    const index = this.serviceList.findIndex(
+    const index = this.invoice.services.findIndex(
       (element: any) => element._id === service._id
     );
 
     if (index !== -1) {
-      this.serviceList.splice(index, 1);
+      this.invoice.services.splice(index, 1);
     }
 
-    if (!this.serviceList.length) {
-      this.serviceList.push(new InvoiceListItem());
-    }
-  }
-
-  checkEmptyLastServiceList(): boolean {
-    return this.serviceList[this.serviceList.length - 1].service !== null;
-  }
-
-  getTotalSum() {
-    let total = 0;
-    if (this.serviceList && this.serviceList.length) {
-      this.serviceList.forEach((element: any) => {
-        if (element.service === null) {
-          return;
-        } else {
-          total += element.count * element.price;
-        }
-      });
-    }
-    return total;
+    this.calculateTotalSum();
   }
 
   checkCanCreateInvoice(): boolean {
@@ -161,14 +141,11 @@ export class InvoiceCreateComponent implements OnInit {
   }
 
   save() {
-    this.invoice.services = this.serviceList;
-
     if (!this.checkCanCreateInvoice()) {
       return;
     }
-    console.log('Save');
     this._invoice.add(this.invoice).subscribe((response: any) => {
-      this._notification.success('Счет успешно создан');
+      this._notification.success('Счет успешно создан', 'top');
       this._router.navigate(['/invoice'], { replaceUrl: true });
     });
   }
@@ -179,10 +156,9 @@ export class InvoiceCreateComponent implements OnInit {
 
   calculateTotalSum(): void {
     this.invoice.total.totalSum.amount = 0;
-    this.serviceList.forEach((element) => {
-      if (element) {
-        this.invoice.total.totalSum.amount +=
-          element.service.count * element.service.price;
+    this.invoice.services.forEach((element, index) => {
+      if (element._id) {
+        this.invoice.total.totalSum.amount += element.count * element.price;
       }
     });
   }

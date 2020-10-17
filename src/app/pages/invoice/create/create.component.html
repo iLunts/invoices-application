@@ -74,29 +74,22 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid *ngIf="serviceList">
+  <ion-grid *ngIf="invoice.services && invoice.services.length">
     <ion-row
       class="service-list"
-      *ngFor="let item of serviceList; let i = index"
+      *ngFor="let item of invoice.services; let i = index"
     >
       <ion-col size="12">
         <app-invoice-service-item
-          [service]="serviceList[i]"
+          [service]="item"
           (delete)="removeService($event)"
+          (update)="calculateTotalSum()"
         ></app-invoice-service-item>
-
-        <ion-button
-          class="invoice-btn-add"
-          (click)="showServiceModal(i)"
-          expand="block"
-          fill="outline"
-          *ngIf="serviceList[i].service === null"
-        >
-          Выбрать услугу
-        </ion-button>
       </ion-col>
     </ion-row>
+  </ion-grid>
 
+  <ion-grid>
     <ion-row>
       <ion-col size="12">
         <ion-button
@@ -104,7 +97,6 @@
           (click)="addService()"
           expand="block"
           fill="outline"
-          *ngIf="checkEmptyLastServiceList()"
         >
           Добавить услугу
         </ion-button>
@@ -121,30 +113,24 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <div class="total">
-          <span class="total__label">Итого:</span>
-          <span class="total__sum"
-            >{{ getTotalSum() | number: '0.0-2' }} руб.</span
-          >
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 </ion-content>
 
-<ion-footer>
+<ion-footer class="total-footer">
   <ion-toolbar>
-    <ion-buttons slot="end">
+    <div class="total">
+      <div class="total__content">
+        <span class="total__label">Итого:</span>
+        <span class="total__sum">
+          {{ invoice.total?.totalSum?.amount | number: '0.0-2' }} руб.
+        </span>
+      </div>
       <ion-button
+        class="total__btn"
         expand="block"
         (click)="save()"
         [disabled]="!checkCanCreateInvoice()"
         >Создать</ion-button
       >
-    </ion-buttons>
+    </div>
   </ion-toolbar>
 </ion-footer>

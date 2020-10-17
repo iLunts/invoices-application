@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="act" [fullscreen]="true">
+<ion-content class="act" [fullscreen]="true" #content>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Новый акт</ion-title>
@@ -84,21 +84,27 @@
             {{ group.groupName | date: 'dd MMM yyyy' }}
           </h2>
           <div class="act-date__actions">
-            <button class="btn act-date__actions-btn" (click)="removeDay(group.groupName)">
+            <button
+              class="btn act-date__actions-btn"
+              (click)="removeDay(group.groupName)"
+            >
               <ion-icon
                 class="act-date__actions-btn-icon"
                 slot="end"
                 name="trash-outline"
               ></ion-icon>
             </button>
-            <button class="btn act-date__actions-btn" (click)="cloneDay(group.groupName)">
+            <button
+              class="btn act-date__actions-btn"
+              (click)="cloneDay(group.groupName)"
+            >
               <ion-icon
                 class="act-date__actions-btn-icon"
                 slot="end"
                 name="copy-outline"
               ></ion-icon>
             </button>
-            <button class="btn act-date__actions-btn" (click)="addNewDay()">
+            <button class="btn act-date__actions-btn" (click)="addDay(group.groupName)">
               <ion-icon
                 class="act-date__actions-btn-icon"
                 slot="end"
@@ -196,7 +202,7 @@
   </ion-grid> -->
 </ion-content>
 
-<ion-footer>
+<ion-footer class="total-footer">
   <ion-toolbar>
     <div class="total">
       <div class="total__content">

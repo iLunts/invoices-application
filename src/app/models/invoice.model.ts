@@ -18,7 +18,7 @@ export class Invoice {
   billFrom: object;
 
   contractor: Contractor;
-  services: object;
+  services: Service[];
   status: InvoiceStatus;
   type: string;
   signature: Signature;
@@ -31,7 +31,7 @@ export class Invoice {
     _actId?: string,
     _createdDate?: Date,
     contractor?: Contractor,
-    services?: Service,
+    services?: Service[],
     number?: string,
     createDate?: string,
     expiredDate?: string,
