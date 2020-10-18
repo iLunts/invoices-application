@@ -322,4 +322,6 @@ export class ActsCreateComponent implements OnInit {
       });
     }
   }
+
+  changeContract(contract) {}
 }
