@@ -81,14 +81,12 @@ export class InvoiceService {
   }
 
   add(invoice: Invoice) {
-    const pushkey = this._fs.createId();
-    invoice._id = pushkey;
     invoice._userId = this._auth.getUserId();
     invoice._createdDate = new Date();
     return from(
       this._fs
         .collection(this.dbPath)
-        .doc(pushkey)
+        .doc(invoice._id)
         .set(JSON.parse(JSON.stringify(invoice)))
     );
   }

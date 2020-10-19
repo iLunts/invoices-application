@@ -178,3 +178,6 @@ export const INVOICE_TEMPLATE_NOTE = `
 `;
 export const INVOICE_TEMPLATE_SIGN = `<p class="invoice-sign">ООО "Название компании" 
 <img src="{{invoice.signature.sign}}" style="width: 160px;"/> (подпись)</p>`;
+
+export const INVOICE_TEMPLATE_QR_CODE = `<p class="invoice-sign">Отсканируйте код из приложения invoices.by чтобы открыть документ  
+<img src="{{invoice.qrCode}}" style="width: 150px;"/></p>`;

@@ -21,6 +21,8 @@ import { InvoiceService } from 'src/app/services/invoice.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
 import SignaturePad from 'signature_pad';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-invoice-create',
@@ -28,6 +30,8 @@ import SignaturePad from 'signature_pad';
   styleUrls: ['./create.component.less'],
 })
 export class InvoiceCreateComponent implements OnInit {
+  @ViewChild('qrBlock') qrBlock: any;
+
   invoice: Invoice;
   selectedContractor: Contractor;
   serviceList: Service[] = [new Service()];
@@ -49,20 +53,26 @@ export class InvoiceCreateComponent implements OnInit {
     subHeader: 'Выберите статус для этого счета',
     cssClass: 'select-action-sheet',
   };
+  qrdata: string;
 
   constructor(
     private _modal: ModalController,
     private _invoice: InvoiceService,
     private _router: Router,
-    private _notification: NotificationService
+    private _notification: NotificationService,
+    private _fs: AngularFirestore,
+    private elementRef: ElementRef,
+    private _auth: AuthService
   ) {
     // this.signaturePad = new SignaturePad(
     //   this.signaturePadElement.nativeElement
     // );
 
     this.invoice = new Invoice();
+    this.invoice._id = this._fs.createId();
     this.invoice.type = this.invoiceTypeList[0];
     this.getStatuses();
+    this.generateQrCode();
   }
 
   ngOnInit() {}
@@ -141,6 +151,10 @@ export class InvoiceCreateComponent implements OnInit {
   }
 
   save() {
+    if (this.qrBlock) {
+      this.invoice.qrCode = this.qrBlock.qrcElement.nativeElement.childNodes[0].currentSrc;
+    }
+
     if (!this.checkCanCreateInvoice()) {
       return;
     }
@@ -161,5 +175,9 @@ export class InvoiceCreateComponent implements OnInit {
         this.invoice.total.totalSum.amount += element.count * element.price;
       }
     });
+  }
+
+  generateQrCode() {
+    this.qrdata = this._auth.getUserId() + '@1@' + this.invoice._id;
   }
 }

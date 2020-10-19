@@ -17,6 +17,7 @@ import {
   INVOICE_TEMPLATE_HEADER,
   INVOICE_TEMPLATE_LOGO,
   INVOICE_TEMPLATE_NOTE,
+  INVOICE_TEMPLATE_QR_CODE,
   INVOICE_TEMPLATE_SIGN,
   INVOICE_TEMPLATE_TABLE,
 } from '../templates/contracts/invoice';
@@ -189,7 +190,8 @@ export class TemplatePdfService {
         INVOICE_TEMPLATE_HEADER +
         INVOICE_TEMPLATE_TABLE +
         INVOICE_TEMPLATE_NOTE +
-        INVOICE_TEMPLATE_SIGN
+        INVOICE_TEMPLATE_SIGN +
+        INVOICE_TEMPLATE_QR_CODE
     );
     let html = template({
       invoice: data,

@@ -23,6 +23,7 @@ export class Invoice {
   type: string;
   signature: Signature;
   total: TotalSum;
+  qrCode: string;
 
   constructor(
     _id?: string,
@@ -39,7 +40,8 @@ export class Invoice {
     type?: string,
     contractId?: string,
     signature?: Signature,
-    total?: TotalSum
+    total?: TotalSum,
+    qrCode?: string
   ) {
     this._id = _id || null;
     this._userId = _userId || null;
@@ -56,6 +58,7 @@ export class Invoice {
     this.contractId = contractId || null;
     this.signature = signature || new Signature();
     this.total = total || new TotalSum();
+    this.qrCode = qrCode || null;
   }
 }
 

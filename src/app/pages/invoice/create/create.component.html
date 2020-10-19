@@ -113,6 +113,20 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-grid class="qr-block" *ngIf="qrdata">
+    <ion-row>
+      <ion-col size="12">
+        <qrcode
+          #qrBlock
+          [qrdata]="qrdata"
+          [width]="256"
+          [errorCorrectionLevel]="'H'"
+          [elementType]="'img'"
+        ></qrcode>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <ion-footer class="total-footer">
