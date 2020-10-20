@@ -16,6 +16,7 @@ import { AuthGuard } from './guards/auth.guard';
 // PDF
 import { File } from '@ionic-native/file/ngx';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
     AuthGuard,
     File,
     FileOpener,
+    QRScanner
   ],
   bootstrap: [AppComponent],
   entryComponents: [],

@@ -34,6 +34,7 @@ import { ActPanelComponent } from '../components/ui/act-panel/act-panel.componen
 import { RangeMasterPanelComponent } from '../components/ui/range-master-panel/range-master-panel.component';
 // import { AngularSignaturePadModule } from 'angular-signature-pad/angular-signature-pad';
 import { QRCodeModule } from 'angularx-qrcode';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 let loaderOptions = {
   img: '/assets/svg/pack/loader.svg',
@@ -85,6 +86,7 @@ let loaderOptions = {
     NgxMaskModule.forRoot(),
     // AngularSignaturePadModule.forRoot(),
     QRCodeModule,
+    AngularSvgIconModule.forRoot(),
   ],
   exports: [
     CommonModule,
@@ -112,6 +114,7 @@ let loaderOptions = {
     NgxLoaderIndicatorModule,
     NgxMaskModule,
     QRCodeModule,
+    AngularSvgIconModule,
   ],
   entryComponents: [
     ContractorListModalComponent,

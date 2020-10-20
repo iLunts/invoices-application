@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="end">
+      <ion-button (click)="qrScan()" [disabled]="true">
+        <ion-icon slot="icon-only" name="camera-outline"></ion-icon>
+      </ion-button>
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Счета</ion-title>

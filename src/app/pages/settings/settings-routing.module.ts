@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SettingsListComponent } from './list/list.component';
+import { SettingsBaseComponent } from './base/base.component';
+import { SettingsCompanyComponent } from './company/company.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SettingsListComponent,
+    component: SettingsBaseComponent,
+  },
+  {
+    path: 'company',
+    component: SettingsCompanyComponent,
   },
 ];
 
