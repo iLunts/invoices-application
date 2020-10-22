@@ -6,9 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./company.component.less'],
 })
 export class SettingsCompanyComponent implements OnInit {
+  unpSearch: string;
+  isLoadingSearchUnp: boolean;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
 
+  save(): void {}
+
+  searchByUNP(): void {}
 }
