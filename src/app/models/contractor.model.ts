@@ -5,6 +5,7 @@ export class Contractor {
   _id: string;
   _createdDate: string;
   _userId: string;
+  _type: number;
 
   info: ContractorInfo;
   mailingAddress: ContractorAddress;
@@ -15,6 +16,7 @@ export class Contractor {
     _id?: string,
     _createdDate?: string,
     _userId?: string,
+    _type?: number,
     info?: ContractorInfo,
     mailingAddress?: ContractorAddress,
     juridicalAddress?: ContractorAddress,
@@ -23,6 +25,7 @@ export class Contractor {
     this._id = this._id || null;
     this._userId = this._userId || null;
     this._createdDate = this._createdDate || moment().toString() || null;
+    this._type = this._type || 1;
     this.info = info || new ContractorInfo();
     this.mailingAddress = mailingAddress || new ContractorAddress();
     this.juridicalAddress = juridicalAddress || new ContractorAddress();
@@ -71,19 +74,6 @@ export class ContractorAddress {
   //   return obj;
   // }
 }
-
-// export class ContractorBankAccount {
-//   swift: string;
-//   bank: BankAccount;
-
-//   constructor(
-//     swift?: string,
-//     bank?: BankAccount,
-//   ) {
-//     this.swift = swift || null;
-//     this.bank = bank || null;
-//   }
-// }
 
 export class ContractorInfo {
   fullName?: string;

@@ -29,8 +29,9 @@ export class ProfileService {
     }
   }
 
-  getAll(): AngularFirestoreCollection<Profile> {
-    return this.profileRef;
+  // getAll(): AngularFirestoreCollection<Profile> {
+  getAll(): any {
+    return this.profileRef.valueChanges();
   }
 
   add(profile: Profile) {

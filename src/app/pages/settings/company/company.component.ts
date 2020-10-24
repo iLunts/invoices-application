@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Contractor } from 'src/app/models/contractor.model';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-settings-company',
@@ -6,14 +9,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./company.component.less'],
 })
 export class SettingsCompanyComponent implements OnInit {
-  unpSearch: string;
-  isLoadingSearchUnp: boolean;
+  profileList: Contractor[] = [];
 
-  constructor() {}
+  constructor(private _profile: ProfileService, private _router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fetch();
+  }
 
-  save(): void {}
+  fetch() {
+    this._profile.getAll().subscribe((response: any) => {
+      if (response) {
+        this.profileList = response;
+      }
+    });
+  }
 
-  searchByUNP(): void {}
+  createNew() {
+    this._router.navigate(['/settings/company/create'], { replaceUrl: true });
+  }
 }
