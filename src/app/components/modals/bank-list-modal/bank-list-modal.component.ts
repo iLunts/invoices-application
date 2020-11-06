@@ -11,11 +11,9 @@ import { BankService } from 'src/app/services/bank.service';
 export class BankListModalComponent implements OnInit {
   bankList: Bank[] = [];
   selectedBank: Bank;
+  search: string;
 
-  constructor(
-    private _modal: ModalController,
-    private _bank: BankService
-  ) {
+  constructor(private _modal: ModalController, private _bank: BankService) {
     this.fetch();
   }
 

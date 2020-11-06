@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ElementRef,
-  HostListener,
-  AfterViewInit,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { ContractorListModalComponent } from 'src/app/components/modals/contractor-list-modal/contractor-list-modal.component';
 import { Contractor } from 'src/app/models/contractor.model';
@@ -23,6 +15,8 @@ import { NotificationService } from 'src/app/services/notification.service';
 import SignaturePad from 'signature_pad';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProfileService } from 'src/app/services/profile.service';
+import { Profile } from 'src/app/models/profile.model';
 
 @Component({
   selector: 'app-invoice-create',
@@ -61,8 +55,8 @@ export class InvoiceCreateComponent implements OnInit {
     private _router: Router,
     private _notification: NotificationService,
     private _fs: AngularFirestore,
-    private elementRef: ElementRef,
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _profile: ProfileService
   ) {
     // this.signaturePad = new SignaturePad(
     //   this.signaturePadElement.nativeElement
@@ -73,6 +67,7 @@ export class InvoiceCreateComponent implements OnInit {
     this.invoice.type = this.invoiceTypeList[0];
     this.getStatuses();
     this.generateQrCode();
+    this.getActiveProfile();
   }
 
   ngOnInit() {}
@@ -84,6 +79,20 @@ export class InvoiceCreateComponent implements OnInit {
         this.invoice.status = this.invoiceStatusList[0];
       }
     });
+  }
+
+  getActiveProfile() {
+    this.invoice.profile = this._profile.getSelectedProfileValue();
+    if (!this.invoice.profile._id) {
+      this._profile
+        .getAll()
+        .valueChanges()
+        .subscribe((response: Profile[]) => {
+          if (response) {
+            this.invoice.profile = response[0];
+          }
+        });
+    }
   }
 
   async showServiceModal(index) {
@@ -158,6 +167,7 @@ export class InvoiceCreateComponent implements OnInit {
     if (!this.checkCanCreateInvoice()) {
       return;
     }
+
     this._invoice.add(this.invoice).subscribe((response: any) => {
       this._notification.success('Счет успешно создан', 'top');
       this._router.navigate(['/invoice'], { replaceUrl: true });

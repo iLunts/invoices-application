@@ -50,7 +50,7 @@ export const INVOICE_TEMPLATE_HEADER = `
             text-align: left;
           "
         >
-          {{invoice.contractor.info.fullName}}
+          {{invoice.profile.info.fullName}}
         </p>
         <p
           style="
@@ -60,7 +60,7 @@ export const INVOICE_TEMPLATE_HEADER = `
             text-align: left;
           "
         >
-          УНП: {{invoice.contractor.info.unp}}
+          УНП: {{invoice.profile.info.unp}}
         </p>
         <p
           style="
@@ -70,12 +70,12 @@ export const INVOICE_TEMPLATE_HEADER = `
             text-align: left;
           "
         >
-          Юр. адрес: {{invoice.contractor.juridicalAddress.zipCode}}&nbsp;
-          {{invoice.contractor.juridicalAddress.country}}&nbsp;
-          г. {{invoice.contractor.juridicalAddress.city}}&nbsp;
-          ул. {{invoice.contractor.juridicalAddress.street}}&nbsp;
-          д.{{invoice.contractor.juridicalAddress.houseNumber}}&nbsp;
-          оф.{{invoice.contractor.juridicalAddress.office}}&nbsp;
+          Юр. адрес: {{invoice.profile.juridicalAddress.zipCode}}&nbsp;
+          {{invoice.profile.juridicalAddress.country}}&nbsp;
+          г. {{invoice.profile.juridicalAddress.city}}&nbsp;
+          ул. {{invoice.profile.juridicalAddress.street}}&nbsp;
+          д.{{invoice.profile.juridicalAddress.houseNumber}}&nbsp;
+          оф.{{invoice.profile.juridicalAddress.office}}&nbsp;
         </p>
       </td>
       <td style="width: 50%; border: 0">
@@ -98,7 +98,7 @@ export const INVOICE_TEMPLATE_HEADER = `
             text-align: left;
           "
         >
-          {{profile.test}}
+          {{invoice.contractor.info.fullName}}
         </p>
         <p
           style="
@@ -156,16 +156,16 @@ export const INVOICE_TEMPLATE_TABLE = `
         </tr>
         {{/each}}
         <tr>
-          <td colspan="6" class="invoice-cell-footer-label" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.9px;">Итого:</td>
-          <td class="invoice-cell-footer-summa" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.9px;">1 400 руб.</td>
+          <td colspan="6" class="invoice-cell-footer-label" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.4; font-size: 13px;">Итого:</td>
+          <td class="invoice-cell-footer-summa" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.4; font-size: 13px;">{{getTotalSumDigs}}</td>
         </tr>
         <tr>
-          <td colspan="6" class="invoice-cell-footer-label" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.9px;">Всего с НДС:</td>
-          <td class="invoice-cell-footer-summa" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.9px;">Без НДС</td>
+          <td colspan="6" class="invoice-cell-footer-label" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.4; font-size: 13px;">Всего с НДС:</td>
+          <td class="invoice-cell-footer-summa" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.4; font-size: 13px;">Без НДС</td>
         </tr>
         <tr>
-          <td colspan="6" class="invoice-cell-footer-label" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.9px;">Всего к оплате с НДС:</td>
-          <td class="invoice-cell-footer-summa" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.9px;">1 400 руб.</td>
+          <td colspan="6" class="invoice-cell-footer-label" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.4; font-size: 13px;">Всего к оплате с НДС:</td>
+          <td class="invoice-cell-footer-summa" valign="middle" style="vertical-align: middle; border: none; padding: 5px 15px; margin: 4px 10px; line-height: 1.4; font-size: 13px;">{{getTotalSumDigs}}</td>
         </tr>
       </tbody>
     </table>
@@ -173,11 +173,12 @@ export const INVOICE_TEMPLATE_TABLE = `
 </html>
 `;
 export const INVOICE_TEMPLATE_NOTE = `
-<p class="invoice-note">Всего наименований 2(два), на сумму ({{getTotalSum}}) рублей
-00 коп.</p>
+<p class="invoice-note">Всего наименований 2(два), на сумму {{getTotalSumDigs}} ({{getTotalSum}})</p>
 `;
-export const INVOICE_TEMPLATE_SIGN = `<p class="invoice-sign">ООО "Название компании" 
-<img src="{{invoice.signature.sign}}" style="width: 160px;"/> (подпись)</p>`;
-
-export const INVOICE_TEMPLATE_QR_CODE = `<p class="invoice-sign">Отсканируйте код из приложения invoices.by чтобы открыть документ  
-<img src="{{invoice.qrCode}}" style="width: 150px;"/></p>`;
+export const INVOICE_TEMPLATE_SIGN = `
+<p class="invoice-sign">
+  {{invoice.profile.info.fullName}} 
+  <img src="{{invoice.signature.sign}}" style="display: inline-block; vertical-align: middle; width: 130px;"/> (подпись)
+</p>`;
+export const INVOICE_TEMPLATE_QR_CODE = `<p class="invoice-sign">Отсканируйте код из мобильного приложения invoices.by чтобы открыть документ
+<img src="{{invoice.qrCode}}" style="display: inline-block; vertical-align: middle; width: 100px; margin-left: 15px;"/></p>`;

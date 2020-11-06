@@ -11,7 +11,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { Platform } from '@ionic/angular';
 
 import * as Handlebars from 'handlebars/dist/cjs/handlebars';
-import { CONTRACT_TEMPLATE } from '../templates/contracts/contract';
+import { CONTRACT_TEMPLATE } from '../templates/contracts/contract.template';
 
 @Injectable({
   providedIn: 'root',

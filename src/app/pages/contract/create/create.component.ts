@@ -4,7 +4,7 @@ import { ContractStatus, Contract } from 'src/app/models/contract.model';
 import { Contractor } from 'src/app/models/contractor.model';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CONTRACT_TEMPLATE } from 'src/app/templates/contracts/contract';
+import { CONTRACT_TEMPLATE } from 'src/app/templates/contracts/contract.template';
 import { ContractorService } from 'src/app/services/contractor.service';
 import { InvoiceService } from 'src/app/services/invoice.service';
 

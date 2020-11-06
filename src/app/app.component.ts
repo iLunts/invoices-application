@@ -7,6 +7,8 @@ import { AuthService } from './services/auth.service';
 import { User } from './models/user.model';
 import { Subscription } from 'rxjs';
 import { InvoiceStatus } from './models/invoice.model';
+import { ProfileService } from './services/profile.service';
+import { Profile } from './models/profile.model';
 
 @Component({
   selector: 'app-root',
@@ -70,7 +72,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _profile: ProfileService, // Dont remove
   ) {
     this.initializeApp();
   }

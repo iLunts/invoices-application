@@ -1,0 +1,19 @@
+<ion-grid *ngIf="!isActive">
+  <ion-row>
+    <ion-col size="12">
+      <div class="pn">
+        <p class="pn__text">
+          У вас отсутствует активная компания. Вы не можете создавать документы
+          пока не добавите компанию.
+        </p>
+        <ion-button
+          class="pn__btn"
+          color="warning"
+          size="small"
+          (click)="goToSettingsProfile()"
+          >Добавить мою компанию</ion-button
+        >
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

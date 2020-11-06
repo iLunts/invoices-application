@@ -9,7 +9,8 @@ import { Profile } from 'src/app/models/profile.model';
   styleUrls: ['./list.component.less'],
 })
 export class ProfileListComponent implements OnInit {
-  profileList: Profile;
+  profileList: Profile[];
+  isLoaded: boolean;
 
   constructor(private _router: Router, private _profile: ProfileService) {
     this.fetch();
@@ -18,11 +19,16 @@ export class ProfileListComponent implements OnInit {
   ngOnInit() {}
 
   fetch() {
-    this._profile.getAll().valueChanges().subscribe((response: any) => {
-      if (response) {
-        this.profileList = response[0];
-      }
-    });
+    this.isLoaded = false;
+    this._profile
+      .getAll()
+      .valueChanges()
+      .subscribe((response: any) => {
+        if (response) {
+          this.profileList = response;
+        }
+        this.isLoaded = true;
+      });
   }
 
   createNew() {

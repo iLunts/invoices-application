@@ -35,6 +35,9 @@ import { RangeMasterPanelComponent } from '../components/ui/range-master-panel/r
 // import { AngularSignaturePadModule } from 'angular-signature-pad/angular-signature-pad';
 import { QRCodeModule } from 'angularx-qrcode';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { FilterPipe } from '../pipes/filter.pipe';
+import { CheckProfileDirective } from '../directives/check-profile.directive';
+import { ProfileNotificatorComponent } from '../components/ui/profile-notificator/profile-notificator.component';
 
 let loaderOptions = {
   img: '/assets/svg/pack/loader.svg',
@@ -72,6 +75,9 @@ let loaderOptions = {
     FieldComponent,
     FieldSwiftComponent,
     RangeMasterPanelComponent,
+    FilterPipe,
+    CheckProfileDirective,
+    ProfileNotificatorComponent,
   ],
   imports: [
     CommonModule,
@@ -115,6 +121,9 @@ let loaderOptions = {
     NgxMaskModule,
     QRCodeModule,
     AngularSvgIconModule,
+    FilterPipe,
+    CheckProfileDirective,
+    ProfileNotificatorComponent,
   ],
   entryComponents: [
     ContractorListModalComponent,

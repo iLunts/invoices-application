@@ -11,6 +11,7 @@ export class Contractor {
   mailingAddress: ContractorAddress;
   juridicalAddress: ContractorAddress;
   bankAccount: BankAccount;
+  person: Person;
 
   constructor(
     _id?: string,
@@ -20,7 +21,8 @@ export class Contractor {
     info?: ContractorInfo,
     mailingAddress?: ContractorAddress,
     juridicalAddress?: ContractorAddress,
-    bankAccount?: BankAccount
+    bankAccount?: BankAccount,
+    person?: Person
   ) {
     this._id = this._id || null;
     this._userId = this._userId || null;
@@ -30,6 +32,7 @@ export class Contractor {
     this.mailingAddress = mailingAddress || new ContractorAddress();
     this.juridicalAddress = juridicalAddress || new ContractorAddress();
     this.bankAccount = bankAccount || new BankAccount();
+    this.person = person || new Person();
   }
 }
 
@@ -103,5 +106,15 @@ export class ContractorInfo {
     this.nameBel = nameBel || null;
     this.registrationDate = registrationDate || null;
     this.unp = unp || null;
+  }
+}
+
+export class Person {
+  responsiblePerson?: string;
+  basis?: string;
+
+  constructor(responsiblePerson?: string, basis?: string) {
+    this.responsiblePerson = responsiblePerson || null;
+    this.basis = basis || null;
   }
 }

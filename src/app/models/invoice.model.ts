@@ -1,6 +1,7 @@
 import { Service } from './service.model';
 import { Contractor } from './contractor.model';
 import * as moment from 'moment';
+import { Profile } from './profile.model';
 
 export class Invoice {
   _id: string;
@@ -18,6 +19,7 @@ export class Invoice {
   billFrom: object;
 
   contractor: Contractor;
+  profile: Profile;
   services: Service[];
   status: InvoiceStatus;
   type: string;
@@ -32,6 +34,7 @@ export class Invoice {
     _actId?: string,
     _createdDate?: Date,
     contractor?: Contractor,
+    profile?: Profile,
     services?: Service[],
     number?: string,
     createDate?: string,
@@ -49,7 +52,8 @@ export class Invoice {
     this._actId = _contractId || null;
     this._createdDate = _createdDate || new Date();
     this.number = number || null;
-    this.contractor = contractor || null;
+    this.contractor = contractor || new Contractor();
+    this.profile = profile || new Profile();
     this.services = services || [];
     this.createDate = createDate || moment().toString();
     this.expiredDate = expiredDate || moment().add(7, 'days').toString();

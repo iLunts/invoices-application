@@ -10,6 +10,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class SettingsCompanyComponent implements OnInit {
   profileList: Contractor[] = [];
+  isLoaded: boolean;
 
   constructor(private _profile: ProfileService, private _router: Router) {}
 
@@ -18,11 +19,15 @@ export class SettingsCompanyComponent implements OnInit {
   }
 
   fetch() {
-    this._profile.getAll().subscribe((response: any) => {
-      if (response) {
-        this.profileList = response;
-      }
-    });
+    this._profile
+      .getAll()
+      .valueChanges()
+      .subscribe((response: any) => {
+        if (response) {
+          this.profileList = response;
+        }
+        this.isLoaded = true;
+      });
   }
 
   createNew() {

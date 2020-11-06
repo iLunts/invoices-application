@@ -14,43 +14,31 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="profile">
-    <img class="profile__avatar" src="/assets/svg/illustrations/profile.svg" alt="">
-    <p class="profile__name">
-      {{ profileList?.info?.shortName }}
-    </p>
-    <p class="profile__unp">
-      {{ profileList?.info?.unp }}
-    </p>
-  </div>
-
   <!-- List -->
-  <!-- <ion-list class="profile">
-    <ion-grid>
-      <ion-row>
-        <ion-col class="profile-panel">
-          {{ profileList | json }}
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-list> -->
+  <ng-container *ngIf="profileList && profileList.length > 0">
+    <div class="profile" *ngFor="let item of profileList">
+      <img
+        class="profile__avatar"
+        src="/assets/svg/illustrations/profile.svg"
+        alt=""
+      />
+      <p class="profile__name">
+        {{ item?.info?.shortName }}
+      </p>
+      <p class="profile__unp">
+        {{ item?.info?.unp }}
+      </p>
+    </div>
+  </ng-container>
 
-  <!-- Skeleton -->
-  <!-- <ion-list class="services" *ngIf="!isLoaded">
-    <ion-item
-      class="services__item"
-      *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-    >
-      <ion-avatar class="services__avatar" slot="start">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-avatar>
-      <ion-label>
-        <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
-        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
-        <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
-      </ion-label>
-    </ion-item>
-  </ion-list> -->
+  <!-- Empty -->
+  <ion-grid *ngIf="isLoaded && !profileList.length">
+    <ion-row>
+      <ion-col size="12">
+        <app-empty></app-empty>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="createNew()">

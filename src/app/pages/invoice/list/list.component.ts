@@ -12,13 +12,8 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
   styleUrls: ['./list.component.less'],
 })
 export class InvoiceListComponent implements OnInit {
-  // @ViewChild('htmlData') htmlData: ElementRef;
-
-  // listData: Contractor[] = [];
-  // listData: Observable<Invoice[]>;
   listData: Invoice[] = [];
   invoiceStatuses: any[] = [];
-  // isLoaded: boolean = true;
   isLoaded: boolean;
   isOn = false;
   QRSCANNED_DATA: string;

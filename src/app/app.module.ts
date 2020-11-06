@@ -31,9 +31,8 @@ import { QRScanner } from '@ionic-native/qr-scanner/ngx';
     AuthGuard,
     File,
     FileOpener,
-    QRScanner
+    QRScanner,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [],
 })
 export class AppModule {}

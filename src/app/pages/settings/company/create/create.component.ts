@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Bank } from 'src/app/models/bank.model';
-import { Contractor } from 'src/app/models/contractor.model';
+import { Profile } from 'src/app/models/profile.model';
 import { EgrService } from 'src/app/services/egr.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -14,7 +14,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class SettingsCompanyCreateComponent implements OnInit {
   unpSearch: string;
   isLoadingSearchUnp: boolean;
-  profile: Contractor = new Contractor();
+  profile: Profile = new Profile();
 
   constructor(
     private _egr: EgrService,

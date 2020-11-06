@@ -6,16 +6,19 @@ import {
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { Profile } from '../models/profile.model';
-import { from } from 'rxjs';
+import { from, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
-  private dbPath = '/profiles';
   profileRef: AngularFirestoreCollection<Profile> = null;
   dbRef: AngularFirestoreCollection<Profile> = null;
-  // selectedProfile: any;
+  profileList: Profile[] = [];
+
+  private selectedProfileSubject = new Subject<Profile>();
+  private selectedProfile = new Profile();
+  private dbPath = '/profiles';
 
   constructor(
     private _fs: AngularFirestore,
@@ -26,12 +29,38 @@ export class ProfileService {
       this.profileRef = this._fs.collection(this.dbPath, (q) =>
         q.where('_userId', '==', this._auth.getUserId())
       );
+
+      this.getAll()
+        .valueChanges()
+        .subscribe((response: Profile[]) => {
+          if (response && response.length > 0) {
+            this.setSelectedProfile(response[0]);
+            this.profileList = response;
+          }
+        });
     }
   }
 
-  // getAll(): AngularFirestoreCollection<Profile> {
-  getAll(): any {
-    return this.profileRef.valueChanges();
+  setSelectedProfile(profile: Profile): void {
+    this.selectedProfileSubject.next(profile);
+    this.selectedProfile = profile;
+  }
+
+  getSelectedProfile(): Observable<Profile> {
+    return this.selectedProfileSubject.asObservable();
+  }
+
+  getSelectedProfileValue(): Profile {
+    return this.selectedProfile;
+  }
+
+  clearSelectedProfile() {
+    this.selectedProfileSubject.next();
+  }
+
+  getAll(): AngularFirestoreCollection<Profile> {
+    // getAll(): Observable<Profile[]> {
+    return this.profileRef;
   }
 
   add(profile: Profile) {
@@ -52,5 +81,22 @@ export class ProfileService {
 
   update(_id: string, value: any): Promise<void> {
     return this.profileRef.doc(_id).update(value);
+  }
+
+  // Returns true when user is have activated profile
+  get isActive(): boolean {
+    if (!this.profileList) {
+      this.profileRef.valueChanges().subscribe((response: any) => {
+        if (response) {
+          this.profileList = response;
+        }
+      });
+    }
+
+    if (this.profileList && this.profileList.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
